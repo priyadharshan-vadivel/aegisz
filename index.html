@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ── SEO ── -->
+  <title>AEGISZ — AI, Automation & Cybersecurity Solutions</title>
+  <meta name="description" content="AEGISZ is a premium technology agency specialising in AI Implementation, Automation, SaaS Product Development, and Cybersecurity Solutions. Partner of Metier Genesis FZ LLC and Dedcell Solutions." />
+  <meta name="keywords"    content="AI agency, automation solutions, SaaS development, cybersecurity, machine learning, AEGISZ" />
+  <meta name="author"      content="AEGISZ" />
+  <meta name="robots"      content="index, follow" />
+  <link rel="canonical"    href="https://aegisz.vercel.app/" />
+
+  <!-- ── Open Graph ── -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://aegisz.vercel.app/" />
+  <meta property="og:title"       content="AEGISZ — Building Intelligent Systems for the Future" />
+  <meta property="og:description" content="Premium technology agency specialising in AI, Automation, SaaS and Cybersecurity." />
+  <meta property="og:image"       content="assets/aegisz-logo-full.png" />
+
+  <!-- ── Twitter Card ── -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="AEGISZ — Building Intelligent Systems" />
+  <meta name="twitter:description" content="Premium tech agency: AI, Automation, SaaS, Cybersecurity." />
+  <meta name="twitter:image"       content="assets/aegisz-logo-full.png" />
+
+  <!-- ── Favicon ── -->
+  <link rel="icon"             type="image/png" href="assets/aegisz-logo-icon.png" />
+  <link rel="apple-touch-icon"                  href="assets/aegisz-logo-icon.png" />
+
+  <!-- ── Fonts (preconnect first) ── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" />
+
+  <!-- ── Styles ── -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ════════════════════ NAV ════════════════════ -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+
+    <a href="#home" class="nav-logo" aria-label="AEGISZ — Home">
+      <img src="assets/aegisz-logo-icon.png" alt="AEGISZ" />
+      <span class="nav-logo-text">AEGISZ</span>
+    </a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#partners">Partners</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <a href="https://www.linkedin.com/company/aegisz-cybersecurity"
+         target="_blank" rel="noopener noreferrer"
+         class="btn btn-ghost" style="padding:.6rem 1.25rem; font-size:.82rem;">LinkedIn ↗</a>
+      <a href="tel:+919080883442"
+         class="btn btn-primary" style="padding:.6rem 1.25rem; font-size:.82rem;">Book a Call</a>
+    </div>
+
+    <button class="hamburger" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="mobile-nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ════════════════════ MOBILE NAV ════════════════════ -->
+<div class="mobile-nav" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Navigation">
+  <a href="#about"    >About</a>
+  <a href="#services" >Services</a>
+  <a href="#process"  >Process</a>
+  <a href="#contact"  >Contact</a>
+  <a href="#partners" >Partners</a>
+  <div class="mobile-nav-contact">
+    <a href="tel:+919080883442">+91 90808 83442</a>
+    <a href="mailto:priyanvadivel442@gmail.com">priyanvadivel442@gmail.com</a>
+  </div>
+</div>
+
+<!-- ════════════════════ HERO ════════════════════ -->
+<section class="hero" id="home" aria-label="Hero">
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <div class="hero-glow hero-glow-1" aria-hidden="true"></div>
+  <div class="hero-glow hero-glow-2" aria-hidden="true"></div>
+
+  <div class="container">
+    <div class="hero-inner">
+
+      <div class="hero-badge">
+        <span class="hero-badge-dot" aria-hidden="true"></span>
+        <span class="t-label" style="color:#5a5a54; letter-spacing:.1em;">Available for new projects · 2026</span>
+      </div>
+
+      <h1 class="t-hero hero-title">
+        Building <em>Intelligent</em><br />Systems for the Future
+      </h1>
+
+      <p class="t-body hero-body">
+        We engineer AI-driven products, automate complex workflows, and build
+        high-performance SaaS platforms — giving businesses an unfair advantage
+        in the intelligence era.
+      </p>
+
+      <div class="hero-cta">
+        <a href="tel:+919080883442" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.8 19.8 0 01.22 1.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L6.91 7.15a16 16 0 006 6l.44-.44a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 15v1.92z"/>
+          </svg>
+          Book a Call
+        </a>
+        <a href="#services" class="btn btn-ghost">
+          View Services
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <div class="hero-metrics" aria-label="Key metrics">
+        <div class="metric">
+          <span class="metric-val" data-count="50" data-suffix="+">50+</span>
+          <span class="metric-lbl">Projects Delivered</span>
+        </div>
+        <div class="metric">
+          <span class="metric-val" data-count="4" data-suffix="">4</span>
+          <span class="metric-lbl">Core Specialisations</span>
+        </div>
+        <div class="metric">
+          <span class="metric-val" data-count="2" data-suffix="">2</span>
+          <span class="metric-lbl">Global Partnerships</span>
+        </div>
+        <div class="metric">
+          <span class="metric-val" data-count="100" data-suffix="%">100%</span>
+          <span class="metric-lbl">Client Satisfaction</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-cue" aria-hidden="true">
+    <span class="t-label">Scroll</span>
+    <div class="scroll-cue-line"></div>
+  </div>
+</section>
+
+<!-- ════════════════════ ABOUT ════════════════════ -->
+<section class="about" id="about" aria-labelledby="about-heading">
+  <div class="container">
+    <div class="about-grid">
+
+      <!-- Visual -->
+      <div class="about-visual reveal">
+        <div class="about-card-dark">
+          <img src="assets/aegisz-logo-full.png" alt="AEGISZ" />
+        </div>
+        <div class="about-float">
+          <div class="about-float-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <div class="about-float-text">
+            <strong>Premium Tech Partner</strong>
+            <span>AI · SaaS · Cybersecurity</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="about-content">
+        <span class="t-label reveal">Who We Are</span>
+        <h2 class="t-xl reveal reveal-d1" id="about-heading">
+          Engineering excellence,<br />built to last.
+        </h2>
+        <p class="t-body reveal reveal-d2">
+          AEGISZ is a modern technology agency that partners with businesses to build
+          intelligent, scalable, and secure digital systems. We don't just build software —
+          we craft competitive advantages through engineering depth rarely found in a typical agency.
+        </p>
+        <p class="t-body reveal reveal-d3" style="margin-top:-.5rem;">
+          From LLM-integrated platforms to hardened cybersecurity infrastructures, we
+          execute with precision, speed, and an obsession for quality at every layer.
+        </p>
+        <div class="pillars reveal reveal-d4">
+          <div class="pillar"><span class="pillar-dot"></span><span>AI-first engineering mindset</span></div>
+          <div class="pillar"><span class="pillar-dot"></span><span>Automation-driven delivery</span></div>
+          <div class="pillar"><span class="pillar-dot"></span><span>Security embedded by design</span></div>
+          <div class="pillar"><span class="pillar-dot"></span><span>Client-aligned, outcome-focused</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ SERVICES ════════════════════ -->
+<section class="services" id="services" aria-labelledby="services-heading">
+  <div class="container">
+
+    <header class="section-header">
+      <span class="t-label reveal">What We Build</span>
+      <h2 class="t-xl reveal reveal-d1" id="services-heading">Our Core Services</h2>
+      <p class="t-body reveal reveal-d2">
+        Four domains, one integrated strategy. Every engagement is built for measurable impact.
+      </p>
+    </header>
+
+    <div class="services-grid" role="list">
+
+      <!-- AI & Automation -->
+      <article class="svc-card reveal" role="listitem">
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+          </svg>
+        </div>
+        <h3 class="svc-title">AI &amp; Automation</h3>
+        <p class="svc-desc">
+          Intelligent automation systems that eliminate bottlenecks, reduce operational
+          overhead, and supercharge business velocity using cutting-edge AI models and
+          custom-built orchestration layers.
+        </p>
+        <div class="svc-footer">
+          <div class="svc-tags">
+            <span class="svc-tag">LLM Integration</span>
+            <span class="svc-tag">Workflow AI</span>
+            <span class="svc-tag">RPA</span>
+          </div>
+          <div class="svc-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+          </div>
+        </div>
+      </article>
+
+      <!-- SaaS Development -->
+      <article class="svc-card reveal reveal-d1" role="listitem">
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+          </svg>
+        </div>
+        <h3 class="svc-title">SaaS Development</h3>
+        <p class="svc-desc">
+          From concept to launch, we build scalable, production-ready SaaS products with
+          robust multi-tenant architectures, clean UX, and monetisation-ready
+          infrastructure — fast.
+        </p>
+        <div class="svc-footer">
+          <div class="svc-tags">
+            <span class="svc-tag">Full-Stack</span>
+            <span class="svc-tag">Multi-tenant</span>
+            <span class="svc-tag">API-first</span>
+          </div>
+          <div class="svc-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+          </div>
+        </div>
+      </article>
+
+      <!-- Cybersecurity -->
+      <article class="svc-card reveal reveal-d2" role="listitem">
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <h3 class="svc-title">Cybersecurity Solutions</h3>
+        <p class="svc-desc">
+          End-to-end security architecture, penetration testing, threat monitoring,
+          and compliance frameworks. We protect your digital assets at every layer
+          before attackers find the gaps.
+        </p>
+        <div class="svc-footer">
+          <div class="svc-tags">
+            <span class="svc-tag">Pen Testing</span>
+            <span class="svc-tag">SOC</span>
+            <span class="svc-tag">Compliance</span>
+          </div>
+          <div class="svc-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+          </div>
+        </div>
+      </article>
+
+      <!-- Machine Learning -->
+      <article class="svc-card reveal reveal-d3" role="listitem">
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M3 12h3M18 12h3M12 3v3M12 18v3M5.636 5.636l2.121 2.121M16.243 16.243l2.121 2.121M5.636 18.364l2.121-2.121M16.243 7.757l2.121-2.121"/>
+          </svg>
+        </div>
+        <h3 class="svc-title">Machine Learning Systems</h3>
+        <p class="svc-desc">
+          Custom ML models, training pipelines, and AI-integrated product features —
+          designed, trained, and deployed to solve specific, high-value business
+          problems with measurable ROI.
+        </p>
+        <div class="svc-footer">
+          <div class="svc-tags">
+            <span class="svc-tag">Custom Models</span>
+            <span class="svc-tag">MLOps</span>
+            <span class="svc-tag">Data Pipelines</span>
+          </div>
+          <div class="svc-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ PROCESS ════════════════════ -->
+<section class="process" id="process" aria-labelledby="process-heading">
+  <div class="container">
+
+    <header class="section-header">
+      <span class="t-label reveal">How We Work</span>
+      <h2 class="t-xl reveal reveal-d1" id="process-heading">Our Proven Process</h2>
+      <p class="t-body reveal reveal-d2">A reliable framework that takes ideas to impact — predictably.</p>
+    </header>
+
+    <div class="steps" role="list">
+
+      <div class="step reveal" role="listitem">
+        <div class="step-num" aria-hidden="true">01</div>
+        <div>
+          <h3>Discover</h3>
+          <p>Deep-dive into your goals, technical landscape, and opportunity areas. We ask the right questions to define the right solution.</p>
+        </div>
+      </div>
+
+      <div class="step reveal reveal-d1" role="listitem">
+        <div class="step-num" aria-hidden="true">02</div>
+        <div>
+          <h3>Design</h3>
+          <p>Architecture planning, UX blueprinting, system design. We map every component before writing a single line of code.</p>
+        </div>
+      </div>
+
+      <div class="step reveal reveal-d2" role="listitem">
+        <div class="step-num" aria-hidden="true">03</div>
+        <div>
+          <h3>Build</h3>
+          <p>Iterative, sprint-based development with continuous feedback. Quality-first engineering with full transparency.</p>
+        </div>
+      </div>
+
+      <div class="step reveal reveal-d3" role="listitem">
+        <div class="step-num" aria-hidden="true">04</div>
+        <div>
+          <h3>Deploy</h3>
+          <p>Production-grade deployment, performance tuning, monitoring setup, and post-launch support for a flawless go-live.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ CONTACT ════════════════════ -->
+<section class="contact" id="contact" aria-labelledby="contact-heading">
+  <div class="container">
+
+    <div class="contact-grid">
+
+      <!-- Left: contact details -->
+      <div class="contact-left">
+        <span class="t-label reveal" style="display:block; margin-bottom:1rem;">Get in Touch</span>
+        <h2 class="t-xl reveal reveal-d1" id="contact-heading">
+          Let's talk about<br />what's possible.
+        </h2>
+        <p class="t-body reveal reveal-d2" style="margin-bottom:2rem;">
+          Ready to transform your business with intelligent technology?
+          Reach out via any channel below — we typically respond within a few hours.
+        </p>
+
+        <div class="contact-methods">
+
+          <a href="tel:+919080883442" class="contact-method reveal">
+            <div class="contact-method-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.8 19.8 0 01.22 1.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L6.91 7.15a16 16 0 006 6l.44-.44a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 15v1.92z"/>
+              </svg>
+            </div>
+            <div class="contact-method-body">
+              <strong>Call Us</strong>
+              <span>+91 90808 83442</span>
+            </div>
+            <span class="contact-method-arrow">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+
+          <a href="mailto:priyanvadivel442@gmail.com" class="contact-method reveal reveal-d1">
+            <div class="contact-method-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <div class="contact-method-body">
+              <strong>Email Us</strong>
+              <span>priyanvadivel442@gmail.com</span>
+            </div>
+            <span class="contact-method-arrow">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+
+          <a href="https://www.linkedin.com/company/aegisz-cybersecurity"
+             target="_blank" rel="noopener noreferrer"
+             class="contact-method reveal reveal-d2">
+            <div class="contact-method-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+                <circle cx="4" cy="4" r="2"/>
+              </svg>
+            </div>
+            <div class="contact-method-body">
+              <strong>LinkedIn</strong>
+              <span>AEGISZ Cybersecurity</span>
+            </div>
+            <span class="contact-method-arrow">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Right: dark card with quick links -->
+      <div class="contact-right reveal reveal-d2">
+        <div class="contact-right-inner">
+          <h3>Prefer a quick link?</h3>
+          <p>Jump straight to any of our channels or partner portals below.</p>
+
+          <div class="quick-links">
+
+            <a href="tel:+919080883442" class="quick-link">
+              <div class="quick-link-body">
+                <strong>+91 90808 83442</strong>
+                <span>Tap to call directly</span>
+              </div>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+
+            <a href="mailto:priyanvadivel442@gmail.com" class="quick-link">
+              <div class="quick-link-body">
+                <strong>priyanvadivel442@gmail.com</strong>
+                <span>Open in mail client</span>
+              </div>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+
+            <a href="https://www.linkedin.com/company/aegisz-cybersecurity"
+               target="_blank" rel="noopener noreferrer" class="quick-link">
+              <div class="quick-link-body">
+                <strong>LinkedIn Page</strong>
+                <span>Follow AEGISZ Cybersecurity</span>
+              </div>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+
+            <a href="https://dedcell-security.vercel.app/"
+               target="_blank" rel="noopener noreferrer" class="quick-link">
+              <div class="quick-link-body">
+                <strong>Dedcell Security</strong>
+                <span>Visit partner website</span>
+              </div>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ PARTNERS ════════════════════ -->
+<section class="partners" id="partners" aria-labelledby="partners-heading">
+  <div class="container">
+    <header class="section-header">
+      <span class="t-label reveal">Trusted Network</span>
+      <h2 class="t-xl reveal reveal-d1" id="partners-heading">Our Partners</h2>
+      <p class="t-body reveal reveal-d2">
+        We collaborate with industry-leading organisations to expand our reach and capabilities globally.
+      </p>
+    </header>
+
+    <div class="partners-grid">
+
+      <!-- Metier Genesis -->
+      <a href="#" class="partner-card reveal" aria-label="Metier Genesis FZ LLC">
+        <div class="partner-logo-wrap">
+          <img src="assets/metier-genesis-logo.png" alt="Metier Genesis FZ LLC logo" />
+        </div>
+        <span class="partner-name">Metier Genesis FZ LLC</span>
+        <span class="partner-desc">Technology &amp; Business Solutions · UAE</span>
+        <span class="partner-cta" aria-hidden="true">
+          Partner Organisation
+          <svg viewBox="0 0 24 24"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+        </span>
+      </a>
+
+      <!-- Dedcell Solutions -->
+      <a href="https://dedcell-security.vercel.app/"
+         target="_blank" rel="noopener noreferrer"
+         class="partner-card reveal reveal-d1"
+         aria-label="Dedcell Solutions — Visit website">
+        <div class="partner-logo-wrap">
+          <img src="assets/dedcell-logo.png" alt="Dedcell Solutions logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'partner-logo-placeholder\'><svg width=\'40\' height=\'40\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'#9b9b9b\' stroke-width=\'1.5\'><path d=\'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z\'/></svg></div>'" />
+        </div>
+        <span class="partner-name">Dedcell Solutions</span>
+        <span class="partner-desc">Cybersecurity &amp; Infrastructure Solutions</span>
+        <span class="partner-cta" aria-hidden="true">
+          Visit Website
+          <svg viewBox="0 0 24 24"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+        </span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ PROJECTS ════════════════════ -->
+<section class="projects" id="projects" aria-labelledby="projects-heading">
+  <div class="container">
+    <header class="section-header">
+      <span class="t-label reveal">Selected Work</span>
+      <h2 class="t-xl reveal reveal-d1" id="projects-heading">Recent Projects</h2>
+      <p class="t-body reveal reveal-d2">
+        A glimpse into the products and systems we've engineered for clients across industries.
+      </p>
+    </header>
+
+    <div class="projects-grid">
+
+      <!-- Project 1 -->
+      <article class="proj-card reveal">
+        <div class="proj-visual" aria-hidden="true">
+          <div class="proj-visual-inner">
+            <div class="proj-dot" style="background:#3b82f6;"></div>
+            <div class="proj-lines">
+              <div class="proj-line" style="width:60%"></div>
+              <div class="proj-line" style="width:85%"></div>
+              <div class="proj-line" style="width:50%"></div>
+              <div class="proj-line" style="width:72%"></div>
+            </div>
+            <div class="proj-bar-row">
+              <div class="proj-bar" style="height:22px; background:rgba(59,130,246,.18); border:1px solid rgba(59,130,246,.2);"></div>
+              <div class="proj-bar" style="height:22px; background:rgba(59,130,246,.1);"></div>
+              <div class="proj-bar" style="height:22px; background:rgba(59,130,246,.06);"></div>
+            </div>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-cat">AI · SaaS</div>
+          <h3 class="proj-title">AI Analytics Dashboard</h3>
+          <p class="proj-desc">Real-time BI platform with LLM-powered insights, predictive charts, and natural language query interface.</p>
+        </div>
+      </article>
+
+      <!-- Project 2 -->
+      <article class="proj-card reveal reveal-d1">
+        <div class="proj-visual" aria-hidden="true">
+          <div class="proj-visual-inner">
+            <div class="proj-dot" style="background:#ef4444;"></div>
+            <div class="proj-lines">
+              <div class="proj-line" style="width:50%"></div>
+              <div class="proj-line" style="width:80%"></div>
+              <div class="proj-line" style="width:63%"></div>
+              <div class="proj-line" style="width:75%"></div>
+            </div>
+            <div class="proj-bar-row" style="align-items:center; gap:6px;">
+              <div style="width:7px; height:7px; background:#22c55e; border-radius:50%;"></div>
+              <div style="flex:1; height:3px; background:rgba(239,68,68,.2); border-radius:2px;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-cat">Cybersecurity</div>
+          <h3 class="proj-title">Threat Intelligence Platform</h3>
+          <p class="proj-desc">Automated threat monitoring with ML-based anomaly detection, incident response, and compliance reporting.</p>
+        </div>
+      </article>
+
+      <!-- Project 3 -->
+      <article class="proj-card reveal reveal-d2">
+        <div class="proj-visual" aria-hidden="true">
+          <div class="proj-visual-inner">
+            <div class="proj-dot" style="background:#a855f7;"></div>
+            <div class="proj-lines">
+              <div class="proj-line" style="width:68%"></div>
+              <div class="proj-line" style="width:45%"></div>
+              <div class="proj-line" style="width:82%"></div>
+              <div class="proj-line" style="width:55%"></div>
+            </div>
+            <div class="proj-bar-row" style="align-items:center;">
+              <div style="width:18px;height:18px;background:rgba(168,85,247,.25);border-radius:50%;border:1px solid rgba(168,85,247,.35);"></div>
+              <div style="flex:1;height:1px;background:rgba(168,85,247,.3);"></div>
+              <div style="width:18px;height:18px;background:rgba(168,85,247,.15);border-radius:50%;border:1px solid rgba(168,85,247,.2);"></div>
+              <div style="flex:1;height:1px;background:rgba(168,85,247,.3);"></div>
+              <div style="width:18px;height:18px;background:rgba(168,85,247,.1);border-radius:50%;border:1px solid rgba(168,85,247,.15);"></div>
+            </div>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-cat">Automation · ML</div>
+          <h3 class="proj-title">Workflow Automation Engine</h3>
+          <p class="proj-desc">Business process automation integrating CRM, ERP, and communication stacks with an AI orchestration layer.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ CTA BANNER ════════════════════ -->
+<section class="cta-banner" aria-labelledby="cta-heading">
+  <div class="container">
+    <div class="cta-banner-inner">
+      <h2 class="t-hero reveal" id="cta-heading">Let's Build Something<br />Powerful.</h2>
+      <p class="t-body reveal reveal-d1">
+        Ready to transform your business with intelligent technology?
+        We're accepting new clients now.
+      </p>
+      <div class="cta-banner-btns reveal reveal-d2">
+        <a href="tel:+919080883442" class="btn btn-white">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.8 19.8 0 01.22 1.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L6.91 7.15a16 16 0 006 6l.44-.44a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 15v1.92z"/>
+          </svg>
+          +91 90808 83442
+        </a>
+        <a href="mailto:priyanvadivel442@gmail.com" class="btn btn-outline-white">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+          </svg>
+          Send an Email
+        </a>
+        <a href="https://www.linkedin.com/company/aegisz-cybersecurity"
+           target="_blank" rel="noopener noreferrer"
+           class="btn btn-outline-white">LinkedIn ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ FOOTER ════════════════════ -->
+<footer aria-label="Site footer">
+  <div class="footer-top">
+    <a href="#home" class="footer-logo" aria-label="AEGISZ — Back to top">
+      <img src="assets/aegisz-logo-icon.png" alt="AEGISZ" />
+      <span class="footer-logo-text">AEGISZ</span>
+    </a>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#contact">Contact</a>
+      <a href="#partners">Partners</a>
+      <a href="https://www.linkedin.com/company/aegisz-cybersecurity" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://dedcell-security.vercel.app/" target="_blank" rel="noopener noreferrer">Dedcell</a>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 AEGISZ. All rights reserved. Partner of Metier Genesis FZ LLC (UAE) &amp; Dedcell Solutions.</p>
+    <div class="footer-legal" aria-label="Contact">
+      <a href="tel:+919080883442">+91 90808 83442</a>
+      <a href="mailto:priyanvadivel442@gmail.com">priyanvadivel442@gmail.com</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>
