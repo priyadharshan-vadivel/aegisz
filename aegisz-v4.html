@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en" class="lenis lenis-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  
+  <!-- SEO & Meta -->
+  <title>AEGISZ — Premium AI, Automation & Cybersecurity Solutions</title>
+  <meta name="description" content="AEGISZ is an elite technology agency specialising in AI Implementation, Automation, SaaS Product Development, and Cybersecurity Solutions." />
+  <meta name="keywords" content="AI agency, automation solutions, SaaS development, cybersecurity, machine learning, AEGISZ" />
+  <meta name="author" content="AEGISZ" />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ==========================================
+       CSS VARIABLES & RESET
+       ========================================== */
+    :root {
+      --bg-color: #ffffff;
+      --bg-surface: #f9f9f9;
+      --bg-surface-light: #f0f0f0;
+      --text-main: #111111;
+      --text-muted: #666666;
+      --text-dark: #888888;
+      --accent: #000000;
+      --border: rgba(0, 0, 0, 0.1);
+      
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      
+      --nav-height: 90px;
+      --section-pad: clamp(5rem, 10vw, 12rem);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html.lenis { height: auto; }
+    .lenis.lenis-smooth { scroll-behavior: auto !important; }
+    .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+    .lenis.lenis-stopped { overflow: hidden; }
+    .lenis.lenis-scrolling iframe { pointer-events: none; }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.5;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      cursor: none; /* Custom cursor */
+    }
+
+    ::selection {
+      background: var(--text-main);
+      color: var(--bg-color);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      cursor: none;
+    }
+
+    ul { list-style: none; }
+
+    /* ==========================================
+       TYPOGRAPHY
+       ========================================== */
+    h1, h2, h3, h4, .display-text {
+      font-family: var(--font-display);
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+
+    .t-hero { font-size: clamp(2.5rem, 7vw, 7.5rem); text-transform: uppercase; }
+    .t-xl { font-size: clamp(2.5rem, 5vw, 5rem); }
+    .t-lg { font-size: clamp(1.5rem, 3vw, 2.5rem); }
+    .t-body-lg { font-size: clamp(1.2rem, 2vw, 1.75rem); line-height: 1.4; color: var(--text-muted); font-family: var(--font-display); }
+    .t-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    /* ==========================================
+       GLOBAL COMPONENTS
+       ========================================== */
+    .container {
+      width: 100%;
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 0 5vw;
+    }
+
+    .noise {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100vh;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    /* Custom Cursor */
+    .cursor-dot {
+      width: 8px; height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      position: fixed;
+      top: 0; left: 0;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 10000;
+      mix-blend-mode: difference;
+    }
+    .cursor-outline {
+      width: 40px; height: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px) brightness(1.2) contrast(1.2);
+      -webkit-backdrop-filter: blur(5px) brightness(1.2) contrast(1.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 4px 8px rgba(255, 255, 255, 0.8), inset 0 -4px 8px rgba(0, 0, 0, 0.05);
+      border-radius: 50%;
+      position: fixed;
+      top: 0; left: 0;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 9999;
+      transition: width 0.3s, height 0.3s, background 0.3s, backdrop-filter 0.3s, box-shadow 0.3s, border 0.3s;
+    }
+    .cursor-outline.hover {
+      width: 70px; height: 70px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px) brightness(1.2) contrast(1.2) saturate(120%);
+      -webkit-backdrop-filter: blur(10px) brightness(1.2) contrast(1.2) saturate(120%);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15), inset 0 6px 12px rgba(255, 255, 255, 0.9), inset 0 -4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Preloader */
+    .preloader {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-color);
+      z-index: 99999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    .preloader-logo-svg {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    .preloader-brand {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      letter-spacing: 0.2em;
+      opacity: 0;
+    }
+    .preloader-bar {
+      width: 0%;
+      height: 1px;
+      background: var(--accent);
+      margin-top: 2rem;
+      position: relative;
+    }
+    .preloader-track {
+      width: 200px;
+      height: 1px;
+      background: var(--border);
+      margin-top: 2rem;
+      position: absolute;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2rem;
+      border-radius: 100px;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid transparent;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg-color);
+    }
+    .btn-primary:hover {
+      background: #333333;
+      transform: scale(1.05);
+    }
+    .btn-outline {
+      border-color: var(--border);
+      color: var(--accent);
+    }
+    .btn-outline:hover {
+      background: var(--accent);
+      color: var(--bg-color);
+    }
+    .magnetic-wrap { display: inline-block; }
+
+    /* ==========================================
+       NAVIGATION
+       ========================================== */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; width: 100%;
+      height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      z-index: 9000;
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #000000;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    .nav-inner {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo-mark {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.25rem;
+      letter-spacing: 0.05em;
+      color: inherit;
+    }
+    .logo-img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+    }
+    .nav-links {
+      display: flex;
+      gap: 3rem;
+    }
+    .nav-links a {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      position: relative;
+      overflow: hidden;
+      color: #000000;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; width: 100%; height: 1px;
+      background: #000000;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.4s ease;
+    }
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+    .nav .btn-outline {
+      border-color: rgba(0, 0, 0, 0.2);
+      color: #000000;
+    }
+    .nav .btn-outline:hover {
+      background: #000000;
+      color: #ffffff;
+    }
+
+    /* ==========================================
+       SECTIONS
+       ========================================== */
+    section { padding: var(--section-pad) 0; position: relative; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: calc(var(--nav-height) + 6rem);
+      padding-bottom: 5rem;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      margin-bottom: 3rem;
+    }
+    .hero-badge .dot {
+      width: 6px; height: 6px;
+      background: #4ade80;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #4ade80;
+    }
+    .hero-badge span { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;}
+    .hero-title .line { overflow: hidden; }
+    .hero-title span { display: block; }
+    .hero-bottom {
+      margin-top: 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .hero-metrics {
+      display: flex;
+      gap: 4rem;
+    }
+    .metric-val { font-family: var(--font-display); font-size: 2rem; font-weight: 500; display: block;}
+    .metric-lbl { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;}
+    
+    /* Background Orb */
+    .hero-glow {
+      position: absolute;
+      width: 800px; height: 800px;
+      background: radial-gradient(circle, rgba(0,0,0,0.04) 0%, rgba(255,255,255,0) 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: -1;
+      filter: blur(60px);
+    }
+
+    /* ABOUT (Scroll Reveal) */
+    .about-text {
+      font-size: clamp(1.75rem, 4.5vw, 4rem);
+      font-family: var(--font-display);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+    .about-text .word { opacity: 0.15; transition: opacity 0.1s; }
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 5rem;
+      border-top: 1px solid var(--border);
+      padding-top: 3rem;
+    }
+    .pillar { display: flex; gap: 1rem; align-items: flex-start; }
+    .pillar-num { font-family: var(--font-display); font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;}
+    .pillar-text { font-size: 1.1rem; }
+
+    /* SERVICES (Pinned Stack) */
+    .services-stack {
+      position: relative;
+      margin-top: 5rem;
+    }
+    .svc-card {
+      position: sticky;
+      top: clamp(100px, 15vh, 200px);
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: clamp(3rem, 5vw, 5rem);
+      margin-bottom: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      box-shadow: 0 -10px 40px rgba(0,0,0,0.05);
+      transform-origin: top center;
+    }
+    .svc-card:nth-child(1) { top: 120px; z-index: 1; }
+    .svc-card:nth-child(2) { top: 140px; z-index: 2; }
+    .svc-card:nth-child(3) { top: 160px; z-index: 3; }
+    .svc-card:nth-child(4) { top: 180px; z-index: 4; }
+    
+    .svc-icon {
+      width: 60px; height: 60px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 2rem;
+      background: var(--bg-color);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .svc-card:hover .svc-icon {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      border-color: rgba(0,0,0,0.2);
+    }
+    .svc-icon svg { width: 24px; height: 24px; stroke: var(--accent); fill: none; stroke-width: 1.5; }
+    .svc-title { font-size: 2.5rem; margin-bottom: 1.5rem; }
+    .svc-desc { color: var(--text-muted); font-size: 1.1rem; max-width: 80%; }
+    .svc-tags { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+    .svc-tag { padding: 0.5rem 1rem; border: 1px solid var(--border); border-radius: 100px; font-size: 0.75rem; color: var(--text-muted); }
+    .svc-visual {
+      background: var(--bg-surface-light);
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .line-art {
+      width: 70%;
+      height: 70%;
+      opacity: 0.8;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .svc-card:hover .line-art {
+      opacity: 1;
+      transform: scale(1.05);
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.05));
+    }
+
+    /* PROJECTS (Horizontal Scroll) */
+    .horizontal-section {
+      height: 100vh;
+      overflow: hidden;
+      background: var(--bg-surface-light);
+      display: flex;
+      align-items: center;
+    }
+    .horizontal-wrapper {
+      display: flex;
+      width: max-content;
+      padding: 0 5vw;
+      gap: 5vw;
+    }
+    .hz-intro {
+      width: 40vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .proj-card {
+      width: 45vw;
+      min-width: 500px;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .proj-img {
+      width: 100%;
+      height: 500px;
+      background: var(--bg-color);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .proj-meta { display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid var(--border); padding-top: 1.5rem;}
+    .proj-cat { font-family: var(--font-display); font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; }
+    .proj-name { font-size: 2rem; margin-top: 0.5rem; }
+
+    /* PROCESS */
+    .process-list {
+      margin-top: 5rem;
+      border-top: 1px solid var(--border);
+    }
+    .process-item {
+      display: grid;
+      grid-template-columns: 100px 1fr 2fr;
+      padding: 3rem 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .process-item::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: var(--bg-surface-light);
+      transform: translateY(100%);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: -1;
+    }
+    .process-item:hover::before { transform: translateY(0); }
+    .process-num { font-family: var(--font-display); color: var(--text-muted); }
+    .process-title { font-size: 2rem; }
+    .process-desc { color: var(--text-muted); font-size: 1.1rem; }
+
+    /* PARTNERS */
+    .partners-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+    .partner-card {
+      padding: 4rem;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      transition: background 0.4s;
+    }
+    .partner-card:hover { background: var(--bg-surface-light); }
+    .p-logo { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-main); }
+    .p-desc { color: var(--text-muted); margin-bottom: 2rem; }
+    .p-link { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; }
+
+    /* FOOTER / CONTACT */
+    .footer {
+      padding: 8rem 0 2rem 0;
+      background: var(--bg-color);
+      border-top: 1px solid var(--border);
+    }
+    .footer-cta {
+      text-align: center;
+      margin-bottom: 8rem;
+    }
+    .huge-text {
+      font-size: clamp(4rem, 10vw, 12rem);
+      font-family: var(--font-display);
+      font-weight: 500;
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+      margin-bottom: 3rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      border-top: 1px solid var(--border);
+      padding-top: 4rem;
+    }
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .footer-links a {
+      font-size: 1.5rem;
+      font-family: var(--font-display);
+      color: var(--text-muted);
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--text-main); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 6rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* Decorative SVG animations */
+    .abstract-lines { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.2; }
+    .abstract-lines path { stroke: var(--text-main); stroke-width: 1; fill: none; stroke-dasharray: 1000; stroke-dashoffset: 1000; }
+
+    @media (max-width: 1024px) {
+      .nav-links { display: none; }
+      .hero-bottom { flex-direction: column; align-items: flex-start; gap: 3rem; }
+      .svc-card { grid-template-columns: 1fr; gap: 2rem; }
+      .process-item { grid-template-columns: 1fr; gap: 1rem; padding: 2rem 0; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .horizontal-wrapper { flex-direction: column; width: 100%; padding: 0; }
+      .hz-intro { width: 100%; margin-bottom: 3rem; }
+      .proj-card { width: 100%; min-width: 100%; }
+      .horizontal-section { height: auto; padding: var(--section-pad) 0; }
+      .projects-track { display: block; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Noise -->
+  <div class="noise"></div>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-outline"></div>
+
+  <!-- Preloader -->
+  <div class="preloader">
+    <!-- Inline SVG Logo (Replaces broken local image link) -->
+    <svg class="logo-svg preloader-logo-svg" viewBox="0 0 100 100" style="width: 60px; height: 60px; margin-bottom: 2rem;">
+      <path d="M50 15 L85 85 L50 60 L15 85 Z" fill="none" stroke="#000000" stroke-width="8" stroke-linejoin="bevel" />
+      <circle cx="50" cy="15" r="9" fill="#000000" />
+      <circle cx="50" cy="60" r="9" fill="#000000" />
+      <line x1="50" y1="15" x2="50" y2="60" stroke="#000000" stroke-width="8" />
+    </svg>
+    <div class="preloader-brand">AEGISZ</div>
+    <div class="preloader-track"><div class="preloader-bar"></div></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="#" class="logo-mark hover-target">
+        <svg class="logo-svg" viewBox="0 0 100 100">
+          <path d="M50 15 L85 85 L50 60 L15 85 Z" fill="none" stroke="#000000" stroke-width="8" stroke-linejoin="bevel" />
+          <circle cx="50" cy="15" r="9" fill="#000000" />
+          <circle cx="50" cy="60" r="9" fill="#000000" />
+          <line x1="50" y1="15" x2="50" y2="60" stroke="#000000" stroke-width="8" />
+        </svg>
+        AEGISZ
+      </a>
+      <ul class="nav-links">
+        <li><a href="#about" class="hover-target">About</a></li>
+        <li><a href="#services" class="hover-target">Services</a></li>
+        <li><a href="#projects" class="hover-target">Work</a></li>
+        <li><a href="#contact" class="hover-target">Contact</a></li>
+      </ul>
+      <div class="magnetic-wrap">
+        <a href="tel:+919080883442" class="btn btn-outline hover-target magnetic">Book a Call</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="smooth-wrapper">
+    <div id="smooth-content">
+
+      <!-- HERO SECTION -->
+      <section class="hero" id="home">
+        <div class="hero-glow"></div>
+        <div class="container">
+          <div class="hero-badge reveal-fade">
+            <span class="dot"></span>
+            <span>Available for new projects · 2026</span>
+          </div>
+          
+          <h1 class="t-hero hero-title">
+            <span class="line"><span class="line-inner">Building</span></span>
+            <span class="line"><span class="line-inner" style="color:var(--text-muted)">Intelligent</span></span>
+            <span class="line"><span class="line-inner">Systems for</span></span>
+            <span class="line"><span class="line-inner">The Future</span></span>
+          </h1>
+
+          <div class="hero-bottom reveal-fade delay-1">
+            <p class="t-body-lg" style="max-width: 500px;">
+              We engineer AI-driven products, automate complex workflows, and build high-performance SaaS platforms giving businesses an unfair advantage.
+            </p>
+            <div class="hero-metrics">
+              <div class="metric">
+                <span class="metric-val">50+</span>
+                <span class="metric-lbl">Projects</span>
+              </div>
+              <div class="metric">
+                <span class="metric-val">4</span>
+                <span class="metric-lbl">Domains</span>
+              </div>
+              <div class="metric">
+                <span class="metric-val">100%</span>
+                <span class="metric-lbl">Satisfaction</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT SECTION -->
+      <section class="about" id="about">
+        <div class="container">
+          <span class="t-label">Who We Are</span>
+          <div class="about-text-wrap">
+            <p class="about-text split-text">
+              AEGISZ is a modern technology agency that partners with businesses to build intelligent, scalable, and secure digital systems. We don't just build software we craft competitive advantages through engineering depth rarely found in a typical agency.
+            </p>
+          </div>
+          
+          <div class="pillars">
+            <div class="pillar">
+              <span class="pillar-num">01</span>
+              <span class="pillar-text">AI-first engineering mindset</span>
+            </div>
+            <div class="pillar">
+              <span class="pillar-num">02</span>
+              <span class="pillar-text">Automation-driven delivery</span>
+            </div>
+            <div class="pillar">
+              <span class="pillar-num">03</span>
+              <span class="pillar-text">Security embedded by design</span>
+            </div>
+            <div class="pillar">
+              <span class="pillar-num">04</span>
+              <span class="pillar-text">Client-aligned, outcome-focused</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SERVICES SECTION -->
+      <section class="services" id="services">
+        <div class="container">
+          <span class="t-label">What We Build</span>
+          <h2 class="t-xl">Core Services</h2>
+          
+          <div class="services-stack">
+            
+            <!-- Service 1 -->
+            <article class="svc-card">
+              <div class="svc-content">
+                <div class="svc-icon">
+                  <svg viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                </div>
+                <h3 class="svc-title">AI & Automation</h3>
+                <p class="svc-desc">Intelligent automation systems that eliminate bottlenecks and supercharge business velocity using cutting-edge AI models.</p>
+                <div class="svc-tags">
+                  <span class="svc-tag">LLM Integration</span>
+                  <span class="svc-tag">Workflow AI</span>
+                  <span class="svc-tag">RPA</span>
+                </div>
+              </div>
+              <div class="svc-visual">
+                <svg class="line-art" viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="150" y="150" width="100" height="100" rx="8" />
+                  <path d="M150 200 L100 200 M250 200 L300 200 M200 150 L200 100 M200 250 L200 300" />
+                  <circle cx="100" cy="200" r="4" fill="currentColor"/>
+                  <circle cx="300" cy="200" r="4" fill="currentColor"/>
+                  <circle cx="200" cy="100" r="4" fill="currentColor"/>
+                  <circle cx="200" cy="300" r="4" fill="currentColor"/>
+                  <rect x="175" y="175" width="50" height="50" rx="4" stroke-dasharray="4 4"/>
+                  <circle cx="200" cy="200" r="6" fill="currentColor" />
+                </svg>
+              </div>
+            </article>
+
+            <!-- Service 2 -->
+            <article class="svc-card">
+              <div class="svc-content">
+                <div class="svc-icon">
+                  <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                </div>
+                <h3 class="svc-title">SaaS Development</h3>
+                <p class="svc-desc">From concept to launch, we build scalable, production-ready SaaS products with robust multi-tenant architectures.</p>
+                <div class="svc-tags">
+                  <span class="svc-tag">Full-Stack</span>
+                  <span class="svc-tag">Multi-tenant</span>
+                  <span class="svc-tag">API-first</span>
+                </div>
+              </div>
+              <div class="svc-visual">
+                <svg class="line-art" viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="100" y="120" width="200" height="160" rx="6" />
+                  <line x1="100" y1="150" x2="300" y2="150" />
+                  <line x1="150" y1="150" x2="150" y2="280" />
+                  <rect x="165" y="165" width="120" height="40" rx="4" />
+                  <rect x="165" y="220" width="50" height="45" rx="4" />
+                  <rect x="235" y="220" width="50" height="45" rx="4" />
+                  <circle cx="115" cy="135" r="3" fill="currentColor"/>
+                  <circle cx="125" cy="135" r="3" fill="currentColor"/>
+                  <circle cx="135" cy="135" r="3" fill="currentColor"/>
+                </svg>
+              </div>
+            </article>
+
+            <!-- Service 3 -->
+            <article class="svc-card">
+              <div class="svc-content">
+                <div class="svc-icon">
+                  <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <h3 class="svc-title">Cybersecurity</h3>
+                <p class="svc-desc">End-to-end security architecture, penetration testing, and compliance frameworks. We protect your digital assets.</p>
+                <div class="svc-tags">
+                  <span class="svc-tag">Pen Testing</span>
+                  <span class="svc-tag">SOC</span>
+                  <span class="svc-tag">Compliance</span>
+                </div>
+              </div>
+              <div class="svc-visual">
+                <svg class="line-art" viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M200 100 L280 130 V 220 C 280 270 200 310 200 310 C 200 310 120 270 120 220 V 130 Z" />
+                  <rect x="175" y="170" width="50" height="40" rx="4" />
+                  <path d="M185 170 V 150 C 185 140 215 140 215 150 V 170" />
+                  <circle cx="200" cy="190" r="4" fill="currentColor"/>
+                  <line x1="200" y1="194" x2="200" y2="202" />
+                </svg>
+              </div>
+            </article>
+
+            <!-- Service 4 -->
+            <article class="svc-card">
+              <div class="svc-content">
+                <div class="svc-icon">
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M3 12h3M18 12h3M12 3v3M12 18v3M5.636 5.636l2.121 2.121M16.243 16.243l2.121 2.121M5.636 18.364l2.121-2.121M16.243 7.757l2.121-2.121"/></svg>
+                </div>
+                <h3 class="svc-title">Machine Learning</h3>
+                <p class="svc-desc">Custom ML models, training pipelines, and AI-integrated product features designed to solve specific business problems.</p>
+                <div class="svc-tags">
+                  <span class="svc-tag">Custom Models</span>
+                  <span class="svc-tag">MLOps</span>
+                  <span class="svc-tag">Pipelines</span>
+                </div>
+              </div>
+              <div class="svc-visual">
+                <svg class="line-art" viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="120" cy="150" r="8" />
+                  <circle cx="120" cy="200" r="8" />
+                  <circle cx="120" cy="250" r="8" />
+                  <circle cx="200" cy="120" r="8" />
+                  <circle cx="200" cy="170" r="8" />
+                  <circle cx="200" cy="220" r="8" />
+                  <circle cx="200" cy="270" r="8" />
+                  <circle cx="280" cy="175" r="8" />
+                  <circle cx="280" cy="225" r="8" />
+                  <path d="M128 150 L192 120 M128 150 L192 170 M128 150 L192 220 M128 150 L192 270" stroke-opacity="0.3" />
+                  <path d="M128 200 L192 120 M128 200 L192 170 M128 200 L192 220 M128 200 L192 270" stroke-opacity="0.3" />
+                  <path d="M128 250 L192 120 M128 250 L192 170 M128 250 L192 220 M128 250 L192 270" stroke-opacity="0.3" />
+                  <path d="M208 120 L272 175 M208 120 L272 225" stroke-opacity="0.3" />
+                  <path d="M208 170 L272 175 M208 170 L272 225" stroke-opacity="0.3" />
+                  <path d="M208 220 L272 175 M208 220 L272 225" stroke-opacity="0.3" />
+                  <path d="M208 270 L272 175 M208 270 L272 225" stroke-opacity="0.3" />
+                  <circle cx="200" cy="170" r="4" fill="currentColor" />
+                  <circle cx="280" cy="175" r="4" fill="currentColor" />
+                  <path d="M128 200 L192 170 L272 175" stroke-width="2" stroke-opacity="1" />
+                </svg>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS HORIZONTAL SCROLL -->
+      <section class="horizontal-section" id="projects">
+        <div class="projects-track horizontal-wrapper">
+          
+          <div class="hz-intro">
+            <span class="t-label">Selected Work</span>
+            <h2 class="t-xl">Recent Projects</h2>
+            <p class="t-body-lg" style="margin-top: 2rem;">A glimpse into the products and systems we've engineered for clients across industries.</p>
+          </div>
+
+          <article class="proj-card">
+            <div class="proj-img">
+               <svg class="abstract-lines" style="opacity:0.9" viewBox="0 0 800 500">
+                 <!-- Outer Network Rings -->
+                 <circle cx="400" cy="250" r="180" stroke="rgba(0,0,0,0.1)" stroke-width="1" fill="none" />
+                 <circle cx="400" cy="250" r="140" stroke="rgba(0,0,0,0.2)" stroke-width="1" stroke-dasharray="5 5" fill="none" />
+                 <!-- Enterprise Shield / Access Boundary -->
+                 <polygon points="400,100 530,175 530,325 400,400 270,325 270,175" stroke="rgba(0,0,0,0.8)" stroke-width="2" fill="none" />
+                 <!-- Core AI Logic -->
+                 <circle cx="400" cy="250" r="50" stroke="rgba(0,0,0,1)" stroke-width="3" fill="rgba(0,0,0,0.05)" />
+                 <circle cx="400" cy="250" r="20" fill="rgba(0,0,0,0.9)" />
+                 <!-- Access Links -->
+                 <line x1="400" y1="250" x2="400" y2="100" stroke="rgba(0,0,0,0.4)" stroke-width="2" />
+                 <line x1="400" y1="250" x2="530" y2="175" stroke="rgba(0,0,0,0.4)" stroke-width="2" />
+                 <line x1="400" y1="250" x2="530" y2="325" stroke="rgba(0,0,0,0.4)" stroke-width="2" />
+                 <line x1="400" y1="250" x2="400" y2="400" stroke="rgba(0,0,0,0.4)" stroke-width="2" />
+                 <line x1="400" y1="250" x2="270" y2="325" stroke="rgba(0,0,0,0.4)" stroke-width="2" />
+                 <line x1="400" y1="250" x2="270" y2="175" stroke="rgba(0,0,0,0.4)" stroke-width="2" />
+                 <!-- Node Endpoints -->
+                 <circle cx="400" cy="100" r="6" fill="rgba(0,0,0,0.9)" />
+                 <circle cx="530" cy="175" r="6" fill="rgba(0,0,0,0.9)" />
+                 <circle cx="530" cy="325" r="6" fill="rgba(0,0,0,0.9)" />
+                 <circle cx="400" cy="400" r="6" fill="rgba(0,0,0,0.9)" />
+                 <circle cx="270" cy="325" r="6" fill="rgba(0,0,0,0.9)" />
+                 <circle cx="270" cy="175" r="6" fill="rgba(0,0,0,0.9)" />
+                 <!-- Activity Wave representing Intent Analysis -->
+                 <path d="M150 250 Q 275 150 400 250 T 650 250" stroke="rgba(0,0,0,0.3)" stroke-width="2" fill="none" />
+               </svg>
+            </div>
+            <div class="proj-meta">
+              <div>
+                <div class="proj-cat">Enterprise Security · AI</div>
+                <h3 class="proj-name">IAAC: Intent-Aware Access Control</h3>
+              </div>
+            </div>
+          </article>
+
+          <article class="proj-card">
+            <div class="proj-img">
+               <svg class="abstract-lines" style="opacity:0.8" viewBox="0 0 800 500"><rect x="100" y="100" width="600" height="300" rx="10" stroke="rgba(59,130,246,0.5)"/><line x1="100" y1="150" x2="700" y2="150" stroke="rgba(59,130,246,0.5)"/><rect x="150" y="200" width="100" height="150" fill="rgba(59,130,246,0.1)"/><rect x="300" y="250" width="100" height="100" fill="rgba(59,130,246,0.1)"/></svg>
+            </div>
+            <div class="proj-meta">
+              <div>
+                <div class="proj-cat">AI · SaaS</div>
+                <h3 class="proj-name">AI Analytics Dashboard</h3>
+              </div>
+            </div>
+          </article>
+
+          <article class="proj-card">
+            <div class="proj-img">
+               <svg class="abstract-lines" style="opacity:0.8" viewBox="0 0 800 500"><circle cx="400" cy="250" r="150" stroke="rgba(239,68,68,0.5)"/><circle cx="400" cy="250" r="100" stroke="rgba(239,68,68,0.5)" stroke-dasharray="10 10"/><line x1="400" y1="100" x2="400" y2="400" stroke="rgba(239,68,68,0.5)"/><line x1="250" y1="250" x2="550" y2="250" stroke="rgba(239,68,68,0.5)"/></svg>
+            </div>
+            <div class="proj-meta">
+              <div>
+                <div class="proj-cat">Cybersecurity</div>
+                <h3 class="proj-name">Threat Intelligence</h3>
+              </div>
+            </div>
+          </article>
+
+          <article class="proj-card">
+            <div class="proj-img">
+               <svg class="abstract-lines" style="opacity:0.8" viewBox="0 0 800 500"><path d="M200 250 Q 400 50 600 250 T 1000 250" stroke="rgba(168,85,247,0.5)" stroke-width="2"/><path d="M200 250 Q 400 450 600 250 T 1000 250" stroke="rgba(168,85,247,0.5)" stroke-width="2"/><circle cx="200" cy="250" r="10" fill="rgba(168,85,247,0.5)"/><circle cx="600" cy="250" r="10" fill="rgba(168,85,247,0.5)"/></svg>
+            </div>
+            <div class="proj-meta">
+              <div>
+                <div class="proj-cat">Automation · ML</div>
+                <h3 class="proj-name">Workflow Engine</h3>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- PROCESS -->
+      <section class="process" id="process">
+        <div class="container">
+          <span class="t-label">How We Work</span>
+          <h2 class="t-xl">Proven Process</h2>
+          
+          <div class="process-list">
+            <div class="process-item hover-target">
+              <div class="process-num">01</div>
+              <h3 class="process-title">Discover</h3>
+              <p class="process-desc">Deep-dive into your goals, technical landscape, and opportunity areas. We ask the right questions to define the right solution.</p>
+            </div>
+            <div class="process-item hover-target">
+              <div class="process-num">02</div>
+              <h3 class="process-title">Design</h3>
+              <p class="process-desc">Architecture planning, UX blueprinting, system design. We map every component before writing a single line of code.</p>
+            </div>
+            <div class="process-item hover-target">
+              <div class="process-num">03</div>
+              <h3 class="process-title">Build</h3>
+              <p class="process-desc">Iterative, sprint-based development with continuous feedback. Quality-first engineering with full transparency.</p>
+            </div>
+            <div class="process-item hover-target">
+              <div class="process-num">04</div>
+              <h3 class="process-title">Deploy</h3>
+              <p class="process-desc">Production-grade deployment, performance tuning, monitoring setup, and post-launch support for a flawless go-live.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PARTNERS -->
+      <section class="partners">
+        <div class="container">
+          <span class="t-label">Trusted Network</span>
+          <h2 class="t-xl">Our Partners</h2>
+          
+          <div class="partners-grid">
+            <a href="https://www.metiergenesis.com/" target="_blank" rel="noopener" class="partner-card hover-target">
+              <h3 class="p-logo">Metier Genesis FZ LLC</h3>
+              <p class="p-desc">Technology & Business Solutions · UAE</p>
+              <div class="p-link">Visit Website <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></div>
+            </a>
+            
+            <a href="https://dedcell-security.vercel.app/" target="_blank" rel="noopener" class="partner-card hover-target">
+              <h3 class="p-logo">Dedcell Solutions</h3>
+              <p class="p-desc">Cybersecurity & Infrastructure Solutions</p>
+              <div class="p-link">Visit Website <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER / CONTACT -->
+      <footer class="footer" id="contact">
+        <div class="container">
+          <div class="footer-cta">
+            <h2 class="huge-text">LET'S BUILD<br/>SOMETHING<br/>POWERFUL.</h2>
+            <div class="magnetic-wrap" style="margin-top: 2rem;">
+              <a href="mailto:contact@aegisz.in" class="btn btn-primary magnetic hover-target" style="font-size: 1.25rem; padding: 1.5rem 3rem;">contact@aegisz.in</a>
+            </div>
+          </div>
+
+          <div class="footer-grid">
+            <div class="footer-col">
+              <a href="#" class="hover-target" style="background: #ffffff; padding: 1.25rem; border-radius: 24px; display: inline-flex; width: fit-content; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease;">
+                <svg viewBox="0 0 100 100" style="width: 48px; height: 48px;">
+                  <path d="M50 15 L85 85 L50 60 L15 85 Z" fill="none" stroke="#000000" stroke-width="8" stroke-linejoin="bevel" />
+                  <circle cx="50" cy="15" r="9" fill="#000000" />
+                  <circle cx="50" cy="60" r="9" fill="#000000" />
+                  <line x1="50" y1="15" x2="50" y2="60" stroke="#000000" stroke-width="8" />
+                </svg>
+              </a>
+              <h3 style="margin-top: 1.5rem; font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; letter-spacing: 0.05em;">AEGISZ</h3>
+              <p class="t-label" style="margin-top: 0.5rem;">Premium Technology Agency</p>
+            </div>
+            
+            <div class="footer-col footer-links">
+              <span class="t-label">Direct Contact</span>
+              <a href="tel:+919080883442" class="hover-target">+91 90808 83442</a>
+              <a href="mailto:contact@aegisz.in" class="hover-target">contact@aegisz.in</a>
+              
+              <span class="t-label" style="margin-top: 2rem;">Socials</span>
+              <a href="https://www.linkedin.com/company/aegisz-cybersecurity" target="_blank" rel="noopener" class="hover-target">LinkedIn</a>
+            </div>
+          </div>
+
+          <div class="footer-bottom">
+            <p>© 2026 AEGISZ. All rights reserved.</p>
+            <p>Partner of Metier Genesis FZ LLC & Dedcell Solutions.</p>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/split-type"></script>
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Initialize Lenis (Smooth Scrolling)
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        direction: 'vertical',
+        gestureDirection: 'vertical',
+        smooth: true,
+        mouseMultiplier: 1,
+        smoothTouch: false,
+        touchMultiplier: 2,
+        infinite: false,
+      });
+
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+
+      // Integrate Lenis with GSAP ScrollTrigger
+      gsap.registerPlugin(ScrollTrigger);
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+      gsap.ticker.lagSmoothing(0);
+
+      // 2. Custom Cursor
+      const cursorDot = document.querySelector('.cursor-dot');
+      const cursorOutline = document.querySelector('.cursor-outline');
+      const hoverTargets = document.querySelectorAll('.hover-target, a, button');
+
+      window.addEventListener('mousemove', (e) => {
+        gsap.to(cursorDot, { x: e.clientX, y: e.clientY, duration: 0.1, ease: "power2.out" });
+        gsap.to(cursorOutline, { x: e.clientX, y: e.clientY, duration: 0.5, ease: "power2.out" });
+      });
+
+      hoverTargets.forEach(target => {
+        target.addEventListener('mouseenter', () => cursorOutline.classList.add('hover'));
+        target.addEventListener('mouseleave', () => cursorOutline.classList.remove('hover'));
+      });
+
+      // 3. Preloader & Hero Animation
+      const tlLoader = gsap.timeline();
+      
+      tlLoader.to('.preloader-logo-svg', { opacity: 1, scale: 1, duration: 1.2, ease: 'power3.out' })
+              .to('.preloader-bar', { width: '100%', duration: 1.2, ease: 'power3.inOut' }, "-=0.5")
+              .to('.preloader-brand', { opacity: 1, y: -20, duration: 0.8, ease: 'power3.out' }, "-=0.8")
+              .to('.preloader', { yPercent: -100, duration: 1, ease: 'power4.inOut', delay: 0.3 })
+              .from('.hero-title .line-inner', { y: 150, stagger: 0.1, duration: 1.2, ease: 'power4.out' }, "-=0.5")
+              .from('.reveal-fade', { opacity: 0, y: 30, stagger: 0.2, duration: 1, ease: 'power3.out' }, "-=1");
+
+      // Animate Hero SVG drawing
+      gsap.to('.abstract-lines path', {
+        strokeDashoffset: 0, duration: 4, ease: "power2.inOut", stagger: 0.5, 
+        scrollTrigger: { trigger: ".services", start: "top 80%" }
+      });
+
+      // 4. Text Reveal (About Section)
+      const splitText = new SplitType('.split-text', { types: 'words' });
+      gsap.fromTo(splitText.words, 
+        { opacity: 0.1 },
+        {
+          opacity: 1,
+          stagger: 0.05,
+          scrollTrigger: {
+            trigger: '.about-text-wrap',
+            start: 'top 80%',
+            end: 'bottom 40%',
+            scrub: true,
+          }
+        }
+      );
+
+      // 5. Horizontal Scroll (Projects) - Desktop Only
+      if (window.innerWidth > 1024) {
+        let hzSection = document.querySelector('.horizontal-section');
+        let hzWrapper = document.querySelector('.horizontal-wrapper');
+        
+        let getScrollAmount = () => -(hzWrapper.scrollWidth - window.innerWidth + (window.innerWidth * 0.1));
+
+        gsap.to(hzWrapper, {
+          x: getScrollAmount,
+          ease: "none",
+          scrollTrigger: {
+            trigger: hzSection,
+            pin: true,
+            scrub: 1,
+            start: "center center",
+            end: () => `+=${hzWrapper.scrollWidth}`,
+            invalidateOnRefresh: true
+          }
+        });
+      }
+
+      // 6. Services Stacking Effect (Scale down previous cards)
+      const cards = gsap.utils.toArray('.svc-card');
+      cards.forEach((card, i) => {
+        if (i !== cards.length - 1) {
+          gsap.to(card, {
+            scale: 0.9,
+            opacity: 0.5,
+            scrollTrigger: {
+              trigger: card,
+              start: "top 100px",
+              end: "bottom top",
+              scrub: true,
+            }
+          });
+        }
+      });
+
+      // 7. Magnetic Buttons
+      const magnetics = document.querySelectorAll('.magnetic');
+      magnetics.forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+          const rect = btn.getBoundingClientRect();
+          const x = (e.clientX - rect.left - rect.width / 2) * 0.3;
+          const y = (e.clientY - rect.top - rect.height / 2) * 0.3;
+          gsap.to(btn, { x: x, y: y, duration: 0.5, ease: 'power2.out' });
+        });
+        btn.addEventListener('mouseleave', () => {
+          gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.3)' });
+        });
+      });
+
+      // Prevent Lenis from acting weird on hash links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          lenis.scrollTo(this.getAttribute('href'), { offset: -100 });
+        });
+      });
+    });
+  </script>
+</body>
+</html>
