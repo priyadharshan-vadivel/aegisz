@@ -840,7 +840,7 @@
             <p class="t-body-lg" style="margin-top: 2rem;">A glimpse into the products and systems we've engineered for clients across industries.</p>
           </div>
 
-          <article class="proj-card">
+          <article class="proj-card" id="iaac-card">
             <div class="proj-img">
                <svg class="abstract-lines" style="opacity:0.9" viewBox="0 0 800 500">
                  <!-- Outer Network Rings -->
@@ -1152,6 +1152,20 @@
           lenis.scrollTo(this.getAttribute('href'), { offset: -100 });
         });
       });
+
+      // IAAC card — open live app on click, ignore horizontal drag gestures
+      (function () {
+        const card = document.getElementById('iaac-card');
+        if (!card) return;
+        card.style.cursor = 'pointer';
+        let downX = 0;
+        card.addEventListener('mousedown', e => { downX = e.clientX; });
+        card.addEventListener('click', e => {
+          if (Math.abs(e.clientX - downX) < 6) {
+            window.open('https://iaac-production.vercel.app/login', '_blank', 'noopener,noreferrer');
+          }
+        });
+      })();
     });
   </script>
 </body>
