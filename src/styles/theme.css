@@ -1,0 +1,122 @@
+/*
+ * AegisZ design tokens — the ONLY place colours, fonts, radii, spacing and
+ * motion are defined. Components use the Tailwind utilities generated from
+ * the @theme block at the bottom (bg-bg, text-fg-muted, rounded-md, ...).
+ * Re-theme the site by editing the values in the first two blocks.
+ *
+ * Fonts: --ae-font-* point at the CSS variables that next/font sets up in
+ * src/styles/fonts.ts. To change typeface, change it there and here.
+ */
+
+/* ---------- Dark (default) ---------- */
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --ae-bg: #0b0c0e;
+  --ae-surface: #131418;
+  --ae-surface-2: #1b1d22;
+  --ae-border: #2a2d34;
+  --ae-border-strong: #3a3e47;
+
+  --ae-fg: #ececee;
+  --ae-fg-muted: #a6a8b0;
+  --ae-fg-subtle: #8a8d96;
+
+  --ae-accent: #8fb3ff;
+  --ae-accent-fg: #0b0c0e;
+  --ae-focus: #8fb3ff;
+
+  /* Verdicts — also used for status badges */
+  --ae-allow: #5fd38d;
+  --ae-block: #ff7a7a;
+  --ae-review: #f2c25b;
+
+  --ae-shadow-card: 0 1px 0 0 rgb(255 255 255 / 0.03) inset, 0 8px 24px -12px rgb(0 0 0 / 0.6);
+}
+
+/* ---------- Light ---------- */
+[data-theme="light"] {
+  color-scheme: light;
+
+  --ae-bg: #fafaf9;
+  --ae-surface: #ffffff;
+  --ae-surface-2: #f1f1ef;
+  --ae-border: #e2e2df;
+  --ae-border-strong: #c9c9c4;
+
+  --ae-fg: #111214;
+  --ae-fg-muted: #4a4d55;
+  --ae-fg-subtle: #61646c;
+
+  --ae-accent: #1f4fd1;
+  --ae-accent-fg: #ffffff;
+  --ae-focus: #1f4fd1;
+
+  --ae-allow: #12773f;
+  --ae-block: #b42323;
+  --ae-review: #8a5a00;
+
+  --ae-shadow-card: 0 1px 2px rgb(0 0 0 / 0.04), 0 8px 24px -16px rgb(0 0 0 / 0.18);
+}
+
+/* ---------- Theme-independent ---------- */
+:root {
+  --ae-font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --ae-font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --ae-radius-sm: 6px;
+  --ae-radius-md: 10px;
+  --ae-radius-lg: 16px;
+
+  --ae-space-section: clamp(4rem, 8vw, 7rem);
+  --ae-space-gutter: 1rem;
+  --ae-container-max: 72rem;
+  --ae-header-h: 4rem;
+
+  /* Partner logos ship on white backgrounds */
+  --ae-logo-tile: #ffffff;
+
+  --ae-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ae-duration: 200ms;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --ae-space-gutter: 1.5rem;
+  }
+}
+
+/* ---------- Tailwind mapping (don't put values here) ---------- */
+@theme inline {
+  --color-bg: var(--ae-bg);
+  --color-surface: var(--ae-surface);
+  --color-surface-2: var(--ae-surface-2);
+  --color-border: var(--ae-border);
+  --color-border-strong: var(--ae-border-strong);
+  --color-fg: var(--ae-fg);
+  --color-fg-muted: var(--ae-fg-muted);
+  --color-fg-subtle: var(--ae-fg-subtle);
+  --color-accent: var(--ae-accent);
+  --color-accent-fg: var(--ae-accent-fg);
+  --color-focus: var(--ae-focus);
+  --color-allow: var(--ae-allow);
+  --color-block: var(--ae-block);
+  --color-review: var(--ae-review);
+  --color-logo-tile: var(--ae-logo-tile);
+
+  --font-sans: var(--ae-font-sans);
+  --font-mono: var(--ae-font-mono);
+
+  --radius-sm: var(--ae-radius-sm);
+  --radius-md: var(--ae-radius-md);
+  --radius-lg: var(--ae-radius-lg);
+
+  --spacing-section: var(--ae-space-section);
+  --spacing-gutter: var(--ae-space-gutter);
+  --spacing-header: var(--ae-header-h);
+  --container-site: var(--ae-container-max);
+
+  --shadow-card: var(--ae-shadow-card);
+  --ease-out: var(--ae-ease-out);
+}
