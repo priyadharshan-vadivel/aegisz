@@ -1,0 +1,7 @@
+# AegisZ security contact (RFC 9116)
+# TODO: switch Contact to a dedicated security address once confirmed, and add Encryption if a PGP key is published.
+Contact: mailto:contact@aegisz.in
+Expires: 2027-10-28T00:00:00.000Z
+Policy: https://aegisz.in/trust
+Preferred-Languages: en
+Canonical: https://aegisz.in/.well-known/security.txt

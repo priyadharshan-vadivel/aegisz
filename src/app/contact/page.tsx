@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
@@ -28,9 +27,7 @@ export default function ContactPage() {
             body={<p>See IAAC judge real commands, or tell us about a requirement you need built.</p>}
           />
           <div className="mt-10">
-            <Suspense>
-              <ContactForm />
-            </Suspense>
+            <ContactForm />
           </div>
         </div>
 

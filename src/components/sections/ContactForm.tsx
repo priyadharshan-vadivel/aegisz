@@ -1,8 +1,7 @@
 "use client";
 
-import { useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
@@ -38,8 +37,12 @@ const inputBase =
   "mt-1.5 block w-full rounded-md border bg-bg px-3.5 py-2.5 text-fg placeholder:text-fg-subtle focus-visible:outline-2 focus-visible:outline-offset-0";
 
 export function ContactForm() {
-  const params = useSearchParams();
-  const initialInterest = interests.some((i) => i.value === params.get("interest")) ? params.get("interest")! : "";
+  // Preselect from ?interest= after mount, so the form itself stays server-rendered (no layout shift).
+  const [interest, setInterest] = useState("");
+  useEffect(() => {
+    const q = new URLSearchParams(window.location.search).get("interest");
+    if (q && interests.some((i) => i.value === q)) setInterest(q);
+  }, []);
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
@@ -111,7 +114,8 @@ export function ContactForm() {
         <select
           id={id("interest")}
           name="interest"
-          defaultValue={initialInterest}
+          value={interest}
+          onChange={(e) => setInterest(e.target.value)}
           aria-invalid={errors.interest ? true : undefined}
           aria-describedby={errors.interest ? `${id("interest")}-err` : undefined}
           className={cn(inputBase, errors.interest ? "border-block" : "border-border-strong")}
