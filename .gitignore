@@ -13,3 +13,7 @@ playwright-report/
 /IAAC-Profile.pdf
 .env
 .env*.local
+
+# Kept out of the public repo (confidential). Present locally; see SETUP.md.
+/brand/company-profile.md
+/private/

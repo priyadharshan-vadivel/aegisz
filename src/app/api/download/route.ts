@@ -21,7 +21,15 @@ export async function GET(req: Request) {
       });
     }
   }
-  const pdf = await readFile(FILE);
+  // The PDF isn't in git (the repo is public); it must be added to the deployment. See SETUP.md.
+  const pdf = await readFile(FILE).catch(() => null);
+  if (!pdf) {
+    console.error("[download] private/iaac-overview.pdf is missing from this deployment");
+    return new Response("The IAAC overview isn't available right now. Email contact@aegisz.in and we'll send it.", {
+      status: 503,
+      headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store" },
+    });
+  }
   return new Response(new Uint8Array(pdf), {
     headers: {
       "Content-Type": "application/pdf",

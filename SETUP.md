@@ -84,9 +84,13 @@ npm run build && npm start   # http://localhost:3000
 npm test                     # simulator + form pipeline tests (no email is sent)
 ```
 
-## Updating the IAAC overview PDF
+## The IAAC overview PDF
 
-The download serves `private/iaac-overview.pdf`. It sits outside `public/`, so it can't be fetched without a valid link. To rebuild it from a new deck with the pricing slide removed:
+The download serves `private/iaac-overview.pdf`. It sits outside `public/`, so it can't be fetched without a valid link.
+
+**It is not in git**, because the GitHub repo is public and a committed PDF could be downloaded there, bypassing the form. Until the file is present in a deployment, the download route answers "isn't available right now" and points people to contact@aegisz.in. To include it, deploy with the file present, for example `vercel --prod` from a machine that has `private/iaac-overview.pdf`. Alternatively, keep the PDF in private storage and change `src/app/api/download/route.ts` to fetch it from there.
+
+To rebuild it from a new deck with the pricing slide removed:
 
 ```
 node scripts/make-overview-pdf.mjs path/to/IAAC-Profile.pdf
