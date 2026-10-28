@@ -6,7 +6,7 @@ export type ProductStatus = "available" | "in-development" | "roadmap";
 const statusLabel: Record<ProductStatus, string> = {
   available: "Available",
   "in-development": "In development",
-  roadmap: "Roadmap",
+  roadmap: "Coming",
 };
 
 export function StatusBadge({ status, className }: { status: ProductStatus; className?: string }) {

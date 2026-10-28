@@ -1,32 +1,29 @@
 import Image from "next/image";
-import { Building2, Factory, Flag, Landmark, Layers, PencilRuler, Server, ShieldCheck, Users } from "lucide-react";
-import { Section, SectionHeading } from "@/components/ui/Section";
+import Link from "next/link";
+import { Building2, Factory, Landmark, Server } from "lucide-react";
 import { Container } from "@/components/ui/Container";
-import { Card } from "@/components/ui/Card";
+import { Section, SectionHeading } from "@/components/ui/Section";
 import { ArrowLink, LinkButton } from "@/components/ui/Button";
 import { StatusBadge } from "@/components/ui/Badge";
-import { Bento, span } from "@/components/ui/Bento";
 import { Reveal } from "@/components/motion/Reveal";
 import { Magnetic } from "@/components/motion/Magnetic";
-import { WordReveal } from "@/components/motion/WordReveal";
+import { LinkedInIcon } from "@/components/brand/LinkedInIcon";
 import { home } from "@/content/home";
-import { iaac } from "@/content/iaac";
-import { industries } from "@/content/industries";
-import { partners } from "@/content/company";
+import { company, partners } from "@/content/company";
+import { productCards } from "@/content/products";
 import { demoCta } from "@/content/site";
-import { cn } from "@/lib/cn";
 
 type Cta = { href: string; label: string };
 
 export function CtaPair({ primary = { href: demoCta.href, label: "Book an IAAC demo" }, secondary }: { primary?: Cta; secondary: Cta }) {
   return (
-    <div className="flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
-      <Magnetic>
+    <div className="flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-center">
+      <Magnetic className="flex">
         <LinkButton href={primary.href} size="lg" className="w-full sm:w-auto">
           {primary.label}
         </LinkButton>
       </Magnetic>
-      <Magnetic>
+      <Magnetic className="flex">
         <LinkButton href={secondary.href} variant="secondary" size="lg" className="w-full sm:w-auto">
           {secondary.label}
         </LinkButton>
@@ -35,273 +32,91 @@ export function CtaPair({ primary = { href: demoCta.href, label: "Book an IAAC d
   );
 }
 
-/* 1. Hero: who AegisZ is */
-export function Hero() {
-  const [l1, l2, l3] = home.hero.titleLines;
-  const words = (s: string, offset: number) =>
-    s.split(" ").map((w, i) => (
-      <span key={i} aria-hidden className="rise" style={{ animationDelay: `${80 * (offset + i)}ms` }}>
-        {w}&nbsp;
-      </span>
-    ));
-  const n1 = l1.split(" ").length;
-  const n2 = l2.split(" ").length;
+/* 1. Hero */
+export function Hero({ visual }: { visual: React.ReactNode }) {
+  const words = home.hero.title.split(" ");
   return (
-    <section aria-labelledby="hero-title" className="relative">
-      <Container className="relative pt-16 pb-section sm:pt-24">
-        <div className="max-w-4xl">
-          <p className="label rise mb-8 block">{home.hero.eyebrow}</p>
-          {/* A step below text-h1 so the copy sits left of the 3D shield on wide screens. */}
-          <h1
-            id="hero-title"
-            aria-label={home.hero.titleLines.join(" ")}
-            className="text-[clamp(2.75rem,1rem+4.6vw,5.5rem)] leading-none font-semibold tracking-[-0.04em] text-fg"
-          >
-            <span className="block">{words(l1, 0)}</span>
-            <span className="block">{words(l2, n1)}</span>
-            <span className="block text-fg-muted">{words(l3, n1 + n2)}</span>
-          </h1>
-          <p className="rise mt-10 block max-w-measure text-lead text-fg-muted" style={{ animationDelay: "600ms" }}>
-            {home.hero.body}
-          </p>
-          <div className="rise mt-12 block" style={{ animationDelay: "720ms" }}>
-            <div className="sm:inline-block">
-              <CtaPair primary={{ href: "/products", label: "Explore products" }} secondary={{ href: demoCta.href, label: "Book a demo" }} />
-            </div>
-          </div>
-        </div>
-      </Container>
-    </section>
-  );
-}
-
-/* 2. Why we exist */
-export function WhyWeExist() {
-  const p = home.problem;
-  return (
-    <section aria-labelledby="why-exist-title" className="py-section">
-      <Container>
-        <p className="label mb-10">{p.eyebrow}</p>
-        <h2 id="why-exist-title" className="sr-only">
-          {p.lines.join(" ")}
-        </h2>
-        <div aria-hidden className="space-y-1">
-          {p.lines.map((line, i) => (
-            <WordReveal key={i} as="p" text={line} className="text-h1" />
-          ))}
-        </div>
-        <p className="mt-14 max-w-measure text-lead text-fg-muted">{p.closer}</p>
-      </Container>
-    </section>
-  );
-}
-
-/* 4. What we do */
-const whatIcons = { products: Layers, services: PencilRuler };
-
-export function WhatWeDo() {
-  const w = home.whatWeDo;
-  return (
-    <Section labelledBy="what-title">
-      <SectionHeading id="what-title" eyebrow={w.eyebrow} title={w.title} />
-      <ul className="mt-16 grid gap-3 sm:gap-4 lg:grid-cols-2">
-        {w.cards.map((c, i) => {
-          const Icon = whatIcons[c.key as keyof typeof whatIcons];
-          return (
-            <Reveal as="li" key={c.key} delay={i * 0.08}>
-              <Card interactive className="card-glow flex h-full min-h-96 flex-col justify-between gap-12 p-8 sm:p-12">
-                <Icon aria-hidden strokeWidth={1.25} className="size-10 text-fg" />
-                <div>
-                  <h3 className="text-h2 text-fg">{c.title}</h3>
-                  <p className="mt-5 max-w-md text-lead text-fg-muted">{c.body}</p>
-                  <ul className="mt-8 flex flex-wrap gap-2">
-                    {c.chips.map((chip) => (
-                      <li key={chip} className="rounded-pill border border-border-strong px-3.5 py-1.5 font-mono text-[0.75rem] text-fg">
-                        {chip}
-                      </li>
-                    ))}
-                  </ul>
-                  <ArrowLink href={c.href} className="mt-10">
-                    {c.cta}
-                  </ArrowLink>
-                </div>
-              </Card>
-            </Reveal>
-          );
-        })}
-      </ul>
-    </Section>
-  );
-}
-
-/* 5a. Products teaser */
-export function PortfolioTeaser() {
-  const p = home.portfolio;
-  return (
-    <Section labelledBy="portfolio-title" tone="surface">
-      <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:items-end">
-        <SectionHeading id="portfolio-title" eyebrow={p.eyebrow} title={p.title} body={<p>{p.body}</p>} />
-        <ol aria-label="Platform coverage" className="grid grid-cols-4 gap-2">
-          {p.layers.map((layer) => {
-            const live = layer === "Runtime";
-            return (
-              <li
-                key={layer}
-                className={cn(
-                  "rounded-md border px-3 py-4 text-center font-mono text-[0.75rem] sm:text-sm",
-                  live ? "border-allow text-fg" : "border-border text-fg-subtle",
-                )}
-              >
-                {layer}
-                {live && <span className="sr-only"> (IAAC, available now)</span>}
-              </li>
-            );
-          })}
-        </ol>
+    <section aria-labelledby="hero-title" className="relative isolate overflow-hidden">
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-[30%] bottom-0 -z-10 sm:inset-y-0 sm:top-0 sm:left-[38%]">
+        {visual}
       </div>
-      <Reveal className="mt-14">
-        <Card as="article" interactive className="card-glow flex flex-col gap-6 bg-bg sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <div className="flex flex-wrap items-center gap-3">
-              <h3 className="text-h2 text-fg">{iaac.name}</h3>
-              <StatusBadge status={iaac.status} />
-            </div>
-            <p className="mt-2 text-fg-muted">
-              {iaac.fullName}. {iaac.oneLiner}
-            </p>
-          </div>
-          <ArrowLink href={iaac.href} className="shrink-0">
-            Explore IAAC
-          </ArrowLink>
-        </Card>
-      </Reveal>
-    </Section>
-  );
-}
-
-/* 5b. IAAC spotlight */
-export function IaacSpotlight({ children }: { children: React.ReactNode }) {
-  return (
-    <Section labelledBy="iaac-title">
-      <div className="grid gap-14 lg:grid-cols-[1fr_1.15fr] lg:items-center">
-        <div>
-          <SectionHeading id="iaac-title" eyebrow="Available now · IAAC" title={iaac.headline} body={<p>{iaac.summary}</p>} />
-          <ol className="mt-12 space-y-6">
-            {iaac.steps.map((s, i) => (
-              <li key={s.key} className="flex gap-5">
-                <span className="font-mono text-sm text-fg-subtle">{i + 1}</span>
-                <div>
-                  <h3 className="font-semibold text-fg">{s.title}</h3>
-                  <p className="mt-1 max-w-[52ch] text-fg-muted">{s.body}</p>
-                </div>
-              </li>
+      <Container className="flex min-h-[calc(100svh-var(--ae-header-h))] flex-col justify-between gap-10 pt-12 pb-12 sm:justify-center sm:pt-16 sm:pb-20">
+        <div className="max-w-5xl">
+          <h1 id="hero-title" aria-label={home.hero.title} className="text-display text-fg">
+            {words.map((w, i) => (
+              <span key={i} aria-hidden className="rise" style={{ animationDelay: `${70 * i}ms` }}>
+                {w}&nbsp;
+              </span>
             ))}
-          </ol>
-          <ArrowLink href={iaac.href} className="mt-10">
-            How IAAC works
-          </ArrowLink>
+          </h1>
+          <p className="rise mt-8 block max-w-[34ch] text-lead text-fg-muted" style={{ animationDelay: "420ms" }}>
+            {home.hero.line}
+          </p>
         </div>
-        <Reveal y={40}>{children}</Reveal>
+        <div className="rise block sm:mt-12" style={{ animationDelay: "520ms" }}>
+          <CtaPair primary={{ href: "/products", label: "Explore products" }} secondary={{ href: demoCta.href, label: "Book a demo" }} />
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+/* 2. About */
+export function About() {
+  const a = home.about;
+  return (
+    <Section id="about" labelledBy="about-title">
+      <div className="grid gap-12 lg:grid-cols-[1.3fr_1fr] lg:items-end lg:gap-20">
+        <div>
+          <p className="label mb-6">{a.eyebrow}</p>
+          <h2 id="about-title" className="text-h1 text-fg">
+            {a.statement}
+          </h2>
+          <p className="mt-8 max-w-[52ch] text-lead text-fg-muted">{a.body}</p>
+        </div>
+        <ul aria-label="Founders" className="grid gap-3">
+          {company.leadership.map((l) => (
+            <li key={l.name} className="flex items-center gap-4 rounded-tile border border-border bg-surface p-4 sm:p-5">
+              <span className="relative grid size-14 shrink-0 place-items-center overflow-hidden rounded-full border border-border-strong bg-surface-2 font-mono text-fg-muted">
+                {l.photo ? <Image src={l.photo} alt="" fill sizes="56px" className="object-cover" /> : <span aria-hidden>{l.initials}</span>}
+              </span>
+              <div className="min-w-0 flex-1">
+                <p className="font-semibold text-fg">{l.name}</p>
+                <p className="text-sm text-fg-muted">{l.role}</p>
+              </div>
+              <a
+                href={l.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${l.name} on LinkedIn (opens in a new tab)`}
+                className="grid size-11 shrink-0 place-items-center rounded-full border border-border-strong text-fg-muted transition-colors hover:border-fg-subtle hover:text-fg"
+              >
+                <LinkedInIcon />
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
     </Section>
   );
 }
 
-/* 6. Who we serve: compact icon tiles */
-const industryIcons = { landmark: Landmark, bank: Building2, server: Server, factory: Factory };
-
-export function WhoWeServe() {
+/* 3. Vision & mission */
+export function VisionMission() {
+  const v = home.vision;
   return (
-    <Section labelledBy="serve-title">
-      <SectionHeading id="serve-title" eyebrow="Who we serve" title="Where one misused command becomes a board-level event" />
-      <ul className="mt-16 grid grid-cols-1 gap-3 min-[420px]:grid-cols-2 sm:gap-4 lg:grid-cols-4">
-        {industries.map((ind, i) => {
-          const Icon = industryIcons[ind.icon];
-          return (
-            <Reveal as="li" key={ind.slug} delay={i * 0.06}>
-              <a
-                href="#who-we-serve"
-                className="card-glow group flex h-full flex-col gap-8 rounded-tile border border-border bg-surface p-6 transition-[border-color,transform] duration-[var(--ae-dur-base)] ease-out-expo hover:-translate-y-0.5 hover:border-border-strong sm:p-7"
-              >
-                <Icon aria-hidden strokeWidth={1.5} className="size-7 text-fg transition-colors group-hover:text-accent" />
-                <div>
-                  <h3 className="text-h3 text-fg">{ind.short}</h3>
-                  <p className="mt-2 text-sm text-fg-muted">{ind.chips[0]}</p>
-                </div>
-              </a>
-            </Reveal>
-          );
-        })}
-      </ul>
-    </Section>
-  );
-}
-
-/* 7. Why AegisZ */
-const whyIcons = { shield: ShieldCheck, server: Server, flag: Flag, users: Users };
-
-export function WhyAegisz() {
-  const w = home.why;
-  return (
-    <Section labelledBy="why-title" tone="surface">
-      <SectionHeading id="why-title" eyebrow={w.eyebrow} title={w.title} body={<p>{w.body}</p>} />
-      <Bento as="ul" className="mt-16">
-        {w.items.map((item, i) => {
-          const Icon = whyIcons[item.icon as keyof typeof whyIcons];
-          const wide = i === 0 || i === 3;
-          return (
-            <Reveal as="li" key={item.title} delay={i * 0.06} className={wide ? span.twoThirds : span.third}>
-              <Card className="card-glow flex h-full min-h-64 flex-col justify-between gap-10 bg-bg">
-                <Icon className="size-6 text-fg-subtle" aria-hidden strokeWidth={1.5} />
-                <div>
-                  <h3
-                    className={cn(
-                      "max-w-[14ch] text-fg",
-                      wide ? "text-h2" : "text-[clamp(1.75rem,1rem+1.8vw,2.75rem)] leading-[1.05] font-semibold tracking-[-0.03em]",
-                    )}
-                  >
-                    {item.title}
-                  </h3>
-                  <p className="mt-4 max-w-md text-fg-muted">{item.body}</p>
-                </div>
-              </Card>
-            </Reveal>
-          );
-        })}
-      </Bento>
-    </Section>
-  );
-}
-
-/* 8. Partners */
-export function Partners({ headingId = "partners-title" }: { headingId?: string }) {
-  return (
-    <Section labelledBy={headingId}>
-      <SectionHeading
-        id={headingId}
-        eyebrow="Strategic partnerships"
-        title="Our partners"
-        body={<p>One takes our products to global markets; the other adds offensive security expertise.</p>}
-      />
-      <ul className="mt-16 grid gap-3 sm:gap-4 md:grid-cols-2">
-        {partners.map((p, i) => (
-          <Reveal as="li" key={p.name} delay={i * 0.08}>
-            <Card interactive className="card-glow flex h-full flex-col gap-8">
-              <div className="flex h-16 w-32 items-center justify-center overflow-hidden rounded-md bg-plate p-2.5">
-                <Image src={p.logo} alt={`${p.name} logo`} width={128} height={64} className="h-full w-auto object-contain" />
-              </div>
-              <div>
-                <p className="label">{p.role}</p>
-                <h3 className="mt-2 text-h3 text-fg">
-                  <a href={p.href} target="_blank" rel="noopener noreferrer" className="rounded-sm hover:underline underline-offset-4">
-                    {p.name}
-                    <span className="sr-only"> (opens in a new tab)</span>
-                  </a>
-                </h3>
-                <p className="mt-1 text-sm text-fg-muted">{p.roleDetail}</p>
-                <p className="mt-4 max-w-[60ch] text-fg-muted">{p.about}</p>
-              </div>
-            </Card>
+    <Section labelledBy="vision-title" tone="surface">
+      <p className="label mb-8">{v.eyebrow}</p>
+      <h2 id="vision-title" className="max-w-[20ch] text-statement text-fg">
+        {company.vision}
+      </h2>
+      <h3 className="sr-only">Our mission</h3>
+      <ul className="mt-14 flex flex-wrap gap-2.5">
+        {v.mission.map((m, i) => (
+          <Reveal as="li" key={m} delay={i * 0.05}>
+            <span className="inline-flex min-h-11 items-center rounded-pill border border-border-strong bg-bg/40 px-5 text-[0.9375rem] text-fg">
+              {m}
+            </span>
           </Reveal>
         ))}
       </ul>
@@ -309,22 +124,144 @@ export function Partners({ headingId = "partners-title" }: { headingId?: string 
   );
 }
 
-/* 9. Closing CTA */
-export function ClosingCta({
-  title = home.closing.title,
-  body = home.closing.body,
-}: {
-  title?: string;
-  body?: string;
-}) {
+/* 4. Who we serve */
+const serveIcons = { landmark: Landmark, bank: Building2, server: Server, factory: Factory };
+
+export function WhoWeServe() {
+  const s = home.serve;
+  return (
+    <Section id="who-we-serve" labelledBy="serve-title">
+      <SectionHeading id="serve-title" eyebrow={s.eyebrow} title={s.title} />
+      <ul className="mt-14 grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
+        {s.tiles.map((t, i) => {
+          const Icon = serveIcons[t.icon as keyof typeof serveIcons];
+          return (
+            <Reveal as="li" key={t.label} delay={i * 0.05}>
+              <div className="flex h-full flex-col gap-8 rounded-tile border border-border bg-surface p-6 sm:p-7">
+                <Icon aria-hidden strokeWidth={1.5} className="size-7 text-accent-ink" />
+                <div>
+                  <h3 className="text-h3 text-fg">{t.label}</h3>
+                  <p className="mt-2 text-fg-muted">{t.line}</p>
+                </div>
+              </div>
+            </Reveal>
+          );
+        })}
+      </ul>
+    </Section>
+  );
+}
+
+/* 5. Our products (cards shared with /products) */
+export function ProductCards({ headingLevel = "h3" }: { headingLevel?: "h2" | "h3" }) {
+  const H = headingLevel;
+  return (
+    <ul className="grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
+      {productCards.map((p, i) => (
+        <Reveal as="li" key={p.key} delay={i * 0.05}>
+          {p.href ? (
+            <Link
+              href={p.href}
+              className="card-glow group flex h-full min-h-56 flex-col justify-between gap-8 rounded-tile border border-border-strong bg-surface p-6 transition-[border-color,transform] duration-[var(--ae-dur-base)] ease-out-expo hover:-translate-y-0.5 hover:border-fg-subtle sm:p-7"
+            >
+              <StatusBadge status={p.status} className="self-start" />
+              <div>
+                <H className="text-h2 text-fg">{p.name}</H>
+                <p className="mt-2 text-fg-muted">{p.line}</p>
+                <span className="mt-5 inline-flex items-center gap-1.5 font-medium text-accent-ink">
+                  Explore {p.name}{" "}
+                  <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
+                    →
+                  </span>
+                </span>
+              </div>
+            </Link>
+          ) : (
+            <div className="flex h-full min-h-56 flex-col justify-between gap-8 rounded-tile border border-dashed border-border-strong p-6 sm:p-7">
+              <StatusBadge status={p.status} className="self-start" />
+              <div>
+                <H className="text-h3 text-fg-muted">{p.name}</H>
+                <p className="mt-2 text-fg-subtle">{p.line}</p>
+              </div>
+            </div>
+          )}
+        </Reveal>
+      ))}
+    </ul>
+  );
+}
+
+export function OurProducts() {
+  const p = home.products;
+  return (
+    <Section labelledBy="products-title" tone="surface">
+      <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+        <SectionHeading id="products-title" eyebrow={p.eyebrow} title={p.title} />
+        <ArrowLink href="/products" className="min-h-11 shrink-0">
+          View all products
+        </ArrowLink>
+      </div>
+      <div className="mt-14">
+        <ProductCards />
+      </div>
+    </Section>
+  );
+}
+
+/* 6. Partners + closing CTA */
+export function PartnersCta() {
+  return (
+    <section aria-labelledby="cta-title" className="overflow-hidden border-t border-border">
+      <Container className="glow py-section">
+        <div className="text-center">
+          <h2 id="cta-title" className="mx-auto max-w-[16ch] text-h1 text-fg">
+            {home.closing.title}
+          </h2>
+          <div className="mt-10 flex justify-center">
+            <CtaPair secondary={{ href: "/contact", label: "Talk to us" }} />
+          </div>
+        </div>
+        <div className="mt-20">
+          <h3 className="label text-center">{home.closing.partnersLabel}</h3>
+          <ul className="mt-6 grid gap-3 sm:grid-cols-2 sm:gap-4">
+            {partners.map((p) => (
+              <li key={p.name}>
+                <a
+                  href={p.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex min-h-11 items-center gap-5 rounded-tile border border-border bg-surface p-4 transition-colors hover:border-border-strong sm:p-5"
+                >
+                  <span className="flex h-12 w-24 shrink-0 items-center justify-center overflow-hidden rounded-md bg-plate p-2">
+                    <Image src={p.logo} alt="" width={96} height={48} className="h-full w-auto object-contain" />
+                  </span>
+                  <span>
+                    <span className="block font-semibold text-fg">
+                      {p.name}
+                      <span className="sr-only"> (opens in a new tab)</span>
+                    </span>
+                    <span className="block text-sm text-fg-muted">{p.role}</span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+/* Shared closing CTA for other pages */
+export function ClosingCta({ title = home.closing.title, body }: { title?: string; body?: string }) {
   return (
     <section aria-labelledby="cta-title" className="overflow-hidden border-t border-border">
       <Container className="glow py-section text-center">
         <h2 id="cta-title" className="mx-auto max-w-[16ch] text-h1 text-fg">
           {title}
         </h2>
-        <p className="mx-auto mt-6 max-w-measure text-lead text-fg-muted">{body}</p>
-        <div className="mt-12">
+        {body && <p className="mx-auto mt-6 max-w-measure text-lead text-fg-muted">{body}</p>}
+        <div className="mt-10 flex justify-center">
           <CtaPair secondary={{ href: "/contact", label: "Talk to us" }} />
         </div>
       </Container>

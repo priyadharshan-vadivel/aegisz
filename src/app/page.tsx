@@ -1,34 +1,16 @@
-import { BreakItTerminal } from "@/components/sections/BreakItTerminal";
-import { VisionMission } from "@/components/sections/VisionMission";
-import { HeroStage } from "@/components/three/HeroStage";
-import {
-  ClosingCta,
-  Hero,
-  IaacSpotlight,
-  Partners,
-  PortfolioTeaser,
-  WhatWeDo,
-  WhoWeServe,
-  WhyAegisz,
-} from "@/components/sections/home";
+import { ShieldPoster } from "@/components/three/ShieldPoster";
+import { About, Hero, OurProducts, PartnersCta, VisionMission, WhoWeServe } from "@/components/sections/home";
 
+// TODO: customer proof (logos, case studies or quotes) once approved for publication. Do not invent.
 export default function HomePage() {
   return (
     <>
-      <HeroStage>
-        <Hero />
-      </HeroStage>
+      <Hero visual={<ShieldPoster className="h-full w-full" />} />
+      <About />
       <VisionMission />
-      <WhatWeDo />
-      <PortfolioTeaser />
-      <IaacSpotlight>
-        <BreakItTerminal />
-      </IaacSpotlight>
       <WhoWeServe />
-      <WhyAegisz />
-      {/* TODO: customer proof (logos, case studies or quotes) once approved for publication. Do not invent. */}
-      <Partners />
-      <ClosingCta />
+      <OurProducts />
+      <PartnersCta />
     </>
   );
 }

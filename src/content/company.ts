@@ -39,26 +39,20 @@ export const company = {
     },
   ],
   // photo: path under /public, or null until brand/team/ photos are supplied (initials are shown instead).
-  // linkedin: null until URLs are supplied. No phone numbers on the site.
+  // No phone numbers on the site.
   leadership: [
     {
       name: "Priyadharshan Vadivel",
       initials: "PV",
       role: "Founder & CEO",
-      // TODO: confirm two-line bio
-      bio: "Leads strategy, partnerships and global go-to-market. Background in security research and penetration testing.",
-      email: "priyadharshanv@aegisz.in",
-      linkedin: null as string | null, // TODO: LinkedIn URL
+      linkedin: "https://www.linkedin.com/in/priyadharshan-vadivel/",
       photo: null as string | null, // TODO: photo from brand/team/
     },
     {
       name: "Jejo J",
       initials: "JJ",
       role: "Co-founder & CTO",
-      // TODO: confirm two-line bio
-      bio: "Leads product architecture and engineering. Builds and ships the AegisZ platforms, starting with IAAC.",
-      email: "jejo@aegisz.in",
-      linkedin: null as string | null, // TODO: LinkedIn URL
+      linkedin: "https://www.linkedin.com/in/jejo-j/",
       photo: null as string | null, // TODO: photo from brand/team/
     },
   ],
