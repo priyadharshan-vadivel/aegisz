@@ -8,6 +8,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { WordReveal } from "@/components/motion/WordReveal";
 import { Marquee } from "@/components/motion/Marquee";
 import { Terminal } from "@/components/sections/Terminal";
+import { BreakItTerminal } from "@/components/sections/BreakItTerminal";
 import { ArchitectureDiagram, Roadmap, StickyStory } from "@/components/sections/iaac";
 import { ClosingCta, CtaPair } from "@/components/sections/home";
 import { iaac } from "@/content/iaac";
@@ -100,6 +101,19 @@ export default function IaacPage() {
         <SectionHeading id="how-title" eyebrow="How it works" title="See. Judge. Allow, Block or Review." />
         <div className="mt-16 lg:mt-8">
           <StickyStory />
+        </div>
+      </Section>
+
+      {/* Try to break it */}
+      <Section labelledBy="break-title">
+        <div className="grid gap-14 lg:grid-cols-[1fr_1.2fr] lg:items-center">
+          <SectionHeading
+            id="break-title"
+            eyebrow="Try it"
+            title="Try to break it."
+            body={<p>Type a command an attacker, or a tired admin, might run. See what IAAC would decide, and why.</p>}
+          />
+          <BreakItTerminal />
         </div>
       </Section>
 

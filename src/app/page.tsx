@@ -1,6 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import { Todo } from "@/components/ui/Todo";
-import { Terminal } from "@/components/sections/Terminal";
+import { BreakItTerminal } from "@/components/sections/BreakItTerminal";
 import { VisionMission } from "@/components/sections/VisionMission";
 import { HeroStage } from "@/components/three/HeroStage";
 import {
@@ -26,7 +26,7 @@ export default function HomePage() {
       <WhatWeDo />
       <PortfolioTeaser />
       <IaacSpotlight>
-        <Terminal lit />
+        <BreakItTerminal />
       </IaacSpotlight>
       <WhoWeServe />
       <WhyAegisz />

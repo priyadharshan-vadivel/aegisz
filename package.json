@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
+    "test": "node --test scripts/*.test.ts",
     "shots": "playwright test --config scripts/playwright.config.ts"
   },
   "dependencies": {
