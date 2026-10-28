@@ -1,16 +1,8 @@
-import Link from "next/link";
-import { Section, SectionHeading } from "@/components/ui/Section";
-import { Card } from "@/components/ui/Card";
-import { ArrowLink, LinkButton } from "@/components/ui/Button";
-import { StatusBadge } from "@/components/ui/Badge";
-import { Table } from "@/components/ui/Table";
-import { Bento, span } from "@/components/ui/Bento";
-import { Reveal } from "@/components/motion/Reveal";
-import { Terminal } from "@/components/sections/Terminal";
-import { ClosingCta } from "@/components/sections/home";
-import { home } from "@/content/home";
-import { iaac } from "@/content/iaac";
-import { linesOfBusiness } from "@/content/services";
+import { Container } from "@/components/ui/Container";
+import { Section } from "@/components/ui/Section";
+import { ShieldPoster } from "@/components/three/ShieldPoster";
+import { ClosingCta, ProductCards } from "@/components/sections/home";
+import { layers } from "@/content/products";
 import { pageMetadata } from "@/lib/metadata";
 import { cn } from "@/lib/cn";
 
@@ -21,115 +13,59 @@ export const metadata = pageMetadata({
   path: "/products",
 });
 
-const facts = [
-  { k: "Protects", v: iaac.oneLiner },
-  { k: "Runs on", v: "Linux servers today; Windows, macOS, containers and Kubernetes on the roadmap." },
-  { k: "Deployment", v: "Per protected server, or Sovereign: dedicated, air-gapped and self-hosted." },
-];
+/** Code → Cloud → Runtime → Data, with Runtime (IAAC) lit. */
+function Spine() {
+  return (
+    <ol aria-label="Platform coverage" className="relative grid grid-cols-4 gap-2">
+      <span aria-hidden className="absolute top-5 right-[12.5%] left-[12.5%] h-px bg-gradient-to-r from-border-strong via-accent to-border-strong" />
+      {layers.map((l) => {
+        const live = l === "Runtime";
+        return (
+          <li key={l} className="relative flex flex-col items-center gap-3 text-center">
+            <span
+              aria-hidden
+              className={cn(
+                "grid size-10 place-items-center rounded-full border bg-bg",
+                live ? "border-accent shadow-[0_0_24px_var(--color-accent)]" : "border-border-strong",
+              )}
+            >
+              <span className={cn("size-2.5 rounded-full", live ? "bg-accent" : "bg-fg-subtle")} />
+            </span>
+            <span className={cn("text-[0.9375rem]", live ? "font-semibold text-fg" : "text-fg-muted")}>{l}</span>
+            {live && <span className="text-sm text-accent-ink">IAAC</span>}
+          </li>
+        );
+      })}
+    </ol>
+  );
+}
 
 export default function ProductsPage() {
-  const p = home.portfolio;
   return (
     <>
-      <Section labelledBy="products-title" className="pt-14 sm:pt-20">
-        <SectionHeading
-          id="products-title"
-          as="h1"
-          eyebrow="Product portfolio"
-          title="AI security platforms, built on one core"
-          body={<p>{p.body}</p>}
-        />
-      </Section>
-
-      <Section labelledBy="available-title" className="pt-0">
-        <h2 id="available-title" className="sr-only">
-          Available products
-        </h2>
-        <Bento>
-          <Reveal className={span.full}>
-            <Card as="article" className="grid gap-12 overflow-hidden p-8 sm:p-12 lg:grid-cols-[1fr_1.1fr] lg:items-center">
-              <div>
-                <div className="flex flex-wrap items-center gap-3">
-                  <h3 className="text-h1 text-fg">
-                    <Link href={iaac.href} className="rounded-sm hover:underline underline-offset-8">
-                      {iaac.name}
-                    </Link>
-                  </h3>
-                  <StatusBadge status={iaac.status} />
-                </div>
-                <p className="mt-2 text-fg-muted">{iaac.fullName}</p>
-                <p className="mt-8 text-h3 text-fg">{iaac.headline}</p>
-                <p className="mt-3 text-fg-muted">{iaac.summary}</p>
-                <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-                  <LinkButton href={iaac.href}>Explore IAAC →</LinkButton>
-                  <LinkButton href="/contact?interest=iaac-demo" variant="secondary">
-                    Book a demo
-                  </LinkButton>
-                </div>
-              </div>
-              <Terminal still lit />
-            </Card>
-          </Reveal>
-          {facts.map((f, i) => (
-            <Reveal key={f.k} delay={i * 0.06} className={span.third}>
-              <Card className="h-full">
-                <p className="label">{f.k}</p>
-                <p className="mt-4 text-lead text-fg">{f.v}</p>
-              </Card>
-            </Reveal>
-          ))}
-        </Bento>
-      </Section>
-
-      <Section labelledBy="platform-title" tone="surface">
-        <div className="grid gap-10 lg:grid-cols-2">
-          <SectionHeading id="platform-title" eyebrow="One platform" title="Each new product strengthens the others" />
-          <div className="space-y-5 text-lead text-fg-muted lg:pt-12">
-            <p>{p.shared}</p>
-            <p>
-              Beyond these, AegisZ&apos;s long-term direction is a broader portfolio of AI and cybersecurity products,
-              built in India to compete with the best in the world.
-            </p>
-          </div>
+      <section aria-labelledby="products-title" className="relative isolate overflow-hidden">
+        <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 -z-10 hidden w-1/2 lg:block">
+          <ShieldPoster className="h-full w-full" />
         </div>
-        <ol aria-label="Platform coverage" className="mt-16 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
-          {p.layers.map((layer, i) => {
-            const live = layer === "Runtime";
-            return (
-              <Reveal as="li" key={layer} delay={i * 0.06}>
-                <div
-                  className={cn(
-                    "flex min-h-40 h-full flex-col justify-between rounded-tile border bg-bg p-6",
-                    live ? "border-accent" : "border-border",
-                  )}
-                >
-                  <span aria-hidden className={cn("size-2 rounded-full", live ? "bg-accent" : "bg-border-strong")} />
-                  <div>
-                    <p className={cn("text-h3", live ? "text-fg" : "text-fg-muted")}>{layer}</p>
-                    <p className="mt-1 text-sm text-fg-subtle">{live ? "IAAC, available now" : "On the shared platform"}</p>
-                  </div>
-                </div>
-              </Reveal>
-            );
-          })}
-        </ol>
-      </Section>
+        <Container className="pt-14 pb-section sm:pt-20">
+          <p className="label mb-6">Products</p>
+          <h1 id="products-title" className="max-w-[14ch] text-h1 text-fg">
+            One platform, from code to data
+          </h1>
+          <p className="mt-6 max-w-[40ch] text-lead text-fg-muted">
+            Every AegisZ product shares one security graph and control plane. IAAC is first; the rest build on the same core.
+          </p>
+          <div className="mt-16 max-w-2xl">
+            <Spine />
+          </div>
+        </Container>
+      </section>
 
-      <Section labelledBy="lob-title">
-        <SectionHeading
-          id="lob-title"
-          eyebrow="Two ways to work with us"
-          title="Standard products or a product built to your requirement"
-        />
-        <Table
-          className="mt-14"
-          caption="Standard products compared with security design services"
-          head={["", ...linesOfBusiness.columns]}
-          rows={linesOfBusiness.rows.map((r) => [r.label, ...r.values])}
-        />
-        <ArrowLink href="/design-services" className="mt-10">
-          About security design services
-        </ArrowLink>
+      <Section labelledBy="cards-title" tone="surface">
+        <h2 id="cards-title" className="sr-only">
+          All products
+        </h2>
+        <ProductCards headingLevel="h3" />
       </Section>
 
       <ClosingCta />
