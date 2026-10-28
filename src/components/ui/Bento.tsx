@@ -1,7 +1,7 @@
 import { cn } from "@/lib/cn";
 
 /** 6-column bento on desktop, 2 on tablet, 1 on phones. Size tiles with the span helpers below. */
-export function Bento({ as: Tag = "div", className, children }: { as?: "div" | "ul"; className?: string; children: React.ReactNode }) {
+export function Bento({ as: Tag = "div", className, children }: { as?: "div" | "ul" | "ol"; className?: string; children: React.ReactNode }) {
   return <Tag className={cn("grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-6", className)}>{children}</Tag>;
 }
 
