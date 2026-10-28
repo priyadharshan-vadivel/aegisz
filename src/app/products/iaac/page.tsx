@@ -2,13 +2,13 @@ import { Container } from "@/components/ui/Container";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { Card } from "@/components/ui/Card";
 import { StatusBadge } from "@/components/ui/Badge";
-import { Todo } from "@/components/ui/Todo";
 import { Bento, span } from "@/components/ui/Bento";
 import { Reveal } from "@/components/motion/Reveal";
 import { WordReveal } from "@/components/motion/WordReveal";
 import { Marquee } from "@/components/motion/Marquee";
 import { Terminal } from "@/components/sections/Terminal";
 import { BreakItTerminal } from "@/components/sections/BreakItTerminal";
+import { DownloadGate } from "@/components/sections/DownloadGate";
 import { ArchitectureDiagram, Roadmap, StickyStory } from "@/components/sections/iaac";
 import { ClosingCta, CtaPair } from "@/components/sections/home";
 import { iaac } from "@/content/iaac";
@@ -23,7 +23,8 @@ export const metadata = pageMetadata({
 });
 
 // Capability tiles: sizes vary so the grid reads as a bento, not a table.
-const capSpans = [span.twoThirds, span.third, span.third, span.third, span.third, span.half];
+// Rows on desktop: 4+2 | 2+2+2 | 3+3 (eight tiles).
+const capSpans = [span.twoThirds, span.third, span.third, span.third, span.third, span.third, span.half, span.half];
 
 export default function IaacPage() {
   return (
@@ -176,11 +177,12 @@ export default function IaacPage() {
                 <div className="glow h-full">
                   <Card className="grid h-full gap-8 border-accent bg-bg md:grid-cols-[1fr_auto] md:items-end">
                     <div>
-                      <h3 className="text-h2 text-fg">{d.name}</h3>
+                      <p className="label">{d.tagline}</p>
+                      <h3 className="mt-3 text-h2 text-fg">{d.name}</h3>
                       <p className="mt-4 max-w-xl text-lead text-fg-muted">{d.body}</p>
                     </div>
                     <ul className="flex flex-wrap gap-2">
-                      {["Air-gapped", "Self-hosted", "Zero data egress"].map((x) => (
+                      {d.features.map((x) => (
                         <li key={x} className="rounded-pill border border-border-strong px-4 py-2 font-mono text-[0.8125rem] text-fg">
                           {x}
                         </li>
@@ -189,16 +191,40 @@ export default function IaacPage() {
                   </Card>
                 </div>
               ) : (
-                <Card className="flex h-full min-h-48 flex-col justify-between bg-bg">
-                  <h3 className="text-h3 text-fg">{d.name}</h3>
-                  <p className="mt-6 text-fg-muted">{d.body}</p>
+                <Card className="card-glow flex h-full min-h-64 flex-col justify-between gap-8 bg-bg">
+                  <div>
+                    <p className="label">{d.tagline}</p>
+                    <h3 className="mt-3 text-h2 text-fg">{d.name}</h3>
+                  </div>
+                  <ul className="space-y-2.5">
+                    {d.features.map((x) => (
+                      <li key={x} className="flex items-center gap-2.5 text-fg-muted">
+                        <span aria-hidden className="size-1.5 rounded-full bg-allow" />
+                        {x}
+                      </li>
+                    ))}
+                  </ul>
                 </Card>
               )}
             </Reveal>
           ))}
         </Bento>
-        <p className="mt-8 text-fg-subtle">Pricing is shared on request.</p>
-        <Todo className="mt-4">What differs between Basic, Medium and Enterprise (features, limits, support). No prices.</Todo>
+        <p className="mt-8 text-fg-subtle">Priced per protected server. Pricing is shared on request.</p>
+      </Section>
+
+      {/* Download */}
+      <Section id="download" labelledBy="download-title" tone="surface">
+        <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr] lg:items-start">
+          <SectionHeading
+            id="download-title"
+            eyebrow="Overview"
+            title="Download the IAAC overview"
+            body={<p>The problem, how IAAC works, architecture, compliance and roadmap, in one PDF.</p>}
+          />
+          <div className="lg:pt-10">
+            <DownloadGate gated={process.env.GATED_DOWNLOAD !== "false"} />
+          </div>
+        </div>
       </Section>
 
       {/* Roadmap */}

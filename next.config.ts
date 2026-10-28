@@ -10,6 +10,8 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  // The gated PDF lives outside /public; ship it with the download function.
+  outputFileTracingIncludes: { "/api/download": ["./private/**/*"] },
   async headers() {
     return [{ source: "/(.*)", headers: securityHeaders }];
   },

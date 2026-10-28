@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useInView, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { Cpu, LayoutDashboard } from "lucide-react";
 import { VerdictBadge } from "@/components/ui/Badge";
-import { Todo } from "@/components/ui/Todo";
 import { iaac, terminalDemo } from "@/content/iaac";
 import { dur, easeOutExpo, spring } from "@/styles/motion";
 import { cn } from "@/lib/cn";
@@ -179,13 +178,7 @@ export function ArchitectureDiagram() {
         </div>
         <Plane {...enforcement} icon={Cpu} />
       </div>
-      <figcaption className="mt-8 max-w-2xl text-fg-subtle">
-        The enforcement plane makes every decision on the host; the control plane holds policy, approvals and audit.
-      </figcaption>
-      <Todo className="mt-6">
-        Engineering to confirm which capabilities sit in which plane, and whether to show data flows. Diagram is
-        illustrative.
-      </Todo>
+      <figcaption className="mt-8 max-w-2xl text-fg-subtle">{iaac.architecture.caption}</figcaption>
     </figure>
   );
 }

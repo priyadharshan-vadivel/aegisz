@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { Card } from "@/components/ui/Card";
 import { ArrowLink, LinkButton } from "@/components/ui/Button";
@@ -49,7 +50,11 @@ export default function ProductsPage() {
             <Card as="article" className="grid gap-12 overflow-hidden p-8 sm:p-12 lg:grid-cols-[1fr_1.1fr] lg:items-center">
               <div>
                 <div className="flex flex-wrap items-center gap-3">
-                  <h3 className="text-h1 text-fg">{iaac.name}</h3>
+                  <h3 className="text-h1 text-fg">
+                    <Link href={iaac.href} className="rounded-sm hover:underline underline-offset-8">
+                      {iaac.name}
+                    </Link>
+                  </h3>
                   <StatusBadge status={iaac.status} />
                 </div>
                 <p className="mt-2 text-fg-muted">{iaac.fullName}</p>
