@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
@@ -34,7 +34,7 @@ function validate(data: FormData): Errors {
 }
 
 const inputBase =
-  "mt-1.5 block w-full rounded-md border bg-bg px-3.5 py-2.5 text-fg placeholder:text-fg-subtle focus-visible:outline-2 focus-visible:outline-offset-0";
+  "mt-2 block w-full rounded-md border bg-surface px-4 py-3.5 text-fg transition-colors duration-[var(--ae-dur-fast)] placeholder:text-fg-subtle hover:border-fg-subtle focus-visible:border-accent focus-visible:outline-2 focus-visible:outline-offset-0";
 
 export function ContactForm() {
   // Preselect from ?interest= after mount, so the form itself stays server-rendered (no layout shift).
@@ -65,12 +65,12 @@ export function ContactForm() {
 
   if (sent) {
     return (
-      <div role="status" className="rounded-lg border border-allow/40 bg-allow/5 p-6">
-        <CheckCircle2 className="size-6 text-allow" aria-hidden />
-        <h2 className="mt-3 text-lg font-medium text-fg">Thanks, we&apos;ve got your details.</h2>
+      <div role="status" className="rounded-tile border border-accent bg-surface p-8 sm:p-10">
+        <CheckCircle2 className="size-7 text-accent-ink" aria-hidden strokeWidth={1.5} />
+        <h2 className="mt-6 text-h3 text-fg">Thanks, we&apos;ve got your details.</h2>
         <p className="mt-1 text-fg-muted">
           We&apos;ll be in touch shortly. {/* TODO: remove this note once the form is wired */}
-          <span className="text-review">(Preview build: this form isn&apos;t connected yet.)</span>
+          <span className="text-fg-subtle">(Preview build: this form isn&apos;t connected yet.)</span>
         </p>
       </div>
     );
@@ -88,10 +88,10 @@ export function ContactForm() {
         autoComplete={opts.autoComplete}
         aria-invalid={errors[f] ? true : undefined}
         aria-describedby={errors[f] ? `${id(f)}-err` : undefined}
-        className={cn(inputBase, errors[f] ? "border-block" : "border-border-strong")}
+        className={cn(inputBase, errors[f] ? "border-danger" : "border-border-strong")}
       />
       {errors[f] && (
-        <p id={`${id(f)}-err`} className="mt-1.5 text-sm text-block">
+        <p id={`${id(f)}-err`} className="mt-1.5 text-sm text-danger">
           {errors[f]}
         </p>
       )}
@@ -118,7 +118,7 @@ export function ContactForm() {
           onChange={(e) => setInterest(e.target.value)}
           aria-invalid={errors.interest ? true : undefined}
           aria-describedby={errors.interest ? `${id("interest")}-err` : undefined}
-          className={cn(inputBase, errors.interest ? "border-block" : "border-border-strong")}
+          className={cn(inputBase, errors.interest ? "border-danger" : "border-border-strong")}
         >
           <option value="" disabled>
             Choose one
@@ -130,7 +130,7 @@ export function ContactForm() {
           ))}
         </select>
         {errors.interest && (
-          <p id={`${id("interest")}-err`} className="mt-1.5 text-sm text-block">
+          <p id={`${id("interest")}-err`} className="mt-1.5 text-sm text-danger">
             {errors.interest}
           </p>
         )}
@@ -149,7 +149,7 @@ export function ContactForm() {
         />
       </div>
 
-      <Button type="submit" className="w-full sm:w-auto">
+      <Button type="submit" size="lg" className="w-full sm:w-auto">
         Send request
       </Button>
       <p className="text-xs text-fg-subtle">
