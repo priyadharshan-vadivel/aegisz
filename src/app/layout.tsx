@@ -5,6 +5,7 @@ import { site } from "@/content/site";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { CardGlowTracker } from "@/components/motion/CardGlowTracker";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -28,8 +29,9 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#0b0c0e" },
-    { media: "(prefers-color-scheme: light)", color: "#fafaf9" },
+    // Browser UI colour can't read CSS variables; keep in sync with --ae-bg in theme.css.
+    { media: "(prefers-color-scheme: dark)", color: "#050505" },
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
   ],
 };
 
@@ -49,6 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </main>
           <Footer />
+          <CardGlowTracker />
         </ThemeProvider>
       </body>
     </html>

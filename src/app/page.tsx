@@ -1,25 +1,30 @@
 import { Container } from "@/components/ui/Container";
 import { Todo } from "@/components/ui/Todo";
+import { Terminal } from "@/components/sections/Terminal";
+import { VisionMission } from "@/components/sections/VisionMission";
 import {
   ClosingCta,
-  DesignServicesBand,
   Hero,
   IaacSpotlight,
   Partners,
-  PortfolioGrid,
-  ProblemSection,
+  PortfolioTeaser,
+  WhatWeDo,
   WhoWeServe,
   WhyAegisz,
+  WhyWeExist,
 } from "@/components/sections/home";
 
 export default function HomePage() {
   return (
     <>
       <Hero />
-      <ProblemSection />
-      <PortfolioGrid />
-      <IaacSpotlight />
-      <DesignServicesBand />
+      <WhyWeExist />
+      <VisionMission />
+      <WhatWeDo />
+      <PortfolioTeaser />
+      <IaacSpotlight>
+        <Terminal lit />
+      </IaacSpotlight>
       <WhoWeServe />
       <WhyAegisz />
       <Container className="pt-section">

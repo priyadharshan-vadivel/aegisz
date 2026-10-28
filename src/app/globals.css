@@ -112,6 +112,20 @@
     transform: translateX(120%);
   }
 
+  /* Cursor-tracked highlight on cards. --mx/--my are set by CardGlowTracker. */
+  .card-glow {
+    background-repeat: no-repeat;
+  }
+  @media (hover: hover) {
+    .card-glow:hover {
+      background-image: radial-gradient(
+        28rem circle at var(--mx, 50%) var(--my, 50%),
+        color-mix(in oklab, var(--color-fg) 6%, transparent),
+        transparent 45%
+      );
+    }
+  }
+
   .marquee {
     animation: marquee var(--ae-marquee-dur) linear infinite;
   }

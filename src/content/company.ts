@@ -14,23 +14,33 @@ export const company = {
     "To be among India's top 10 cybersecurity product makers by 2030, and a globally recognised name in protecting digital ecosystems.",
   mission: [
     {
+      icon: "landmark",
       title: "Build a secure digital government for India",
+      short: "Public systems protected by security built and controlled in India.",
       body: "Protect the public systems, data and services that citizens depend on, with security built and controlled in India.",
     },
     {
+      icon: "cpu",
       title: "Make world-class security IP in India",
+      short: "Design and own core security technology, not resell it.",
       body: "Design and own core cybersecurity technology rather than resell it.",
     },
     {
+      icon: "lock",
       title: "Keep sensitive data sovereign",
+      short: "Analysis runs inside your environment; critical data never leaves.",
       body: "Build products where analysis runs inside the customer's environment and critical data never has to leave it.",
     },
     {
+      icon: "shield",
       title: "Stop damage before it happens",
+      short: "Prevent harmful actions in real time, not report them after.",
       body: "Prevent harmful actions in real time instead of reporting them after the fact.",
     },
     {
+      icon: "globe",
       title: "Deliver globally through trusted partners",
+      short: "Indian-built security for every region we serve.",
       body: "Take Indian-built security to enterprises and governments in every region we serve.",
     },
   ],
