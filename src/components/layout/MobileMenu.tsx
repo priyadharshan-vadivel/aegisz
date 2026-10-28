@@ -10,7 +10,7 @@ import { demoCta, mainNav } from "@/content/site";
 import { easeOutExpo, dur } from "@/styles/motion";
 import { cn } from "@/lib/cn";
 
-const items = [{ label: "Home", href: "/" }, ...mainNav, { label: "Contact", href: "/contact" }];
+const items = mainNav;
 
 /**
  * The panel is portalled to <body>: the header's backdrop-filter would otherwise become the

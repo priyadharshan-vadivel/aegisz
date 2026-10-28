@@ -1,69 +1,62 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Wordmark } from "@/components/brand/Logo";
-import { footerNav, legalNav, site } from "@/content/site";
+import { companyLinkedIn, footerNav, legalNav, site } from "@/content/site";
+
+const linkCls = "inline-flex min-h-11 items-center text-fg-muted transition-colors hover:text-fg";
 
 export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border bg-bg text-[0.8125rem]">
-      <Container className="pt-16 pb-10">
-        <div className="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-4">
-          {footerNav.map((group) => (
-            <nav key={group.heading} aria-label={group.heading}>
-              <h2 className="font-semibold text-fg">{group.heading}</h2>
-              <ul className="mt-3 space-y-2">
-                {group.items.map((item) => (
-                  <li key={item.href}>
-                    <Link href={item.href} className="text-fg-muted transition-colors hover:text-fg">
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          ))}
-          <div>
-            <h2 className="font-semibold text-fg">Contact</h2>
-            <address className="mt-3 space-y-2 not-italic text-fg-muted">
-              <p>
-                <a href={`mailto:${site.email}`} className="transition-colors hover:text-fg">
-                  {site.email}
-                </a>
-              </p>
-              <p>
-                <a href={site.phoneHref} className="transition-colors hover:text-fg">
-                  {site.phone}
-                </a>
-              </p>
-              <p>{site.location}</p>
-            </address>
-          </div>
+    <footer className="border-t border-border bg-bg">
+      <Container className="flex flex-col gap-10 py-14 md:flex-row md:items-start md:justify-between">
+        <div className="max-w-xs">
+          <Link href="/" className="inline-flex min-h-11 items-center rounded-sm" aria-label="AegisZ home">
+            <Wordmark />
+          </Link>
+          <p className="mt-3 text-sm text-fg-subtle">{site.tagline}</p>
         </div>
 
-        <div className="mt-14 flex flex-col gap-6 border-t border-border pt-8 md:flex-row md:items-end md:justify-between">
-          <div>
-            <Link href="/" className="inline-block rounded-sm" aria-label="AegisZ home">
-              <Wordmark />
-            </Link>
-            <p className="mt-3 max-w-sm text-fg-subtle">{site.tagline}</p>
-          </div>
-          <div className="flex flex-col gap-3 text-fg-subtle md:items-end">
-            <ul className="flex flex-wrap gap-x-5 gap-y-2">
-              {legalNav.map((item) => (
-                <li key={item.href + item.label}>
-                  <Link href={item.href} className="transition-colors hover:text-fg">
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <p>
-              © {year} {site.name}. Built in India.
-            </p>
-          </div>
-        </div>
+        <nav aria-label="Footer" className="grid grid-cols-2 gap-x-10 gap-y-1 text-[0.9375rem] sm:grid-cols-3">
+          <ul>
+            {footerNav.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} className={linkCls}>
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <ul>
+            {legalNav.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} className={linkCls}>
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <ul className="col-span-2 sm:col-span-1">
+            <li>
+              <a href={`mailto:${site.email}`} className={linkCls}>
+                {site.email}
+              </a>
+            </li>
+            {companyLinkedIn && (
+              <li>
+                <a href={companyLinkedIn} target="_blank" rel="noopener noreferrer" className={linkCls}>
+                  LinkedIn<span className="sr-only"> (opens in a new tab)</span>
+                </a>
+              </li>
+            )}
+          </ul>
+        </nav>
+      </Container>
+      <Container className="border-t border-border py-6 text-sm text-fg-subtle">
+        <p>
+          © {year} {site.name}. Built in India.
+        </p>
       </Container>
     </footer>
   );

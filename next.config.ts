@@ -12,6 +12,12 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   // The gated PDF lives outside /public; ship it with the download function.
   outputFileTracingIncludes: { "/api/download": ["./private/**/*"] },
+  async redirects() {
+    return [
+      { source: "/industries", destination: "/#who-we-serve", permanent: true },
+      { source: "/company", destination: "/#about", permanent: true },
+    ];
+  },
   async headers() {
     return [{ source: "/(.*)", headers: securityHeaders }];
   },

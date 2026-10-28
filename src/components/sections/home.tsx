@@ -220,7 +220,7 @@ export function WhoWeServe() {
           return (
             <Reveal as="li" key={ind.slug} delay={i * 0.06}>
               <a
-                href={`/industries#${ind.slug}`}
+                href="#who-we-serve"
                 className="card-glow group flex h-full flex-col gap-8 rounded-tile border border-border bg-surface p-6 transition-[border-color,transform] duration-[var(--ae-dur-base)] ease-out-expo hover:-translate-y-0.5 hover:border-border-strong sm:p-7"
               >
                 <Icon aria-hidden strokeWidth={1.5} className="size-7 text-fg transition-colors group-hover:text-accent" />

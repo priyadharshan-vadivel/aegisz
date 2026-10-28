@@ -12,7 +12,7 @@ import { ThemeToggle } from "./ThemeToggle";
 import { MobileMenu } from "./MobileMenu";
 
 export function isActive(pathname: string, href: string) {
-  if (href === "/products") return pathname === "/products";
+  if (href === "/") return pathname === "/";
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 

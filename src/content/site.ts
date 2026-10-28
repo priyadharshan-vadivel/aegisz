@@ -15,42 +15,27 @@ export const site = {
 export type NavItem = { label: string; href: string };
 
 export const mainNav: NavItem[] = [
+  { label: "Home", href: "/" },
   { label: "Products", href: "/products" },
-  { label: "IAAC", href: "/products/iaac" },
-  { label: "Design services", href: "/design-services" },
-  { label: "Industries", href: "/industries" },
-  { label: "Company", href: "/company" },
+  { label: "Design Services", href: "/design-services" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export const demoCta: NavItem = { label: "Book a demo", href: "/contact?interest=iaac-demo" };
 
-export const footerNav: { heading: string; items: NavItem[] }[] = [
-  {
-    heading: "Products",
-    items: [
-      { label: "Portfolio", href: "/products" },
-      { label: "IAAC", href: "/products/iaac" },
-    ],
-  },
-  {
-    heading: "Solutions",
-    items: [
-      { label: "Design services", href: "/design-services" },
-      { label: "Industries", href: "/industries" },
-    ],
-  },
-  {
-    heading: "Company",
-    items: [
-      { label: "About", href: "/company" },
-      { label: "Contact", href: "/contact" },
-      { label: "Trust & disclosure", href: "/trust" },
-    ],
-  },
+export const footerNav: NavItem[] = [
+  { label: "Products", href: "/products" },
+  { label: "IAAC", href: "/products/iaac" },
+  { label: "Design Services", href: "/design-services" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export const legalNav: NavItem[] = [
+  { label: "Trust", href: "/trust" },
   { label: "Privacy", href: "/privacy" },
   { label: "Terms", href: "/terms" },
-  { label: "Responsible disclosure", href: "/trust" },
 ];
+
+// Company LinkedIn page. Footer shows the link only once this is set.
+// TODO: add the company LinkedIn URL when the page exists.
+export const companyLinkedIn: string | null = null;
