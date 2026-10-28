@@ -4,12 +4,6 @@ export const company = {
     "Modern attackers rarely break in. They log in with stolen credentials, act as insiders, or use trusted system tools that look like normal admin work. Our products are built for that reality: they judge what an action is trying to do, not just whether the user is allowed to do it.",
     "All intellectual property is built and owned in-house. Products reach global markets through our channel partner, Metier Genesis.",
   ],
-  facts: [
-    { label: "Headquarters", value: "Coimbatore, Tamil Nadu, India" },
-    { label: "Registered", value: "April 2025 (MSME, India)" },
-    { label: "Who we serve", value: "Enterprises (BFSI, SaaS, critical infrastructure) and government" },
-    { label: "Delivery", value: "Direct, and globally through channel partners" },
-  ],
   vision:
     "To be among India's top 10 cybersecurity product makers by 2030, and a globally recognised name in protecting digital ecosystems.",
   mission: [
@@ -44,17 +38,28 @@ export const company = {
       body: "Take Indian-built security to enterprises and governments in every region we serve.",
     },
   ],
+  // photo: path under /public, or null until brand/team/ photos are supplied (initials are shown instead).
+  // linkedin: null until URLs are supplied. No phone numbers on the site.
   leadership: [
     {
       name: "Priyadharshan Vadivel",
+      initials: "PV",
       role: "Founder & CEO",
-      focus:
-        "Strategy, techno-commercial leadership, partnerships and global go-to-market; background in security research and penetration testing.",
+      // TODO: confirm two-line bio
+      bio: "Leads strategy, partnerships and global go-to-market. Background in security research and penetration testing.",
+      email: "priyadharshanv@aegisz.in",
+      linkedin: null as string | null, // TODO: LinkedIn URL
+      photo: null as string | null, // TODO: photo from brand/team/
     },
     {
       name: "Jejo J",
+      initials: "JJ",
       role: "Co-founder & CTO",
-      focus: "Product architecture, engineering and production of AegisZ platforms.",
+      // TODO: confirm two-line bio
+      bio: "Leads product architecture and engineering. Builds and ships the AegisZ platforms, starting with IAAC.",
+      email: "jejo@aegisz.in",
+      linkedin: null as string | null, // TODO: LinkedIn URL
+      photo: null as string | null, // TODO: photo from brand/team/
     },
   ],
 };
