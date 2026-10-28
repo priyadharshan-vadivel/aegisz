@@ -31,7 +31,8 @@ export default function IndustriesPage() {
               <li key={i.slug}>
                 <a
                   href={`#${i.slug}`}
-                  className="inline-block rounded-pill border border-border-strong px-4 py-2 font-mono text-[0.8125rem] text-fg-muted transition-colors hover:border-fg-subtle hover:text-fg"
+                  // Sans, not mono: mono's fallback metrics differ enough to re-wrap this row on font swap (CLS).
+                  className="inline-block rounded-pill border border-border-strong px-4 py-2 text-sm text-fg-muted transition-colors hover:border-fg-subtle hover:text-fg"
                 >
                   {i.short}
                 </a>

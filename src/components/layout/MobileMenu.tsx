@@ -39,16 +39,13 @@ export function MobileMenu({ pathname }: { pathname: string }) {
         return;
       }
       if (e.key !== "Tab") return;
+      // The panel is portalled to the end of <body>, so DOM order doesn't connect it to the
+      // toggle. Cycle explicitly through toggle + panel links.
+      e.preventDefault();
       const list = [toggleRef.current!, ...focusables()];
-      const first = list[0];
-      const last = list[list.length - 1];
-      if (e.shiftKey && document.activeElement === first) {
-        e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
-        e.preventDefault();
-        first.focus();
-      }
+      const at = list.indexOf(document.activeElement as HTMLElement);
+      const next = at === -1 ? 1 : (at + (e.shiftKey ? -1 : 1) + list.length) % list.length;
+      list[next]?.focus();
     };
     document.addEventListener("keydown", onKey);
     return () => {
