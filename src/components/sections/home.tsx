@@ -9,7 +9,6 @@ import { Bento, span } from "@/components/ui/Bento";
 import { Reveal } from "@/components/motion/Reveal";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { WordReveal } from "@/components/motion/WordReveal";
-import { HeroVisual } from "@/components/three/HeroVisual";
 import { home } from "@/content/home";
 import { iaac } from "@/content/iaac";
 import { industries } from "@/content/industries";
@@ -48,12 +47,16 @@ export function Hero() {
   const n1 = l1.split(" ").length;
   const n2 = l2.split(" ").length;
   return (
-    <section aria-labelledby="hero-title" className="relative overflow-hidden">
-      <HeroVisual />
+    <section aria-labelledby="hero-title" className="relative">
       <Container className="relative pt-16 pb-section sm:pt-24">
-        <div className="max-w-5xl">
+        <div className="max-w-4xl">
           <p className="label rise mb-8 block">{home.hero.eyebrow}</p>
-          <h1 id="hero-title" aria-label={home.hero.titleLines.join(" ")} className="text-h1 text-fg">
+          {/* A step below text-h1 so the copy sits left of the 3D shield on wide screens. */}
+          <h1
+            id="hero-title"
+            aria-label={home.hero.titleLines.join(" ")}
+            className="text-[clamp(2.75rem,1rem+4.6vw,5.5rem)] leading-none font-semibold tracking-[-0.04em] text-fg"
+          >
             <span className="block">{words(l1, 0)}</span>
             <span className="block">{words(l2, n1)}</span>
             <span className="block text-fg-muted">{words(l3, n1 + n2)}</span>

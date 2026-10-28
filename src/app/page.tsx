@@ -2,6 +2,7 @@ import { Container } from "@/components/ui/Container";
 import { Todo } from "@/components/ui/Todo";
 import { Terminal } from "@/components/sections/Terminal";
 import { VisionMission } from "@/components/sections/VisionMission";
+import { HeroStage } from "@/components/three/HeroStage";
 import {
   ClosingCta,
   Hero,
@@ -17,7 +18,9 @@ import {
 export default function HomePage() {
   return (
     <>
-      <Hero />
+      <HeroStage>
+        <Hero />
+      </HeroStage>
       <WhyWeExist />
       <VisionMission />
       <WhatWeDo />
