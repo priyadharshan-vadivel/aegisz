@@ -1,4 +1,4 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
 @import "../styles/theme.css";
 
 @layer base {
@@ -40,7 +40,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--color-focus);
     outline-offset: 3px;
   }
 
@@ -103,7 +103,7 @@
     inset: 0;
     z-index: 1;
     pointer-events: none;
-    background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.45) 50%, transparent 70%);
+    background: linear-gradient(110deg, transparent 30%, var(--ae-shine) 50%, transparent 70%);
     transform: translateX(-120%);
     transition: transform var(--ae-dur-slow) var(--ae-ease-out-expo);
   }

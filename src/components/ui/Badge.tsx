@@ -17,25 +17,34 @@ export function StatusBadge({ status, className }: { status: ProductStatus; clas
         className,
       )}
     >
-      <span
-        aria-hidden
-        className={cn("size-1.5 rounded-full", status === "available" ? "bg-accent" : "bg-fg-subtle")}
-      />
+      <span aria-hidden className={cn("size-1.5 rounded-full", status === "available" ? "bg-allow" : "bg-fg-subtle")} />
       {statusLabel[status]}
     </span>
   );
 }
 
+const verdictText: Record<Verdict, string> = {
+  allow: "text-allow border-allow/50",
+  block: "text-block border-block/50",
+  review: "text-review border-review/50",
+};
+
+const verdictFill: Record<Verdict, string> = {
+  allow: "bg-allow border-allow text-bg",
+  block: "bg-block border-block text-bg",
+  review: "bg-review border-review text-bg",
+};
+
 /**
- * Monochrome verdict chip; the word carries the meaning. `live` marks the verdict that
- * just arrived, which gets the accent.
+ * Verdict chip. Colour reinforces the word, never replaces it. `live` marks the verdict
+ * that just arrived: it fills solid, then settles back to an outline.
  */
 export function VerdictBadge({ verdict, live, className }: { verdict: Verdict; live?: boolean; className?: string }) {
   return (
     <span
       className={cn(
         "inline-flex items-center rounded-sm border px-1.5 py-px font-mono text-[0.7rem] font-semibold tracking-[0.1em] uppercase transition-colors duration-[var(--ae-dur-slow)]",
-        live ? "border-accent bg-accent text-accent-fg" : "border-border-strong text-fg",
+        live ? verdictFill[verdict] : verdictText[verdict],
         className,
       )}
     >

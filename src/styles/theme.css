@@ -13,25 +13,38 @@
 [data-theme="dark"] {
   color-scheme: dark;
 
-  --ae-bg: #000000;
-  --ae-surface: #0a0a0a;
+  /* Palette derived from the IAAC deck: near-black slides, #141414 cards, white type,
+     slate-grey body, white pill CTAs, red "contained", green "Full". */
+  --ae-bg: #050505;
+  --ae-surface: #0e0e0e;
   --ae-surface-2: #141414;
-  --ae-border: #1f1f1f;
+  --ae-border: #222222;
   --ae-border-strong: #2e2e2e;
 
-  --ae-fg: #f5f5f7;
-  --ae-fg-muted: #a1a1a6;
-  --ae-fg-subtle: #86868b;
+  --ae-fg: #ffffff;
+  --ae-fg-muted: #9ca3af;
+  --ae-fg-subtle: #7c8594;
 
-  /* The one accent ("signal orange"): CTAs, focus rings, the live verdict, "Available". */
-  --ae-accent: #ff5b1f;
-  --ae-accent-fg: #000000; /* text on an accent fill */
-  --ae-accent-ink: #ff5b1f; /* accent used as text on bg */
-  --ae-glow-alpha: 18%;
+  /* Primary CTA: the deck's white pill. */
+  --ae-cta: #ffffff;
+  --ae-cta-fg: #050505;
+  --ae-shine: rgb(0 0 0 / 0.14);
 
-  /* Form errors only. Error text always states the problem in words too. */
-  --ae-danger: #ff6b6b;
+  /* The one accent (deck red): highlights, glow, "contained", the live verdict, links. */
+  --ae-accent: #ff453a;
+  --ae-accent-fg: #050505; /* text on an accent fill */
+  --ae-accent-ink: #ff453a; /* accent used as text on bg */
+  --ae-glow-alpha: 16%;
 
+  /* Verdicts */
+  --ae-allow: #9be15d;
+  --ae-block: #ff453a;
+  --ae-review: #f5b544;
+
+  /* Form errors. Error text always states the problem in words too. */
+  --ae-danger: var(--ae-block);
+
+  --ae-focus: #ffffff;
   --ae-plate: #ffffff; /* partner logos ship on white */
   --ae-grain-opacity: 0.05;
 
@@ -47,21 +60,30 @@
   color-scheme: light;
 
   --ae-bg: #ffffff;
-  --ae-surface: #f5f5f7;
-  --ae-surface-2: #ebebee;
-  --ae-border: #e3e3e6;
-  --ae-border-strong: #cfcfd4;
+  --ae-surface: #f6f7f9;
+  --ae-surface-2: #edeff2;
+  --ae-border: #e5e7eb;
+  --ae-border-strong: #d1d5db;
 
   --ae-fg: #0a0a0a;
-  --ae-fg-muted: #515154;
-  --ae-fg-subtle: #6a6a6f;
+  --ae-fg-muted: #4b5563;
+  --ae-fg-subtle: #646b78;
 
-  --ae-accent: #ff5b1f;
-  --ae-accent-fg: #000000;
-  --ae-accent-ink: #c2410c;
+  --ae-cta: #0a0a0a;
+  --ae-cta-fg: #ffffff;
+  --ae-shine: rgb(255 255 255 / 0.25);
+
+  --ae-accent: #c81e1e;
+  --ae-accent-fg: #ffffff;
+  --ae-accent-ink: #c81e1e;
   --ae-glow-alpha: 10%;
 
-  --ae-danger: #c4281c;
+  --ae-allow: #2b730d;
+  --ae-block: #c81e1e;
+  --ae-review: #8a5a00;
+
+  --ae-danger: var(--ae-block);
+  --ae-focus: #0a0a0a;
 
   --ae-grain-opacity: 0.035;
 
@@ -93,7 +115,7 @@
   --ae-radius-tile: 28px;
   --ae-radius-pill: 999px;
 
-  --ae-space-section: clamp(5rem, 11vw, 9.5rem);
+  --ae-space-section: clamp(6rem, 12vw, 11rem);
   --ae-space-gutter: 1rem;
   --ae-container-max: 80rem;
   --ae-measure: 40rem;
@@ -132,6 +154,12 @@
   --color-accent-fg: var(--ae-accent-fg);
   --color-accent-ink: var(--ae-accent-ink);
   --color-danger: var(--ae-danger);
+  --color-cta: var(--ae-cta);
+  --color-cta-fg: var(--ae-cta-fg);
+  --color-allow: var(--ae-allow);
+  --color-block: var(--ae-block);
+  --color-review: var(--ae-review);
+  --color-focus: var(--ae-focus);
   --color-plate: var(--ae-plate);
 
   --font-sans: var(--ae-font-sans);

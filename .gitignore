@@ -8,3 +8,8 @@ next-env.d.ts
 screenshots/
 test-results/
 playwright-report/
+
+# Source deck (confidential, has pricing). Only the stripped private/iaac-overview.pdf is committed.
+/IAAC-Profile.pdf
+.env
+.env*.local
