@@ -15,13 +15,13 @@ type TableProps = {
  */
 export function Table({ caption, head, rows, rowHeaders = true, className }: TableProps) {
   return (
-    <div className={cn("overflow-hidden rounded-lg border border-border", className)}>
-      <table className="w-full border-collapse text-left text-sm">
+    <div className={cn("overflow-hidden rounded-tile border border-border bg-bg", className)}>
+      <table className="w-full border-collapse text-left">
         <caption className="sr-only">{caption}</caption>
-        <thead className="hidden bg-surface-2 sm:table-header-group">
+        <thead className="hidden sm:table-header-group">
           <tr>
             {head.map((h) => (
-              <th key={h} scope="col" className="px-5 py-3 font-medium text-fg">
+              <th key={h} scope="col" className="label px-6 pt-7 pb-4 font-medium sm:px-8">
                 {h}
               </th>
             ))}
@@ -38,15 +38,13 @@ export function Table({ caption, head, rows, rowHeaders = true, className }: Tab
                     key={j}
                     scope={isHeader ? "row" : undefined}
                     className={cn(
-                      "block px-5 align-top sm:table-cell sm:py-4",
-                      j === 0 ? "pt-4" : "pt-1",
-                      j === row.length - 1 && "pb-4",
-                      isHeader ? "font-medium text-fg" : "text-fg-muted",
+                      "block px-6 align-top sm:table-cell sm:px-8 sm:py-6",
+                      j === 0 ? "pt-6" : "pt-2",
+                      j === row.length - 1 && "pb-6",
+                      isHeader ? "font-semibold text-fg" : "text-fg-muted",
                     )}
                   >
-                    {j > 0 && (
-                      <span className="mr-1 font-mono text-xs text-fg-subtle sm:hidden">{head[j]}:</span>
-                    )}
+                    {j > 0 && <span className="label mr-2 sm:hidden">{head[j]}</span>}
                     {cell}
                   </Cell>
                 );
