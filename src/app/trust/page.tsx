@@ -1,4 +1,4 @@
-import { Section, SectionHeading } from "@/components/ui/Section";
+﻿import { Section, SectionHeading } from "@/components/ui/Section";
 import { Prose } from "@/components/ui/Prose";
 import { Todo } from "@/components/ui/Todo";
 import { site } from "@/content/site";
@@ -12,7 +12,7 @@ export const metadata = pageMetadata({
 
 export default function TrustPage() {
   return (
-    <Section labelledBy="trust-title">
+    <Section labelledBy="trust-title" className="pt-14 sm:pt-20">
       <SectionHeading
         id="trust-title"
         as="h1"

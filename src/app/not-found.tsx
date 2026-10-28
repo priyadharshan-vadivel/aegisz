@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Section } from "@/components/ui/Section";
+import { Container } from "@/components/ui/Container";
 import { LinkButton } from "@/components/ui/Button";
+import { VerdictBadge } from "@/components/ui/Badge";
 
 export const metadata: Metadata = {
   title: "Page not found",
@@ -9,18 +10,24 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <Section labelledBy="nf-title" className="min-h-[60vh]">
-      <p className="font-mono text-sm text-block">404 · BLOCK</p>
-      <h1 id="nf-title" className="mt-3 text-4xl font-semibold text-fg sm:text-5xl">
-        This page doesn&apos;t exist.
-      </h1>
-      <p className="mt-4 max-w-xl text-lg text-fg-muted">The link may be old, or the address mistyped.</p>
-      <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-        <LinkButton href="/">Go to home</LinkButton>
-        <LinkButton href="/products" variant="secondary">
-          Explore products
-        </LinkButton>
-      </div>
-    </Section>
+    <section aria-labelledby="nf-title" className="flex min-h-[75vh] items-center overflow-hidden">
+      <Container className="glow py-section text-center">
+        <p className="flex items-center justify-center gap-3 font-mono text-sm text-fg-subtle">
+          404 <VerdictBadge verdict="block" live />
+        </p>
+        <h1 id="nf-title" className="mx-auto mt-8 max-w-[14ch] text-h1 text-fg">
+          This page doesn&apos;t exist.
+        </h1>
+        <p className="mx-auto mt-6 max-w-measure text-lead text-fg-muted">The link may be old, or the address mistyped.</p>
+        <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
+          <LinkButton href="/" size="lg">
+            Go to home
+          </LinkButton>
+          <LinkButton href="/products" variant="secondary" size="lg">
+            Explore products
+          </LinkButton>
+        </div>
+      </Container>
+    </section>
   );
 }

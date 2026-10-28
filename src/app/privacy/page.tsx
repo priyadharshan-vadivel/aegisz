@@ -1,4 +1,4 @@
-import { Section, SectionHeading } from "@/components/ui/Section";
+﻿import { Section, SectionHeading } from "@/components/ui/Section";
 import { Todo } from "@/components/ui/Todo";
 import { site } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
@@ -11,7 +11,7 @@ export const metadata = pageMetadata({
 
 export default function PrivacyPage() {
   return (
-    <Section labelledBy="privacy-title">
+    <Section labelledBy="privacy-title" className="pt-14 sm:pt-20">
       <SectionHeading
         id="privacy-title"
         as="h1"
@@ -19,7 +19,7 @@ export default function PrivacyPage() {
         title="Privacy notice"
         body={
           <p>
-            Questions about privacy? Email <a href={`mailto:${site.email}`} className="text-fg underline">{site.email}</a>.
+            Questions about privacy? Email <a href={`mailto:${site.email}`} className="text-fg underline underline-offset-4">{site.email}</a>.
           </p>
         }
       />
