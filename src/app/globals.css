@@ -3,6 +3,7 @@
 
 @layer base {
   html {
+    overflow-x: clip;
     -webkit-text-size-adjust: 100%;
     scroll-padding-top: calc(var(--ae-header-h) + 1rem);
   }
@@ -68,7 +69,8 @@
   .glow::after {
     content: "";
     position: absolute;
-    inset: -20% -10% -30%;
+    /* No horizontal bleed: the blur's ink overflow spreads it, without adding scroll width. */
+    inset: -20% 0 -30%;
     z-index: -1;
     pointer-events: none;
     background: radial-gradient(

@@ -1,14 +1,15 @@
-import { Check, ShieldCheck } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { Card } from "@/components/ui/Card";
-import { LinkButton } from "@/components/ui/Button";
 import { StatusBadge } from "@/components/ui/Badge";
-import { Table } from "@/components/ui/Table";
 import { Todo } from "@/components/ui/Todo";
+import { Bento, span } from "@/components/ui/Bento";
+import { Reveal } from "@/components/motion/Reveal";
+import { WordReveal } from "@/components/motion/WordReveal";
+import { Marquee } from "@/components/motion/Marquee";
 import { Terminal } from "@/components/sections/Terminal";
-import { ArchitectureDiagram, StepFlow } from "@/components/sections/iaac";
-import { ClosingCta } from "@/components/sections/home";
+import { ArchitectureDiagram, Roadmap, StickyStory } from "@/components/sections/iaac";
+import { ClosingCta, CtaPair } from "@/components/sections/home";
 import { iaac } from "@/content/iaac";
 import { pageMetadata } from "@/lib/metadata";
 import { cn } from "@/lib/cn";
@@ -20,31 +21,31 @@ export const metadata = pageMetadata({
   path: "/products/iaac",
 });
 
+// Capability tiles: sizes vary so the grid reads as a bento, not a table.
+const capSpans = [span.twoThirds, span.third, span.third, span.third, span.third, span.half];
+
 export default function IaacPage() {
   return (
     <>
       {/* Hero */}
-      <section aria-labelledby="iaac-hero" className="border-b border-border">
-        <Container className="grid items-center gap-12 py-section lg:grid-cols-[1.1fr_1fr]">
-          <div>
-            <div className="mb-4 flex flex-wrap items-center gap-3">
-              <p className="font-mono text-xs uppercase tracking-[0.14em] text-fg-subtle">
-                {iaac.name} · {iaac.fullName}
-              </p>
-              <StatusBadge status={iaac.status} />
-            </div>
-            <h1 id="iaac-hero" className="text-4xl font-semibold text-fg sm:text-5xl">
-              {iaac.headline}
-            </h1>
-            <p className="mt-6 max-w-xl text-lg text-fg-muted">{iaac.summary}</p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <LinkButton href="/contact?interest=iaac-demo">Book an IAAC demo</LinkButton>
-              <LinkButton href="#how-it-works" variant="secondary">
-                How it works
-              </LinkButton>
-            </div>
+      <section aria-labelledby="iaac-hero" className="overflow-hidden">
+        <Container className="pt-14 pb-section text-center sm:pt-20">
+          <div className="mb-6 flex flex-wrap items-center justify-center gap-3">
+            <p className="label">
+              {iaac.name} · {iaac.fullName}
+            </p>
+            <StatusBadge status={iaac.status} />
           </div>
-          <Terminal />
+          <h1 id="iaac-hero" className="mx-auto max-w-[14ch] text-h1 text-fg">
+            {iaac.headline}
+          </h1>
+          <p className="mx-auto mt-8 max-w-measure text-lead text-fg-muted">{iaac.summary}</p>
+          <div className="mt-10">
+            <CtaPair secondary={{ href: "#how-it-works", label: "How it works" }} />
+          </div>
+          <Reveal y={48} className="mx-auto mt-16 max-w-4xl sm:mt-20">
+            <Terminal lit />
+          </Reveal>
         </Container>
       </section>
 
@@ -56,24 +57,49 @@ export default function IaacPage() {
           title={iaac.problem.heading}
           body={<p>{iaac.problem.body}</p>}
         />
-        <h3 className="mt-14 text-2xl font-semibold text-fg">Permission isn&apos;t intent.</h3>
-        <p className="mt-2 max-w-2xl text-fg-muted">
-          Each existing control answers a different question. IAAC answers the one they leave open: what is this command
-          trying to do?
-        </p>
-        <Table
-          className="mt-8"
-          caption="Existing controls and the gap IAAC closes"
-          head={["Existing control", "What it does", "The gap IAAC closes"]}
-          rows={iaac.gaps.map((g) => [g.control, g.does, g.gap])}
-        />
+      </Section>
+
+      <section aria-labelledby="intent-title" className="flex min-h-[80vh] items-center py-section">
+        <Container>
+          <WordReveal id="intent-title" as="h2" text="Permission isn't intent." className="text-display" />
+          <p className="mt-10 max-w-measure text-lead text-fg-muted">
+            Each existing control answers a different question. IAAC answers the one they leave open: what is this command
+            trying to do?
+          </p>
+        </Container>
+      </section>
+
+      <Section labelledBy="gaps-title" className="pt-0">
+        <h2 id="gaps-title" className="sr-only">
+          Existing controls and the gap IAAC closes
+        </h2>
+        <ul className="grid gap-3 sm:grid-cols-2 sm:gap-4">
+          {iaac.gaps.map((g, i) => (
+            <Reveal as="li" key={g.control} delay={(i % 2) * 0.08}>
+              <Card className="flex h-full flex-col gap-10">
+                <div>
+                  <p className="label">Existing control</p>
+                  <h3 className="mt-2 text-h2 text-fg">{g.control}</h3>
+                  <p className="mt-3 text-fg-muted">
+                    <span className="sr-only">What it does: </span>
+                    {g.does}
+                  </p>
+                </div>
+                <div className="mt-auto border-t border-border pt-5">
+                  <p className="label">The gap IAAC closes</p>
+                  <p className="mt-2 text-lead text-accent-ink">{g.gap}</p>
+                </div>
+              </Card>
+            </Reveal>
+          ))}
+        </ul>
       </Section>
 
       {/* How it works */}
       <Section id="how-it-works" labelledBy="how-title" tone="surface">
         <SectionHeading id="how-title" eyebrow="How it works" title="See. Judge. Allow, Block or Review." />
-        <div className="mt-12">
-          <StepFlow />
+        <div className="mt-16 lg:mt-8">
+          <StickyStory />
         </div>
       </Section>
 
@@ -85,7 +111,7 @@ export default function IaacPage() {
           title="Enforcement on the host, control in your hands"
           body={<p>Decisions happen on the server where the command runs. Analysis never has to leave your environment.</p>}
         />
-        <div className="mt-12">
+        <div className="mt-16">
           <ArchitectureDiagram />
         </div>
       </Section>
@@ -93,39 +119,32 @@ export default function IaacPage() {
       {/* Capabilities */}
       <Section labelledBy="cap-title" tone="surface">
         <SectionHeading id="cap-title" eyebrow="Key capabilities" title="Built for the most privileged sessions" />
-        <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {iaac.capabilities.map((c) => (
-            <Card as="li" key={c.title}>
-              <h3 className="font-medium text-fg">{c.title}</h3>
-              <p className="mt-2 text-sm text-fg-muted">{c.body}</p>
-            </Card>
+        <Bento as="ul" className="mt-16">
+          {iaac.capabilities.map((c, i) => (
+            <Reveal as="li" key={c.title} delay={(i % 3) * 0.06} className={capSpans[i]}>
+              <Card className={cn("flex h-full flex-col justify-end bg-bg", i === 0 ? "min-h-56 lg:min-h-72" : "min-h-40 lg:min-h-56")}>
+                <h3 className={cn("text-fg", i === 0 ? "text-h2" : "text-h3")}>{c.title}</h3>
+                <p className="mt-3 max-w-md text-fg-muted">{c.body}</p>
+              </Card>
+            </Reveal>
           ))}
-        </ul>
+        </Bento>
       </Section>
 
       {/* Compliance */}
       <Section labelledBy="compliance-title">
-        <div className="grid gap-10 lg:grid-cols-2">
-          <SectionHeading
-            id="compliance-title"
-            eyebrow="Compliance"
-            title="Audit-ready by default"
-            body={
-              <p>
-                Tamper-evident records turn weeks of evidence gathering into a one-click export. IAAC produces compliance
-                evidence for:
-              </p>
-            }
-          />
-          <ul className="grid content-start gap-3 sm:grid-cols-2">
-            {iaac.compliance.map((f) => (
-              <li key={f} className="flex items-center gap-3 rounded-md border border-border bg-surface px-4 py-3">
-                <ShieldCheck className="size-4 shrink-0 text-accent" aria-hidden />
-                <span className="text-fg">{f}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <SectionHeading
+          id="compliance-title"
+          eyebrow="Compliance"
+          title="Audit-ready by default"
+          body={
+            <p>
+              Tamper-evident records turn weeks of evidence gathering into a one-click export. IAAC produces compliance
+              evidence for:
+            </p>
+          }
+        />
+        <Marquee className="mt-12" items={iaac.compliance} label="Compliance frameworks" />
       </Section>
 
       {/* Deployment */}
@@ -136,39 +155,42 @@ export default function IaacPage() {
           title="From a single fleet to a sovereign estate"
           body={<p>Observe-first rollout: monitor mode, then enforcement when you&apos;re ready.</p>}
         />
-        <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <Bento as="ul" className="mt-16">
           {iaac.deployment.map((d) => (
-            <Card as="li" key={d.name} className={cn("flex flex-col", d.highlight && "border-accent/60")}>
-              <h3 className="text-lg font-medium text-fg">{d.name}</h3>
-              <p className="mt-2 flex-1 text-sm text-fg-muted">{d.body}</p>
-              {d.highlight && (
-                <ul className="mt-4 space-y-1.5 text-sm text-fg-muted">
-                  {["Air-gapped", "Self-hosted", "Zero data egress"].map((x) => (
-                    <li key={x} className="flex items-center gap-2">
-                      <Check className="size-3.5 text-accent" aria-hidden />
-                      {x}
-                    </li>
-                  ))}
-                </ul>
+            <Reveal as="li" key={d.name} className={d.highlight ? span.full : span.third}>
+              {d.highlight ? (
+                <div className="glow h-full">
+                  <Card className="grid h-full gap-8 border-accent bg-bg md:grid-cols-[1fr_auto] md:items-end">
+                    <div>
+                      <h3 className="text-h2 text-fg">{d.name}</h3>
+                      <p className="mt-4 max-w-xl text-lead text-fg-muted">{d.body}</p>
+                    </div>
+                    <ul className="flex flex-wrap gap-2">
+                      {["Air-gapped", "Self-hosted", "Zero data egress"].map((x) => (
+                        <li key={x} className="rounded-pill border border-border-strong px-4 py-2 font-mono text-[0.8125rem] text-fg">
+                          {x}
+                        </li>
+                      ))}
+                    </ul>
+                  </Card>
+                </div>
+              ) : (
+                <Card className="flex h-full min-h-48 flex-col justify-between bg-bg">
+                  <h3 className="text-h3 text-fg">{d.name}</h3>
+                  <p className="mt-6 text-fg-muted">{d.body}</p>
+                </Card>
               )}
-            </Card>
+            </Reveal>
           ))}
-        </ul>
-        <p className="mt-6 text-sm text-fg-subtle">Pricing is shared on request.</p>
+        </Bento>
+        <p className="mt-8 text-fg-subtle">Pricing is shared on request.</p>
         <Todo className="mt-4">What differs between Basic, Medium and Enterprise (features, limits, support). No prices.</Todo>
       </Section>
 
       {/* Roadmap */}
       <Section labelledBy="roadmap-title">
         <SectionHeading id="roadmap-title" eyebrow="Roadmap" title="Linux today. Every workload next." />
-        <ol className="mt-12 grid gap-4 md:grid-cols-3">
-          {iaac.roadmap.map((r, i) => (
-            <li key={r.when} className={cn("border-t-2 pt-5", i === 0 ? "border-allow" : "border-border")}>
-              <p className="font-mono text-xs uppercase tracking-[0.14em] text-fg-subtle">{r.when}</p>
-              <p className="mt-2 text-fg">{r.body}</p>
-            </li>
-          ))}
-        </ol>
+        <Roadmap />
       </Section>
 
       <ClosingCta
