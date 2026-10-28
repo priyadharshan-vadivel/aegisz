@@ -2,7 +2,6 @@ import Image from "next/image";
 import { Mail } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { Card } from "@/components/ui/Card";
-import { Todo } from "@/components/ui/Todo";
 import { Reveal } from "@/components/motion/Reveal";
 import { VisionMission } from "@/components/sections/VisionMission";
 import { ClosingCta, Partners } from "@/components/sections/home";
@@ -90,7 +89,6 @@ export default function CompanyPage() {
             </Reveal>
           ))}
         </ul>
-        <Todo className="mt-6">Team photos (brand/team/), LinkedIn URLs and final two-line bios for both founders.</Todo>
       </Section>
 
       <Partners headingId="co-partners-title" />

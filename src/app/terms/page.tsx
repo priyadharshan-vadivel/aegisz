@@ -1,5 +1,5 @@
 ﻿import { Section, SectionHeading } from "@/components/ui/Section";
-import { Todo } from "@/components/ui/Todo";
+import { site } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
@@ -8,11 +8,25 @@ export const metadata = pageMetadata({
   path: "/terms",
 });
 
+// TODO: website terms of use from legal.
 export default function TermsPage() {
   return (
     <Section labelledBy="terms-title" className="pt-14 sm:pt-20">
-      <SectionHeading id="terms-title" as="h1" eyebrow="Legal" title="Terms of use" />
-      <Todo className="mt-10 max-w-3xl">Website terms of use from legal.</Todo>
+      <SectionHeading
+        id="terms-title"
+        as="h1"
+        eyebrow="Legal"
+        title="Terms of use"
+        body={
+          <p>
+            Our full terms of use are being finalised. For any question about using this site, email{" "}
+            <a href={`mailto:${site.email}`} className="text-fg underline underline-offset-4">
+              {site.email}
+            </a>
+            .
+          </p>
+        }
+      />
     </Section>
   );
 }

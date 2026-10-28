@@ -1,5 +1,3 @@
-import { Container } from "@/components/ui/Container";
-import { Todo } from "@/components/ui/Todo";
 import { BreakItTerminal } from "@/components/sections/BreakItTerminal";
 import { VisionMission } from "@/components/sections/VisionMission";
 import { HeroStage } from "@/components/three/HeroStage";
@@ -12,7 +10,6 @@ import {
   WhatWeDo,
   WhoWeServe,
   WhyAegisz,
-  WhyWeExist,
 } from "@/components/sections/home";
 
 export default function HomePage() {
@@ -21,7 +18,6 @@ export default function HomePage() {
       <HeroStage>
         <Hero />
       </HeroStage>
-      <WhyWeExist />
       <VisionMission />
       <WhatWeDo />
       <PortfolioTeaser />
@@ -30,9 +26,7 @@ export default function HomePage() {
       </IaacSpotlight>
       <WhoWeServe />
       <WhyAegisz />
-      <Container className="pt-section">
-        <Todo>Customer proof (logos, case studies or quotes) once approved for publication. Do not invent.</Todo>
-      </Container>
+      {/* TODO: customer proof (logos, case studies or quotes) once approved for publication. Do not invent. */}
       <Partners />
       <ClosingCta />
     </>

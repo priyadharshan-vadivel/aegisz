@@ -5,7 +5,6 @@ export const site = {
   description:
     "AegisZ is an Indian cybersecurity product company building AI-driven security platforms that protect enterprise and government infrastructure. First in market: IAAC, Intent-Aware Access Control.",
   location: "Coimbatore, Tamil Nadu, India",
-  registered: "MSME, India · April 2025",
   email: "contact@aegisz.in",
   phone: "+91 90808 83442",
   phoneHref: "tel:+919080883442",

@@ -60,7 +60,7 @@ export function Footer() {
               ))}
             </ul>
             <p>
-              © {year} {site.name}. Built in India. {site.registered}.
+              © {year} {site.name}. Built in India.
             </p>
           </div>
         </div>

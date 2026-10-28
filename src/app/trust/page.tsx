@@ -1,6 +1,5 @@
 ﻿import { Section, SectionHeading } from "@/components/ui/Section";
 import { Prose } from "@/components/ui/Prose";
-import { Todo } from "@/components/ui/Todo";
 import { site } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -64,10 +63,8 @@ export default function TrustPage() {
           We won&apos;t pursue legal action against researchers who act in good faith and follow this policy.
         </p>
       </Prose>
-      <div className="mt-10 max-w-3xl space-y-3">
-        <Todo>Confirm the reporting address (security@aegisz.in?), PGP key, and response-time commitments.</Todo>
-        <Todo>Legal review of the safe-harbour wording before launch.</Todo>
-      </div>
+      {/* TODO: confirm a dedicated reporting address (security@aegisz.in?), PGP key and response times;
+          legal review of the safe-harbour wording before launch. */}
     </Section>
   );
 }
