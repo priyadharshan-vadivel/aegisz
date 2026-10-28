@@ -9,39 +9,33 @@ const statusLabel: Record<ProductStatus, string> = {
   roadmap: "Roadmap",
 };
 
-const statusTone: Record<ProductStatus, string> = {
-  available: "text-allow border-allow/40 bg-allow/10",
-  "in-development": "text-review border-review/40 bg-review/10",
-  roadmap: "text-fg-muted border-border-strong bg-surface-2",
-};
-
 export function StatusBadge({ status, className }: { status: ProductStatus; className?: string }) {
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-sm border px-2 py-0.5 font-mono text-xs font-medium",
-        statusTone[status],
+        "inline-flex items-center gap-2 rounded-pill border border-border-strong px-2.5 py-1 font-mono text-[0.6875rem] font-medium tracking-[0.12em] uppercase text-fg",
         className,
       )}
     >
-      <span aria-hidden className="size-1.5 rounded-full bg-current" />
+      <span
+        aria-hidden
+        className={cn("size-1.5 rounded-full", status === "available" ? "bg-accent" : "bg-fg-subtle")}
+      />
       {statusLabel[status]}
     </span>
   );
 }
 
-const verdictTone: Record<Verdict, string> = {
-  allow: "text-allow border-allow/40 bg-allow/10",
-  block: "text-block border-block/40 bg-block/10",
-  review: "text-review border-review/40 bg-review/10",
-};
-
-export function VerdictBadge({ verdict, className }: { verdict: Verdict; className?: string }) {
+/**
+ * Monochrome verdict chip; the word carries the meaning. `live` marks the verdict that
+ * just arrived, which gets the accent.
+ */
+export function VerdictBadge({ verdict, live, className }: { verdict: Verdict; live?: boolean; className?: string }) {
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-sm border px-1.5 py-px font-mono text-[0.7rem] font-semibold tracking-wider uppercase",
-        verdictTone[verdict],
+        "inline-flex items-center rounded-sm border px-1.5 py-px font-mono text-[0.7rem] font-semibold tracking-[0.1em] uppercase transition-colors duration-[var(--ae-dur-slow)]",
+        live ? "border-accent bg-accent text-accent-fg" : "border-border-strong text-fg",
         className,
       )}
     >

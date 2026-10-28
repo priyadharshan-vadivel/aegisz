@@ -6,11 +6,11 @@ export function Todo({ children, className }: { children: React.ReactNode; class
     <div
       role="note"
       className={cn(
-        "rounded-md border border-dashed border-review/60 bg-review/5 px-4 py-3 font-mono text-sm text-review",
+        "rounded-md border border-dashed border-border-strong px-4 py-3 font-mono text-[0.8125rem] text-fg-muted",
         className,
       )}
     >
-      <span className="font-semibold">TODO:</span> {children}
+      <span className="font-semibold text-accent-ink">TODO:</span> {children}
     </div>
   );
 }

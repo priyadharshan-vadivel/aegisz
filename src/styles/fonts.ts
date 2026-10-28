@@ -1,5 +1,5 @@
-﻿import { Inter, JetBrains_Mono } from "next/font/google";
+﻿import { Geist, Geist_Mono } from "next/font/google";
 
 // Typeface choice lives here; theme.css maps these variables to --font-sans / --font-mono.
-export const fontSans = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
-export const fontMono = JetBrains_Mono({ subsets: ["latin"], display: "swap", variable: "--font-jetbrains" });
+export const fontSans = Geist({ subsets: ["latin"], display: "swap", variable: "--font-geist" });
+export const fontMono = Geist_Mono({ subsets: ["latin"], display: "swap", variable: "--font-geist-mono" });
