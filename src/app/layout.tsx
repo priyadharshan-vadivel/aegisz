@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { fontMono, fontSans } from "@/styles/fonts";
-import { site } from "@/content/site";
+import { companyLinkedIn, site } from "@/content/site";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -22,7 +22,18 @@ export const metadata: Metadata = {
     url: "/",
   },
   twitter: { card: "summary_large_image" },
-  icons: { icon: "/favicon.svg", apple: "/apple-touch-icon.png" },
+  // Icons come from src/app/favicon.ico, icon.png and apple-icon.png (scripts/make-icons.mjs).
+};
+
+/** Organization structured data: lets Google show the AegisZ logo and name in results. */
+const organizationLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: site.name,
+  url: site.url,
+  logo: `${site.url}/icon.png`,
+  email: site.email,
+  ...(companyLinkedIn && { sameAs: [companyLinkedIn] }),
 };
 
 export const viewport: Viewport = {
@@ -39,6 +50,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en-IN" data-theme="dark" suppressHydrationWarning className={`${fontSans.variable} ${fontMono.variable}`}>
       <body className="flex min-h-dvh flex-col">
+        <script
+          type="application/ld+json"
+          // Static object built from site constants, never user input. Escape "<" so it can't close the tag.
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd).replace(/</g, "\\u003c") }}
+        />
         <ThemeProvider>
           <a
             href="#main"
