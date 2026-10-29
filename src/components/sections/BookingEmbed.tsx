@@ -60,7 +60,6 @@ export function BookingEmbed() {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    let timer: ReturnType<typeof setTimeout>;
     const io = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) return;
@@ -78,27 +77,31 @@ export function BookingEmbed() {
         api("ui", { theme: "dark", hideEventTypeDetails: false, layout: "month_view" });
         api("on", { action: "linkReady", callback: () => setState("ready") });
         api("on", { action: "linkFailed", callback: () => setState("failed") });
-        timer = setTimeout(() => setState((s) => (s === "ready" ? s : "failed")), 15000);
       },
       { rootMargin: "400px 0px" },
     );
     io.observe(el);
-    return () => {
-      io.disconnect();
-      clearTimeout(timer);
-    };
+    return () => io.disconnect();
   }, []);
+
+  // If Cal never reports ready (blocked, offline, refused to frame), fall back to the button.
+  useEffect(() => {
+    if (state !== "loading") return;
+    const timer = setTimeout(() => setState((s) => (s === "loading" ? "failed" : s)), 10000);
+    return () => clearTimeout(timer);
+  }, [state]);
 
   return (
     <div className="relative overflow-hidden rounded-tile border border-border bg-surface">
-      {state !== "ready" && (
-        <p role="status" className="absolute inset-x-0 top-1/2 -translate-y-1/2 px-6 text-center text-fg-muted">
-          {state === "failed"
-            ? "The scheduler didn't load here. Use the button above to book in a new tab."
+      {/* Sits above Cal's own centred loader; on failure the box collapses to just this message. */}
+      <p role="status" className={state === "failed" ? "p-6 text-fg-muted sm:p-8" : state === "ready" ? "sr-only" : "absolute inset-x-0 top-8 px-6 text-center text-fg-muted"}>
+        {state === "failed"
+          ? "The scheduler didn't load here. Use the button above to book in a new tab."
+          : state === "ready"
+            ? "Scheduler loaded."
             : "Loading the scheduler…"}
-        </p>
-      )}
-      <div ref={ref} className="min-h-[40rem] w-full overflow-auto" />
+      </p>
+      <div ref={ref} className={state === "failed" ? "hidden" : "min-h-[40rem] w-full overflow-auto"} />
     </div>
   );
 }
