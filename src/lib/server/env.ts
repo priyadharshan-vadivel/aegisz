@@ -1,6 +1,7 @@
 import "server-only";
 import { Resend } from "resend";
 import type { Mail } from "./templates";
+import { hashIp } from "./leads";
 
 /* Environment-backed adapters for the API routes. See SETUP.md and .env.example. */
 
@@ -53,11 +54,21 @@ export async function verifyTurnstile(token: string | undefined, ip: string) {
   }
 }
 
-export const gatedDownload = () => process.env.GATED_DOWNLOAD !== "false";
+/** Secret for hashing client IPs before they're stored. Falls back to DOWNLOAD_SECRET. */
+const ipHashSecret = () => process.env.IP_HASH_SECRET || process.env.DOWNLOAD_SECRET;
+
+/** Absolute base URL for links in emails: SITE_URL, else the Vercel deployment URL, else aegisz.in. */
+export function siteUrl() {
+  const explicit = process.env.SITE_URL?.replace(/\/+$/, "");
+  if (explicit) return explicit;
+  if (process.env.VERCEL_ENV === "production") return "https://aegisz.in";
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  return "https://aegisz.in";
+}
 
 export function clientMeta(req: Request) {
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || req.headers.get("x-real-ip") || "unknown";
-  return { ip, userAgent: req.headers.get("user-agent") ?? "", at: new Date() };
+  return { ip, ipHash: hashIp(ip, ipHashSecret()), userAgent: req.headers.get("user-agent") ?? "", at: new Date() };
 }
 
 export async function readJson(req: Request): Promise<unknown> {

@@ -1,10 +1,9 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
-import Link from "next/link";
 import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { Honeypot, TextField, inputBase, postForm } from "@/components/forms/fields";
+import { ConsentField, Honeypot, PhoneField, TextField, formValues, inputBase, postForm } from "@/components/forms/fields";
 import { Turnstile, turnstileEnabled } from "@/components/forms/Turnstile";
 import { interests, validateContact, type ContactFields, type Errors } from "@/lib/forms";
 import { site } from "@/content/site";
@@ -27,14 +26,16 @@ export function ContactForm() {
   const uid = useId();
   const id = (f: ContactFields) => `${uid}-${f}`;
 
+  // Focus the first invalid field in on-screen order.
+  const order: ContactFields[] = ["name", "email", "company", "role", "phone", "interest", "message", "consent"];
   function focusFirst(errs: Errors<ContactFields>) {
-    const first = Object.keys(errs)[0] as ContactFields | undefined;
+    const first = order.find((f) => errs[f]);
     if (first) formRef.current?.querySelector<HTMLElement>(`#${CSS.escape(id(first))}`)?.focus();
   }
 
   async function onSubmit(ev: React.FormEvent<HTMLFormElement>) {
     ev.preventDefault();
-    const data = Object.fromEntries(new FormData(ev.currentTarget));
+    const data = formValues(ev.currentTarget);
     const v = validateContact(data);
     if (!v.ok) {
       setErrors(v.errors);
@@ -84,6 +85,8 @@ export function ContactForm() {
         <TextField id={id("company")} name="company" label="Company" required autoComplete="organization" error={errors.company} />
         <TextField id={id("role")} name="role" label="Role" autoComplete="organization-title" error={errors.role} />
       </div>
+
+      <PhoneField id={id("phone")} error={errors.phone} />
 
       <div>
         <label htmlFor={id("interest")} className="text-sm font-medium text-fg">
@@ -135,6 +138,8 @@ export function ContactForm() {
         )}
       </div>
 
+      <ConsentField id={id("consent")} error={errors.consent} />
+
       <Turnstile onToken={setToken} resetSignal={resetSignal} />
 
       {state.kind === "error" && (
@@ -150,13 +155,6 @@ export function ContactForm() {
       <Button type="submit" size="lg" disabled={state.kind === "sending"} className="w-full sm:w-auto">
         {state.kind === "sending" ? "Sending…" : "Send message"}
       </Button>
-      <p className="text-xs text-fg-subtle">
-        We use these details only to respond to your request. See our{" "}
-        <Link href="/privacy" className="underline">
-          privacy notice
-        </Link>
-        .
-      </p>
     </form>
   );
 }

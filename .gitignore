@@ -17,3 +17,6 @@ playwright-report/
 # Kept out of the public repo (confidential). Present locally; see SETUP.md.
 /brand/company-profile.md
 /private/
+
+# Lead exports (personal data)
+/exports/

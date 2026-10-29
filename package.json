@@ -9,11 +9,17 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "test": "node --test scripts/*.test.ts",
-    "shots": "playwright test --config scripts/playwright.config.ts"
+    "shots": "playwright test --config scripts/playwright.config.ts",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "leads:export": "node --env-file-if-exists=.env scripts/leads-export.ts",
+    "pdf:upload": "node --env-file-if-exists=.env scripts/pdf-upload.ts"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.2.0",
     "@react-three/fiber": "^9.8.2",
     "clsx": "^2.1.1",
+    "drizzle-orm": "^0.45.4",
     "framer-motion": "^14.7.1",
     "lucide-react": "^1.62.0",
     "next": "^15.5.28",
@@ -33,6 +39,7 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@types/three": "^0.186.0",
+    "drizzle-kit": "^0.31.11",
     "eslint": "^9.39.5",
     "eslint-config-next": "^15.5.28",
     "pdf-lib": "^1.17.1",

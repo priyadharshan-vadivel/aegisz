@@ -1,5 +1,6 @@
+import Link from "next/link";
 import { cn } from "@/lib/cn";
-import { HONEYPOT } from "@/lib/forms";
+import { DEFAULT_COUNTRY_CODE, HONEYPOT, countryCodes } from "@/lib/forms";
 
 export const inputBase =
   "mt-2 block w-full rounded-md border bg-surface px-4 py-3.5 text-fg transition-colors duration-[var(--ae-dur-fast)] placeholder:text-fg-subtle hover:border-fg-subtle focus-visible:border-fg focus-visible:outline-2 focus-visible:outline-offset-0";
@@ -37,6 +38,83 @@ export function TextField({ id, name, label, error, required, type = "text", aut
       )}
     </div>
   );
+}
+
+/** Country-code selector (default +91) plus the number. The server combines them into E.164. */
+export function PhoneField({ id, error }: { id: string; error?: string }) {
+  return (
+    <div>
+      <label htmlFor={id} className="text-sm font-medium text-fg">
+        Phone <span className="text-fg-subtle">(required)</span>
+      </label>
+      <div className="flex gap-2">
+        <select
+          name="phoneCountry"
+          defaultValue={DEFAULT_COUNTRY_CODE}
+          aria-label="Country code"
+          autoComplete="tel-country-code"
+          className={cn(inputBase, "w-32 shrink-0 border-border-strong pr-2")}
+        >
+          {countryCodes.map((c) => (
+            <option key={c.code + c.region} value={c.code}>
+              {c.region} {c.code}
+            </option>
+          ))}
+        </select>
+        <input
+          id={id}
+          name="phone"
+          type="tel"
+          inputMode="tel"
+          autoComplete="tel-national"
+          placeholder="98765 43210"
+          aria-invalid={error ? true : undefined}
+          aria-describedby={error ? `${id}-err` : undefined}
+          className={cn(inputBase, "min-w-0", error ? "border-danger" : "border-border-strong")}
+        />
+      </div>
+      {error && (
+        <p id={`${id}-err`} className="mt-1.5 text-sm text-danger">
+          {error}
+        </p>
+      )}
+    </div>
+  );
+}
+
+/** Required consent checkbox. The label is the whole tap target. */
+export function ConsentField({ id, error }: { id: string; error?: string }) {
+  return (
+    <div>
+      <div className="flex gap-3">
+        <input
+          id={id}
+          name="consent"
+          type="checkbox"
+          aria-invalid={error ? true : undefined}
+          aria-describedby={error ? `${id}-err` : undefined}
+          className="mt-0.5 size-5 shrink-0 cursor-pointer accent-[var(--color-accent)]"
+        />
+        <label htmlFor={id} className="cursor-pointer text-[0.9375rem] text-fg-muted">
+          I agree to AegisZ storing these details to respond to my request, as described in the{" "}
+          <Link href="/privacy" className="text-fg underline underline-offset-4">
+            privacy notice
+          </Link>
+          . <span className="text-fg-subtle">(required)</span>
+        </label>
+      </div>
+      {error && (
+        <p id={`${id}-err`} className="mt-1.5 text-sm text-danger">
+          {error}
+        </p>
+      )}
+    </div>
+  );
+}
+
+/** Form values as a plain object, plus the page the form was sent from. */
+export function formValues(form: HTMLFormElement): Record<string, unknown> {
+  return { ...Object.fromEntries(new FormData(form)), sourcePage: window.location.pathname };
 }
 
 /** Off-screen field for bots. Hidden from people, screen readers and the tab order. */

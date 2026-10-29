@@ -218,11 +218,11 @@ export default function IaacPage() {
           <SectionHeading
             id="download-title"
             eyebrow="Overview"
-            title="Download the IAAC overview"
-            body={<p>The problem, how IAAC works, architecture, compliance and roadmap, in one PDF.</p>}
+            title="Get the IAAC overview"
+            body={<p>The problem, how IAAC works, architecture, compliance and roadmap, in one PDF. We&apos;ll email you the link.</p>}
           />
           <div className="lg:pt-10">
-            <DownloadGate gated={process.env.GATED_DOWNLOAD !== "false"} />
+            <DownloadGate />
           </div>
         </div>
       </Section>
