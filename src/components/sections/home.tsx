@@ -3,14 +3,14 @@ import Link from "next/link";
 import { Building2, Factory, Landmark, Server } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Section, SectionHeading } from "@/components/ui/Section";
-import { ArrowLink, LinkButton } from "@/components/ui/Button";
+import { LinkButton } from "@/components/ui/Button";
 import { StatusBadge } from "@/components/ui/Badge";
 import { Reveal } from "@/components/motion/Reveal";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { LinkedInIcon } from "@/components/brand/LinkedInIcon";
 import { home } from "@/content/home";
 import { company, partners } from "@/content/company";
-import { productCards } from "@/content/products";
+import { iaac } from "@/content/iaac";
 import { demoCta } from "@/content/site";
 
 type Cta = { href: string; label: string };
@@ -152,57 +152,44 @@ export function WhoWeServe() {
   );
 }
 
-/* 5. Our products (cards shared with /products) */
-export function ProductCards({ headingLevel = "h3" }: { headingLevel?: "h2" | "h3" }) {
+/* 5. Our products: IAAC only (shared with /products). Unreleased products are never named. */
+export function IaacCard({ headingLevel = "h3" }: { headingLevel?: "h2" | "h3" }) {
   const H = headingLevel;
   return (
-    <ul className="grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
-      {productCards.map((p, i) => (
-        <Reveal as="li" key={p.key} delay={i * 0.05}>
-          {p.href ? (
-            <Link
-              href={p.href}
-              className="card-glow group flex h-full min-h-56 flex-col justify-between gap-8 rounded-tile border border-border-strong bg-surface p-6 transition-[border-color,transform] duration-[var(--ae-dur-base)] ease-out-expo hover:-translate-y-0.5 hover:border-fg-subtle sm:p-7"
-            >
-              <StatusBadge status={p.status} className="self-start" />
-              <div>
-                <H className="text-h2 text-fg">{p.name}</H>
-                <p className="mt-2 text-fg-muted">{p.line}</p>
-                <span className="mt-5 inline-flex items-center gap-1.5 font-medium text-accent-ink">
-                  Explore {p.name}{" "}
-                  <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
-                    →
-                  </span>
-                </span>
-              </div>
-            </Link>
-          ) : (
-            <div className="flex h-full min-h-56 flex-col justify-between gap-8 rounded-tile border border-dashed border-border-strong p-6 sm:p-7">
-              <StatusBadge status={p.status} className="self-start" />
-              <div>
-                <H className="text-h3 text-fg-muted">{p.name}</H>
-                <p className="mt-2 text-fg-subtle">{p.line}</p>
-              </div>
-            </div>
-          )}
-        </Reveal>
-      ))}
-    </ul>
+    <Reveal>
+      <Link
+        href={iaac.href}
+        className="card-glow group grid gap-8 rounded-tile border border-border-strong bg-surface p-6 transition-[border-color,transform] duration-[var(--ae-dur-base)] ease-out-expo hover:-translate-y-0.5 hover:border-fg-subtle sm:p-9 md:grid-cols-[1fr_auto] md:items-end"
+      >
+        <div>
+          <StatusBadge status={iaac.status} />
+          <H className="mt-8 text-h1 text-fg">{iaac.name}</H>
+          <p className="mt-1 text-lead text-fg-muted">{iaac.fullName}</p>
+          <p className="mt-6 max-w-[48ch] text-fg-muted">{home.products.line}</p>
+        </div>
+        <span className="inline-flex min-h-11 items-center gap-1.5 font-medium text-accent-ink">
+          Explore {iaac.name}{" "}
+          <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
+            →
+          </span>
+        </span>
+      </Link>
+    </Reveal>
   );
+}
+
+export function MoreProductsNote() {
+  return <p className="mt-6 text-fg-subtle">{home.products.more}</p>;
 }
 
 export function OurProducts() {
   const p = home.products;
   return (
     <Section labelledBy="products-title" tone="surface">
-      <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-        <SectionHeading id="products-title" eyebrow={p.eyebrow} title={p.title} />
-        <ArrowLink href="/products" className="min-h-11 shrink-0">
-          View all products
-        </ArrowLink>
-      </div>
+      <SectionHeading id="products-title" eyebrow={p.eyebrow} title={p.title} />
       <div className="mt-14">
-        <ProductCards />
+        <IaacCard />
+        <MoreProductsNote />
       </div>
     </Section>
   );

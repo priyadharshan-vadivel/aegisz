@@ -1,12 +1,11 @@
 import { cn } from "@/lib/cn";
 import type { Verdict } from "@/content/iaac";
 
-export type ProductStatus = "available" | "in-development" | "roadmap";
+// Only released products get a badge; unreleased ones aren't shown at all.
+export type ProductStatus = "available";
 
 const statusLabel: Record<ProductStatus, string> = {
   available: "Available",
-  "in-development": "In development",
-  roadmap: "Coming",
 };
 
 export function StatusBadge({ status, className }: { status: ProductStatus; className?: string }) {

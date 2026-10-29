@@ -1,6 +1,6 @@
 export const company = {
   overview: [
-    "AegisZ is an Indian cybersecurity product company. We design, build and own a growing portfolio of AI-driven security platforms that protect enterprise and government infrastructure, from the code that is written to the data that is stored.",
+    "AegisZ is an Indian cybersecurity product company. We design, build and own AI-driven security platforms that protect enterprise and government infrastructure.",
     "Modern attackers rarely break in. They log in with stolen credentials, act as insiders, or use trusted system tools that look like normal admin work. Our products are built for that reality: they judge what an action is trying to do, not just whether the user is allowed to do it.",
     "All intellectual property is built and owned in-house. Products reach global markets through our channel partner, Metier Genesis.",
   ],

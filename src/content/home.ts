@@ -30,9 +30,12 @@ export const home = {
       { icon: "factory", label: "Critical infrastructure", line: "Nothing leaves the network" },
     ],
   },
+  // IAAC is the only product shown. Never name or describe unreleased products.
   products: {
-    eyebrow: "Our products",
-    title: "One platform, from code to data",
+    eyebrow: "Products",
+    title: "Our products",
+    line: "Stops harmful commands before they run, even as root.",
+    more: "More AegisZ products are in development.",
   },
   closing: {
     title: "See IAAC stop a command before it runs.",

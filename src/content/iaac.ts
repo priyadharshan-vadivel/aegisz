@@ -75,14 +75,14 @@ export const iaac = {
 
   compliance: ["PCI-DSS", "SOC 2", "ISO 27001", "HIPAA", "GDPR", "India's DPDP Act"],
 
-  // Tier names and features from the IAAC overview deck. No pricing on the site.
+  // Tier names match the pricing sheet; features from the IAAC overview deck. No pricing on the site.
   deployment: [
-    { name: "Core", tagline: "Essential runtime protection", features: ["Full enforcement engine", "Alerts and tamper-evident audit", "Fleet console"] },
-    { name: "Star", tagline: "Comply and scale", features: ["Everything in Core", "SSO and audit export", "SIEM integration"] },
-    { name: "Max", tagline: "Govern", features: ["Everything in Star", "Advanced governance", "Dual control and quorum"] },
+    { name: "Basic", tagline: "Protect", features: ["Full enforcement engine", "Alerts and tamper-evident audit", "Fleet console"] },
+    { name: "Medium", tagline: "Comply & Scale", features: ["Everything in Basic", "SSO and audit export", "SIEM integration"] },
+    { name: "Enterprise", tagline: "Govern", features: ["Everything in Medium", "Advanced governance", "Dual control and quorum"] },
     {
       name: "Sovereign",
-      tagline: "Self-hosted / air-gapped",
+      tagline: "Own",
       body: "A dedicated, air-gapped, self-hosted deployment for government, defence and the most regulated estates.",
       features: ["Fully on-prem", "Air-gapped", "Zero data egress"],
       highlight: true,
