@@ -102,12 +102,30 @@ function StoryStep({ index, onActive, active }: { index: number; onActive: (i: n
   );
 }
 
-/** Desktop: visual pinned left, steps scroll right. Mobile / reduced motion: stacked, static. */
+/** True once mounted on a wide screen that allows motion. False on the server and first paint. */
+function useStickyLayout() {
+  const [on, setOn] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px) and (prefers-reduced-motion: no-preference)");
+    const update = () => setOn(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+  return on;
+}
+
+/**
+ * Desktop: visual pinned left, steps scroll right. Mobile / reduced motion: stacked, static.
+ * Only one version is ever in the DOM, so screen readers read the steps once. The stacked one is
+ * server-rendered (works without JS); wide screens swap to the sticky one after mount.
+ */
 export function StickyStory() {
   const [active, setActive] = useState(0);
-  return (
-    <>
-      <div className="hidden gap-16 lg:grid lg:grid-cols-2 motion-reduce:hidden">
+  const sticky = useStickyLayout();
+  if (sticky) {
+    return (
+      <div className="grid grid-cols-2 gap-16">
         <div className="sticky top-[calc(var(--ae-header-h)+4rem)] h-[min(32rem,calc(100vh-10rem))] self-start">
           <StoryVisual step={active} />
         </div>
@@ -117,22 +135,23 @@ export function StickyStory() {
           ))}
         </ol>
       </div>
-
-      <ol className="grid gap-16 lg:hidden motion-reduce:grid">
-        {iaac.steps.map((s, i) => (
-          <li key={s.key} className="grid gap-8 lg:grid-cols-2 lg:items-center">
-            <div>
-              <p className="font-mono text-sm text-fg-subtle">{i + 1} / 3</p>
-              <h3 className="mt-3 text-h2 text-fg">{s.title}</h3>
-              <p className="mt-4 text-lead text-fg-muted">{s.body}</p>
-            </div>
-            <div className="h-80">
-              <StoryVisual step={i} />
-            </div>
-          </li>
-        ))}
-      </ol>
-    </>
+    );
+  }
+  return (
+    <ol className="grid gap-16">
+      {iaac.steps.map((s, i) => (
+        <li key={s.key} className="grid gap-8 lg:grid-cols-2 lg:items-center">
+          <div>
+            <p className="font-mono text-sm text-fg-subtle">{i + 1} / 3</p>
+            <h3 className="mt-3 text-h2 text-fg">{s.title}</h3>
+            <p className="mt-4 text-lead text-fg-muted">{s.body}</p>
+          </div>
+          <div className="h-80">
+            <StoryVisual step={i} />
+          </div>
+        </li>
+      ))}
+    </ol>
   );
 }
 
