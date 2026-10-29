@@ -4,7 +4,7 @@
  */
 
 export const interests = [
-  { value: "iaac-demo", label: "IAAC demo", tag: "IAAC demo" },
+  { value: "iaac-questions", label: "Questions about IAAC", tag: "IAAC question" },
   { value: "sovereign", label: "Sovereign / air-gapped deployment", tag: "Sovereign deployment" },
   { value: "design-services", label: "Security design services", tag: "Design services" },
   { value: "partnership", label: "Partnership", tag: "Partnership" },

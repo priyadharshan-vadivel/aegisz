@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/cn";
 
 type Variant = "primary" | "secondary" | "ghost";
@@ -31,7 +32,22 @@ type LinkButtonProps = {
   children: React.ReactNode;
 } & Omit<React.ComponentProps<typeof Link>, "href" | "className" | "children">;
 
+const isExternal = (href: string) => /^https?:\/\//.test(href);
+
+/** Internal hrefs use next/link; absolute URLs open in a new tab with an announced hint. */
 export function LinkButton({ href, variant, size, className, children, ...rest }: LinkButtonProps) {
+  if (isExternal(href)) {
+    const { onClick } = rest;
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" onClick={onClick} className={buttonClasses(variant, size, className)}>
+        <span className="relative z-[2] inline-flex items-center gap-2">
+          {children}
+          <ArrowUpRight aria-hidden className="size-4 opacity-70" strokeWidth={2} />
+          <span className="sr-only"> (opens in a new tab)</span>
+        </span>
+      </a>
+    );
+  }
   return (
     <Link href={href} className={buttonClasses(variant, size, className)} {...rest}>
       <span className="relative z-[2] inline-flex items-center gap-2">{children}</span>

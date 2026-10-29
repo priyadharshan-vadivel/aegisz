@@ -12,7 +12,7 @@ const good = {
   email: "asha@acme.in",
   company: "Acme Corp",
   role: "CISO",
-  interest: "iaac-demo",
+  interest: "iaac-questions",
   message: "40 Linux servers",
   turnstileToken: "ok",
 };
@@ -35,7 +35,7 @@ test("happy path: owner email with interest-tagged subject, plus confirmation", 
   assert.equal(r.status, 200);
   assert.equal(sent.length, 2);
   assert.equal(sent[0].to, "owner@aegisz.in");
-  assert.equal(sent[0].subject, "[IAAC demo] Acme Corp — Asha Rao");
+  assert.equal(sent[0].subject, "[IAAC question] Acme Corp — Asha Rao");
   assert.equal(sent[0].replyTo, "asha@acme.in");
   assert.match(sent[0].text, /40 Linux servers/);
   assert.equal(sent[1].to, "asha@acme.in");

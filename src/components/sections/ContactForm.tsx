@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
@@ -76,7 +76,7 @@ export function ContactForm() {
   }
 
   return (
-    <form ref={formRef} noValidate onSubmit={onSubmit} aria-label="Book a demo" className="relative space-y-5">
+    <form ref={formRef} noValidate onSubmit={onSubmit} aria-label="Send us a message" className="relative space-y-5">
       <Honeypot />
       <div className="grid gap-5 sm:grid-cols-2">
         <TextField id={id("name")} name="name" label="Name" required autoComplete="name" error={errors.name} />
@@ -148,7 +148,7 @@ export function ContactForm() {
       )}
 
       <Button type="submit" size="lg" disabled={state.kind === "sending"} className="w-full sm:w-auto">
-        {state.kind === "sending" ? "Sending…" : "Send request"}
+        {state.kind === "sending" ? "Sending…" : "Send message"}
       </Button>
       <p className="text-xs text-fg-subtle">
         We use these details only to respond to your request. See our{" "}

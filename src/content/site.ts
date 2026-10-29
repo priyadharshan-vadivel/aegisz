@@ -21,7 +21,10 @@ export const mainNav: NavItem[] = [
   { label: "Contact", href: "/contact" },
 ];
 
-export const demoCta: NavItem = { label: "Book a demo", href: "/contact?interest=iaac-demo" };
+/** Cal.id scheduler. Every "Book a demo" CTA opens it in a new tab. */
+export const bookingUrl = process.env.NEXT_PUBLIC_BOOKING_URL || "https://cal.id/priyadharshan-aegisz";
+
+export const demoCta: NavItem = { label: "Book a demo", href: bookingUrl };
 
 export const footerNav: NavItem[] = [
   { label: "Products", href: "/products" },
