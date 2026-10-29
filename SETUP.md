@@ -1,6 +1,6 @@
 # Setting up booking, forms, the leads database and email
 
-- **Book a demo** buttons open the Cal.id scheduler. `/contact` also embeds it.
+- **Book a demo** buttons open the Cal.id **Product Walkthrough** event in a new tab. `/contact` shows a card for each public event (Product Walkthrough, Partnership Call) with 15 / 30 min links. The event URLs live in `src/content/booking.ts`; nothing from Cal.id is embedded.
 - The contact form (`/contact`) and the IAAC overview form (`/products/iaac#download`) save every submission to a **Neon Postgres** database and email you through **Resend**.
 - The IAAC overview reaches people as an emailed link that works for 7 days. Nothing downloads on the page.
 - Bots are blocked with **Cloudflare Turnstile**, a honeypot field and a rate limit.
@@ -147,7 +147,7 @@ Then go to **Deployments → ⋯ → Redeploy**. A redeploy is required because 
 
 ## 5. Check it works
 
-1. Open `/contact`. The Cal.id scheduler should appear under **Book a demo**, and **Open the scheduler** should open Cal.id in a new tab. If the embedded scheduler stays blank, check that your Cal.id event is public. The button always works.
+1. Open `/contact`. Each card's **Schedule** button and its **15 min** / **30 min** chips should open the matching Cal.id event in a new tab, with the length preselected. The header **Book a demo** opens Product Walkthrough.
 2. Submit **Or send us a message** with a work address you can read:
    - you should receive `[IAAC question] Company — Name` (or the tag for the interest you chose) at `CONTACT_TO_EMAIL`
    - the sender gets a short confirmation

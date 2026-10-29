@@ -1,17 +1,16 @@
 ﻿import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
-import { LinkButton } from "@/components/ui/Button";
-import { BookingEmbed } from "@/components/sections/BookingEmbed";
+import { BookingCards } from "@/components/sections/BookingCards";
 import { ContactForm } from "@/components/sections/ContactForm";
-import { bookingUrl, site } from "@/content/site";
+import { site } from "@/content/site";
 import { partners } from "@/content/company";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
-  title: "Book a demo",
+  title: "Book a call",
   description:
-    "Book an IAAC demo, or send AegisZ a message about a sovereign deployment, security design services or partnership.",
+    "Book an IAAC walkthrough or a partnership call, or send AegisZ a message about a sovereign deployment, security design services or partnership.",
   path: "/contact",
 });
 
@@ -19,22 +18,17 @@ export default function ContactPage() {
   const channel = partners.find((p) => p.name === "Metier Genesis")!;
   return (
     <>
-      {/* 1. Book a demo (Cal.id) */}
+      {/* 1. Book a call: native cards linking to the public Cal.id events */}
       <Section labelledBy="contact-title" className="pt-14 sm:pt-20">
         <SectionHeading
           id="contact-title"
           as="h1"
           eyebrow="Contact"
-          title="Book a demo"
-          body={<p>Pick a time that suits you. We&apos;ll show IAAC judging real commands.</p>}
+          title="Book a call"
+          body={<p>Pick a call and a length. Scheduling opens in a new tab.</p>}
         />
-        <div className="mt-10">
-          <LinkButton href={bookingUrl} size="lg" className="w-full sm:w-auto">
-            Open the scheduler
-          </LinkButton>
-        </div>
-        <div className="mt-10">
-          <BookingEmbed />
+        <div className="mt-12">
+          <BookingCards />
         </div>
       </Section>
 

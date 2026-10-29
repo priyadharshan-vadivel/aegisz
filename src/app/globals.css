@@ -5,7 +5,16 @@
   html {
     overflow-x: clip;
     -webkit-text-size-adjust: 100%;
-    scroll-padding-top: calc(var(--ae-header-h) + 1rem);
+  }
+
+  /* Keep anything scrolled to (anchor links, focused fields) clear of the sticky header. Set on
+     the targets, not as scroll-padding on <html>: Safari ignores scroll-padding when focusing.
+     Form fields get extra room so their label above stays visible too. */
+  :where([id]) {
+    scroll-margin-top: calc(var(--ae-header-h) + 1.5rem);
+  }
+  :where(input, select, textarea) {
+    scroll-margin-top: calc(var(--ae-header-h) + 3.5rem);
   }
 
   body {

@@ -1,3 +1,5 @@
+import { eventUrl, walkthrough } from "./booking";
+
 export const site = {
   name: "AegisZ",
   url: "https://aegisz.in",
@@ -21,8 +23,8 @@ export const mainNav: NavItem[] = [
   { label: "Contact", href: "/contact" },
 ];
 
-/** Cal.id scheduler. Every "Book a demo" CTA opens it in a new tab. */
-export const bookingUrl = process.env.NEXT_PUBLIC_BOOKING_URL || "https://cal.id/priyadharshan-aegisz";
+/** Every "Book a demo" CTA (and the link in emails) opens the Product Walkthrough event in a new tab. */
+export const bookingUrl = eventUrl(walkthrough);
 
 export const demoCta: NavItem = { label: "Book a demo", href: bookingUrl };
 
