@@ -17,7 +17,7 @@ export function BookingCards() {
         return (
           <li key={e.id} className="card-glow flex flex-col rounded-tile border border-border-strong bg-surface p-6 sm:p-9">
             <Icon aria-hidden className="size-6 text-accent-ink" strokeWidth={1.5} />
-            <h2 id={`book-${e.id}`} className="mt-8 text-h2 text-fg">
+            <h2 id={`book-${e.id}`} className="mt-8 text-h3 text-fg sm:text-h2 lg:text-h3">
               {e.title}
             </h2>
             <p className="mt-3 max-w-[40ch] text-fg-muted">{e.body}</p>

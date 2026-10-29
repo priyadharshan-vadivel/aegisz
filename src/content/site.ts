@@ -10,8 +10,8 @@ export const site = {
   email: "contact@aegisz.in",
   phone: "+91 90808 83442",
   phoneHref: "tel:+919080883442",
-  // TODO: confirm a dedicated security reporting address (e.g. security@aegisz.in) for /trust and security.txt
-  securityEmail: "contact@aegisz.in",
+  // Vulnerability reports (/trust and public/.well-known/security.txt). Keep both in step.
+  securityEmail: "security@aegisz.in",
 } as const;
 
 export type NavItem = { label: string; href: string };

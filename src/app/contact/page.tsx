@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { BookingCards } from "@/components/sections/BookingCards";
@@ -52,16 +52,16 @@ export default function ContactPage() {
               <h2 id="direct-title" className="label">
                 Contact us directly
               </h2>
-              <ul className="mt-6 space-y-4 text-lead text-fg">
+              <ul className="mt-6 space-y-1 text-lead text-fg">
                 <li className="flex items-center gap-3">
                   <Mail className="size-4 shrink-0 text-fg-subtle" aria-hidden strokeWidth={1.5} />
-                  <a href={`mailto:${site.email}`} className="underline-offset-4 hover:underline">
+                  <a href={`mailto:${site.email}`} className="inline-flex min-h-11 items-center underline-offset-4 hover:underline">
                     {site.email}
                   </a>
                 </li>
                 <li className="flex items-center gap-3">
                   <Phone className="size-4 shrink-0 text-fg-subtle" aria-hidden strokeWidth={1.5} />
-                  <a href={site.phoneHref} className="underline-offset-4 hover:underline">
+                  <a href={site.phoneHref} className="inline-flex min-h-11 items-center underline-offset-4 hover:underline">
                     {site.phone}
                   </a>
                 </li>
@@ -85,11 +85,15 @@ export default function ContactPage() {
             <div className="rounded-tile border border-border p-7 text-fg-muted sm:p-8">
               <h2 className="text-h3 text-fg">Reporting a vulnerability?</h2>
               <p className="mt-3">
-                Please follow our{" "}
+                Email{" "}
+                <a href={`mailto:${site.securityEmail}`} className="text-fg underline underline-offset-4">
+                  {site.securityEmail}
+                </a>{" "}
+                instead of using this form, and see our{" "}
                 <Link href="/trust" className="text-fg underline underline-offset-4">
                   responsible disclosure policy
-                </Link>{" "}
-                instead of this form.
+                </Link>
+                .
               </p>
             </div>
           </aside>
