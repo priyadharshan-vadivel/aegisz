@@ -38,7 +38,7 @@ export const company = {
       body: "Take Indian-built security to enterprises and governments in every region we serve.",
     },
   ],
-  // photo: path under /public, or null until brand/team/ photos are supplied (initials are shown instead).
+  // photo: path under /public (square, 400px WebP in public/team/), or null to show initials.
   // No phone numbers on the site.
   leadership: [
     {
@@ -46,14 +46,14 @@ export const company = {
       initials: "PV",
       role: "Founder & CEO",
       linkedin: "https://www.linkedin.com/in/priyadharshan-vadivel/",
-      photo: null as string | null, // TODO: photo from brand/team/
+      photo: "/team/priyadharshan-vadivel.webp" as string | null,
     },
     {
       name: "Jejo J",
       initials: "JJ",
       role: "Co-founder & CTO",
       linkedin: "https://www.linkedin.com/in/jejo-j/",
-      photo: null as string | null, // TODO: photo from brand/team/
+      photo: "/team/jejo-j.webp" as string | null,
     },
   ],
 };
