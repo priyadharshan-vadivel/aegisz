@@ -22,17 +22,30 @@ export type Deps = {
   send: ((mail: Mail) => Promise<void>) | null;
   /** Null when no database is configured. */
   saveLead: SaveLead | null;
-  verifyHuman: (token: string | undefined, ip: string) => Promise<boolean>;
+  /** true when human, false or a failure reason (e.g. Turnstile error codes) otherwise. */
+  verifyHuman: (token: string | undefined, ip: string) => Promise<boolean | string>;
   limiter: RateLimiter;
   /** Where lead notifications go (CONTACT_TO_EMAIL); also the reply-to on confirmations. */
   toEmail: string;
   bookingUrl: string;
   log?: (msg: string, err: unknown) => void;
+  /** Outside production: add the exact failure to error responses as `debug`. */
+  debug?: boolean;
 };
 
 export type Result = { status: number; body: Record<string, unknown>; headers?: Record<string, string> };
 
 type Gate = { ok: true; input: Record<string, unknown> } | { ok: false; result: Result };
+
+/** Step failures collected during one submission, for the dev-only `debug` field. */
+type Failures = string[];
+
+const errText = (err: unknown) => (err instanceof Error ? err.message : String(err));
+
+function withDebug(result: Result, deps: Deps, failures: Failures): Result {
+  if (!deps.debug || failures.length === 0) return result;
+  return { ...result, body: { ...result.body, debug: failures.join("; ") } };
+}
 
 const sendFailed: Result = {
   status: 502,
@@ -60,20 +73,26 @@ async function gate(raw: unknown, meta: Meta, deps: Deps): Promise<Gate> {
     };
   }
   const token = typeof input.turnstileToken === "string" ? input.turnstileToken : undefined;
-  if (!(await deps.verifyHuman(token, meta.ip))) {
-    return { ok: false, result: { status: 400, body: { error: "verification_failed", message: "We couldn't verify you're human. Please try again." } } };
+  const human = await deps.verifyHuman(token, meta.ip);
+  if (human !== true) {
+    const result: Result = {
+      status: 400,
+      body: { error: "verification_failed", message: "We couldn't verify you're human. Please try again." },
+    };
+    return { ok: false, result: withDebug(result, deps, [`turnstile: ${human === false ? "rejected" : human}`]) };
   }
   return { ok: true, input };
 }
 
 const defaultLog = (msg: string, err: unknown) => console.error(msg, err);
 
-/** Run a step; log and return null instead of throwing. */
-async function attempt<T>(label: string, deps: Deps, fn: () => Promise<T>): Promise<T | null> {
+/** Run a step; log (and record) the error and return null instead of throwing. */
+async function attempt<T>(label: string, deps: Deps, failures: Failures, fn: () => Promise<T>): Promise<T | null> {
   try {
     return await fn();
   } catch (err) {
     (deps.log ?? defaultLog)(`[forms] ${label} failed`, err);
+    failures.push(`${label}: ${errText(err)}`);
     return null;
   }
 }
@@ -84,19 +103,20 @@ export async function submitContact(raw: unknown, meta: Meta, deps: Deps): Promi
   const v = validateContact(g.input);
   if (!v.ok) return { status: 422, body: { error: "invalid", errors: v.errors } };
 
+  const failures: Failures = [];
   const record = contactRecord(v.data, meta.at, meta.ipHash ?? null, meta.userAgent);
-  const saved = deps.saveLead ? (await attempt("lead save", deps, () => deps.saveLead!(record))) !== null : false;
+  const saved = deps.saveLead ? (await attempt("lead save", deps, failures, () => deps.saveLead!(record))) !== null : false;
   const send = deps.send;
   const ownerSent = send
-    ? (await attempt("owner email", deps, async () => {
+    ? (await attempt("owner email", deps, failures, async () => {
         await send(contactOwnerMail(v.data, meta, deps.toEmail, contactSubject(v.data), saved));
         return true;
       })) === true
     : false;
-  if (!saved && !ownerSent) return sendFailed;
+  if (!saved && !ownerSent) return withDebug(sendFailed, deps, failures);
   // The requester's confirmation is best-effort: the lead is already safe.
-  if (send) await attempt("confirmation email", deps, () => send(contactConfirmationMail(v.data, deps.toEmail)));
-  return { status: 200, body: { ok: true } };
+  if (send) await attempt("confirmation email", deps, failures, () => send(contactConfirmationMail(v.data, deps.toEmail)));
+  return withDebug({ status: 200, body: { ok: true } }, deps, failures);
 }
 
 /**
@@ -109,22 +129,26 @@ export async function submitLead(raw: unknown, meta: Meta, deps: Deps, downloadL
   const v = validateLead(g.input);
   if (!v.ok) return { status: 422, body: { error: "invalid", errors: v.errors } };
 
+  const failures: Failures = [];
   const record = downloadRecord(v.data, meta.at, meta.ipHash ?? null, meta.userAgent);
-  const row = deps.saveLead ? await attempt("lead save", deps, () => deps.saveLead!(record)) : null;
+  const row = deps.saveLead ? await attempt("lead save", deps, failures, () => deps.saveLead!(record)) : null;
   // The ref ties the link to its lead row; without a DB it's a random id (still unique per request).
   const ref = (row?.id ?? randomUUID()).replace(/-/g, "").slice(0, 16);
   const send = deps.send;
-  if (!send) return sendFailed;
-  const delivered = await attempt("overview email", deps, async () => {
+  if (!send) return withDebug(sendFailed, deps, [...failures, "email: not configured"]);
+  const delivered = await attempt("overview email", deps, failures, async () => {
     await send(overviewMail(v.data, downloadLink(ref), deps.toEmail, deps.bookingUrl));
     return true;
   });
   if (!delivered) {
-    return {
+    const result: Result = {
       status: 502,
       body: { error: "send_failed", message: "We couldn't send the email. Please write to us and we'll send the overview." },
     };
+    return withDebug(result, deps, failures);
   }
-  await attempt("owner email", deps, () => send(leadOwnerMail(v.data, meta, deps.toEmail, leadSubject(v.data), row !== null)));
-  return { status: 200, body: { ok: true, email: v.data.email } };
+  await attempt("owner email", deps, failures, () =>
+    send(leadOwnerMail(v.data, meta, deps.toEmail, leadSubject(v.data), row !== null)),
+  );
+  return withDebug({ status: 200, body: { ok: true, email: v.data.email } }, deps, failures);
 }

@@ -17,10 +17,11 @@ Allow about 45 minutes, most of which is waiting for DNS to verify.
 
 1. In Vercel, open your project, then **Storage → Create Database**, and choose **Neon** (Serverless Postgres) from the Marketplace. Accept the terms, then pick the region closest to India (for example *Asia Pacific (Singapore)*) and the free plan.
 2. Connect it to this project for **Production** and **Preview**. Vercel adds `DATABASE_URL` (and a few related `PG*`/`POSTGRES_*` variables) to the project automatically.
-3. On your computer, in the project folder, pull the variables into a local `.env`. The file is git-ignored; never commit it.
+3. On your computer, in the project folder, pull the variables into `.env.local` (or `.env`; both are git-ignored, never commit them). Then check nothing is missing; this prints names only, never values:
    ```
    npx vercel link          # once: pick this project
-   npx vercel env pull .env
+   npx vercel env pull .env.local
+   npm run check:env
    ```
 4. Create the tables:
    ```
@@ -162,13 +163,16 @@ If email fails, contact leads are still saved, and the owner email says whether 
 ## Running locally
 
 ```
-npx vercel env pull .env     # or: cp .env.example .env and fill in values
-npm run db:migrate           # first time, and after schema changes
-npm run build && npm start   # http://localhost:3000
-npm test                     # form, lead, link-expiry, simulator and no-TODO tests (no email, no DB)
+npx vercel env pull .env.local   # or: cp .env.example .env.local and fill in values
+npm run check:env                # lists missing variables (names only)
+npm run db:migrate               # first time, and after schema changes
+npm run build && npm start       # http://localhost:3000
+npm test                         # form, lead, link-expiry, simulator and no-TODO tests (no email, no DB)
 ```
 
 The no-TODO test checks the pages from the last `npm run build`, so run a build first.
+
+Outside production (`npm run dev`, or `next start` with `NODE_ENV` other than `production`), a failed form shows the exact cause after the normal message, for example `[dev: lead save: relation "leads" does not exist]` or `[dev: turnstile: invalid-domain]`. Production only shows the normal message. Note `next start` runs as production, so use `npm run dev` to see the details.
 
 ## The IAAC overview PDF
 

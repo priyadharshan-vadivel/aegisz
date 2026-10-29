@@ -33,26 +33,35 @@ let warned = false;
  * Cloudflare Turnstile check. If TURNSTILE_SECRET_KEY isn't set the check is skipped (with a
  * one-time warning), so forms work before Turnstile is configured. Set both keys in production.
  */
-export async function verifyTurnstile(token: string | undefined, ip: string) {
+export async function verifyTurnstile(token: string | undefined, ip: string): Promise<boolean | string> {
   const secret = process.env.TURNSTILE_SECRET_KEY;
   if (!secret) {
     if (!warned) console.warn("[forms] TURNSTILE_SECRET_KEY not set: skipping human verification");
     warned = true;
     return true;
   }
-  if (!token) return false;
+  if (!token) return "no token sent by the widget";
   try {
     const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
       method: "POST",
       body: new URLSearchParams({ secret, response: token, remoteip: ip }),
     });
-    const json = (await res.json()) as { success?: boolean };
-    return json.success === true;
+    const json = (await res.json()) as { success?: boolean; "error-codes"?: string[] };
+    if (json.success === true) return true;
+    const codes = json["error-codes"]?.join(", ") || "rejected";
+    console.error("[forms] Turnstile rejected:", codes);
+    return codes;
   } catch (err) {
     console.error("[forms] Turnstile verification error", err);
-    return false;
+    return `siteverify request failed: ${err instanceof Error ? err.message : String(err)}`;
   }
 }
+
+/** Outside production, API errors carry the exact cause (`debug`) so failures aren't hidden. */
+export const debugErrors = process.env.NODE_ENV !== "production";
+
+/** Names (never values) of the given env vars that are empty. */
+export const missingEnv = (...names: string[]) => names.filter((n) => !process.env[n]?.trim());
 
 /** Secret for hashing client IPs before they're stored. Falls back to DOWNLOAD_SECRET. */
 const ipHashSecret = () => process.env.IP_HASH_SECRET || process.env.DOWNLOAD_SECRET;

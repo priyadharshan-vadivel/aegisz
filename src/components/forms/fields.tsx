@@ -134,6 +134,10 @@ export async function postForm(url: string, body: Record<string, unknown>) {
   try {
     const res = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
     const json = (await res.json().catch(() => ({}))) as Record<string, unknown>;
+    // Dev servers send the exact cause; show it instead of hiding it behind the generic message.
+    if (typeof json.debug === "string") {
+      json.message = `${typeof json.message === "string" ? json.message : "Request failed."} [dev: ${json.debug}]`;
+    }
     return { status: res.status, json };
   } catch {
     return { status: 0, json: {} as Record<string, unknown> };

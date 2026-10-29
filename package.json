@@ -12,8 +12,9 @@
     "shots": "playwright test --config scripts/playwright.config.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "leads:export": "node --env-file-if-exists=.env scripts/leads-export.ts",
-    "pdf:upload": "node --env-file-if-exists=.env scripts/pdf-upload.ts"
+    "leads:export": "node --env-file-if-exists=.env --env-file-if-exists=.env.local scripts/leads-export.ts",
+    "pdf:upload": "node --env-file-if-exists=.env --env-file-if-exists=.env.local scripts/pdf-upload.ts",
+    "check:env": "node scripts/check-env.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.2.0",

@@ -321,3 +321,23 @@ test("csv: quoting, BOM and formula-injection guard", () => {
   assert.match(csv, /"'=HYPERLINK\(""x""\)"/);
   assert.match(csv, /,'\+919876543210\r\n/);
 });
+
+/* Dev error detail -------------------------------------------------------- */
+
+test("dev: failures carry the exact error; production hides it", async () => {
+  const boom = async () => Promise.reject(new Error("relation \"leads\" does not exist"));
+  const mailDown = async () => Promise.reject(new Error("validation_error: domain not verified"));
+  const dev = await submitContact(good, meta, deps({ saveLead: boom, send: mailDown, debug: true }).d);
+  assert.equal(dev.status, 502);
+  assert.match(String(dev.body.debug), /lead save: relation "leads" does not exist/);
+  assert.match(String(dev.body.debug), /owner email: validation_error: domain not verified/);
+  const prod = await submitContact(good, meta, deps({ saveLead: boom, send: mailDown }).d);
+  assert.equal(prod.status, 502);
+  assert.equal(prod.body.debug, undefined);
+});
+
+test("dev: Turnstile error codes are shown", async () => {
+  const r = await submitLead(goodLead, meta, deps({ verifyHuman: async () => "invalid-input-secret", debug: true }).d, link);
+  assert.equal(r.status, 400);
+  assert.equal(r.body.debug, "turnstile: invalid-input-secret");
+});

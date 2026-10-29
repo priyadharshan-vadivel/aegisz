@@ -3,7 +3,16 @@ import { submitLead } from "@/lib/server/submit";
 import { formLimiter } from "@/lib/server/rate-limit";
 import { signDownloadToken } from "@/lib/server/download-token";
 import { dbSaveLead } from "@/lib/server/db";
-import { clientMeta, emailConfig, readJson, resendSender, siteUrl, verifyTurnstile } from "@/lib/server/env";
+import {
+  clientMeta,
+  debugErrors,
+  emailConfig,
+  missingEnv,
+  readJson,
+  resendSender,
+  siteUrl,
+  verifyTurnstile,
+} from "@/lib/server/env";
 import { bookingUrl } from "@/content/site";
 
 export const runtime = "nodejs";
@@ -14,8 +23,13 @@ export async function POST(req: Request) {
   const secret = process.env.DOWNLOAD_SECRET;
   // Email is how the PDF is delivered, so it's required here.
   if (!cfg || !secret) {
+    const missing = missingEnv("RESEND_API_KEY", "CONTACT_TO_EMAIL", "CONTACT_FROM_EMAIL", "DOWNLOAD_SECRET");
     return NextResponse.json(
-      { error: "not_configured", message: "The overview can't be sent from this site yet." },
+      {
+        error: "not_configured",
+        message: "The overview can't be sent from this site yet.",
+        ...(debugErrors && { debug: `missing env: ${missing.join(", ")}` }),
+      },
       { status: 503 },
     );
   }
@@ -32,6 +46,7 @@ export async function POST(req: Request) {
       limiter: formLimiter,
       toEmail: cfg.to,
       bookingUrl,
+      debug: debugErrors,
     },
     (ref) => `${base}/api/download?t=${encodeURIComponent(signDownloadToken(secret, ref))}`,
   );
